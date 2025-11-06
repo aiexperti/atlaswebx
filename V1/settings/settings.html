@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Lenoir Browser</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <!-- Title Bar -->
+    <div class="titlebar">
+        <div class="titlebar-title">Settings</div>
+        <div class="window-controls">
+            <button class="window-control" id="minimize">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <rect x="2" y="5.5" width="8" height="1" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="window-control close" id="close">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M2 2 L10 10 M10 2 L2 10" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="settings-container">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+            <div class="settings-header">
+                <h1 data-i18n="settings.title">Settings</h1>
+            </div>
+            <nav class="settings-nav">
+                <a href="#general" class="nav-item active" data-section="general">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                    <span data-i18n="settings.general">General</span>
+                </a>
+                <a href="#appearance" class="nav-item" data-section="appearance">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <path d="M3 9h18M9 21V9"/>
+                    </svg>
+                    <span data-i18n="settings.appearance">Appearance</span>
+                </a>
+                <a href="#search" class="nav-item" data-section="search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <span data-i18n="settings.search">Search Engine</span>
+                </a>
+                <a href="#ai" class="nav-item" data-section="ai">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span data-i18n="settings.ai">AI Assistant</span>
+                </a>
+                <a href="#language" class="nav-item" data-section="language">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <span data-i18n="settings.language">Language</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="settings-content">
+            <!-- General Section -->
+            <section id="general" class="settings-section active">
+                <h2>General Settings</h2>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">Site Name</span>
+                        <span class="label-description">Customize your browser name</span>
+                    </label>
+                    <input type="text" id="site-name" class="setting-input" placeholder="Lenoir Browser" value="Lenoir Browser">
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">Homepage</span>
+                        <span class="label-description">Set your default homepage URL</span>
+                    </label>
+                    <input type="text" id="homepage" class="setting-input" placeholder="https://www.google.com" value="">
+                </div>
+            </section>
+
+            <!-- Appearance Section -->
+            <section id="appearance" class="settings-section">
+                <h2>Appearance</h2>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">Wallpaper</span>
+                        <span class="label-description">Choose your home screen background</span>
+                    </label>
+                    <div class="wallpaper-grid">
+                        <div class="wallpaper-option active" data-wallpaper="gradient-purple">
+                            <div class="wallpaper-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);"></div>
+                            <span>Purple Gradient</span>
+                        </div>
+                        <div class="wallpaper-option" data-wallpaper="gradient-blue">
+                            <div class="wallpaper-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                            <span>Blue Gradient</span>
+                        </div>
+                        <div class="wallpaper-option" data-wallpaper="gradient-sunset">
+                            <div class="wallpaper-preview" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                            <span>Sunset</span>
+                        </div>
+                        <div class="wallpaper-option" data-wallpaper="gradient-ocean">
+                            <div class="wallpaper-preview" style="background: linear-gradient(135deg, #2e3192 0%, #1bffff 100%);"></div>
+                            <span>Ocean</span>
+                        </div>
+                        <div class="wallpaper-option" data-wallpaper="gradient-forest">
+                            <div class="wallpaper-preview" style="background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);"></div>
+                            <span>Forest</span>
+                        </div>
+                        <div class="wallpaper-option" data-wallpaper="gradient-dark">
+                            <div class="wallpaper-preview" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);"></div>
+                            <span>Dark</span>
+                        </div>
+                        <div class="wallpaper-option custom-wallpaper" data-wallpaper="custom">
+                            <div class="wallpaper-preview custom-preview" id="custom-preview">
+                                <div class="upload-placeholder">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                    <span>Upload Image</span>
+                                </div>
+                            </div>
+                            <span>Custom</span>
+                        </div>
+                    </div>
+                    <input type="file" id="wallpaper-upload" accept="image/*" style="display: none;">
+                </div>
+            </section>
+
+            <!-- Search Engine Section -->
+            <section id="search" class="settings-section">
+                <h2>Search Engine</h2>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">Default Search Engine</span>
+                        <span class="label-description">Choose your preferred search provider</span>
+                    </label>
+                    <div class="search-engine-list">
+                        <label class="radio-option active">
+                            <input type="radio" name="search-engine" value="google" checked>
+                            <div class="option-content">
+                                <div class="option-icon">G</div>
+                                <div class="option-info">
+                                    <span class="option-name">Google</span>
+                                    <span class="option-url">google.com</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="search-engine" value="bing">
+                            <div class="option-content">
+                                <div class="option-icon">B</div>
+                                <div class="option-info">
+                                    <span class="option-name">Bing</span>
+                                    <span class="option-url">bing.com</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="search-engine" value="duckduckgo">
+                            <div class="option-content">
+                                <div class="option-icon">D</div>
+                                <div class="option-info">
+                                    <span class="option-name">DuckDuckGo</span>
+                                    <span class="option-url">duckduckgo.com</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="search-engine" value="brave">
+                            <div class="option-content">
+                                <div class="option-icon">🦁</div>
+                                <div class="option-info">
+                                    <span class="option-name">Brave Search</span>
+                                    <span class="option-url">search.brave.com</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Assistant Section -->
+            <section id="ai" class="settings-section">
+                <h2>AI Assistant</h2>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">AI Model</span>
+                        <span class="label-description">Select your preferred AI assistant</span>
+                    </label>
+                    <div class="ai-model-list">
+                        <label class="radio-option active">
+                            <input type="radio" name="ai-model" value="gpt-4" checked>
+                            <div class="option-content">
+                                <div class="option-icon">🤖</div>
+                                <div class="option-info">
+                                    <span class="option-name">GPT-4</span>
+                                    <span class="option-url">OpenAI - Most capable</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="ai-model" value="claude">
+                            <div class="option-content">
+                                <div class="option-icon">🧠</div>
+                                <div class="option-info">
+                                    <span class="option-name">Claude</span>
+                                    <span class="option-url">Anthropic - Thoughtful responses</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="ai-model" value="gemini">
+                            <div class="option-content">
+                                <div class="option-icon">✨</div>
+                                <div class="option-info">
+                                    <span class="option-name">Gemini</span>
+                                    <span class="option-url">Google - Multimodal AI</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="ai-model" value="local">
+                            <div class="option-content">
+                                <div class="option-icon">💻</div>
+                                <div class="option-info">
+                                    <span class="option-name">Local LLM</span>
+                                    <span class="option-url">Ollama - Privacy focused</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">API Key</span>
+                        <span class="label-description">Enter your AI provider API key (optional)</span>
+                    </label>
+                    <input type="password" id="ai-api-key" class="setting-input" placeholder="sk-...">
+                </div>
+            </section>
+
+            <!-- Language Section -->
+            <section id="language" class="settings-section">
+                <h2>Language & Region</h2>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <span class="label-text">Display Language</span>
+                        <span class="label-description">Choose your interface language</span>
+                    </label>
+                    <select id="language-select" class="setting-select">
+                        <option value="en" selected>English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="it">Italiano</option>
+                        <option value="pt">Português</option>
+                        <option value="ru">Русский</option>
+                        <option value="zh">中文</option>
+                        <option value="ja">日本語</option>
+                        <option value="ko">한국어</option>
+                        <option value="ar">العربية</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Save Button -->
+            <div class="settings-footer">
+                <button class="btn-secondary" id="reset-btn" data-i18n="settings.reset">Reset to Defaults</button>
+                <button class="btn-primary" id="save-btn" data-i18n="settings.save">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../translations.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>

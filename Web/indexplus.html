@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lenoir Plus — Gen Z AI Browser for Live Website Glow-Ups</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lenoir Plus is the AI browser for Gen Z creators. Remix any live site, drop your vibe, and ship pixel-perfect redesigns in minutes. Join the invite-only waitlist." />
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lenoir.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lenoir Plus — Gen Z AI Browser for Live Website Glow-Ups">
+  <meta property="og:description" content="Remix live sites with AI, collaborate in real time, and export clean code. Invites drop weekly." />
+  <meta property="og:url" content="https://lenoir.app/">
+  <meta property="og:image" content="https://lenoir.app/social-preview.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050208;
+      --bg-alt: #0e0715;
+      --surface: rgba(15, 6, 32, 0.8);
+      --surface-strong: rgba(20, 8, 46, 0.9);
+      --white: #f5f6ff;
+      --muted: rgba(245, 246, 255, 0.64);
+      --accent: #7f5af0;
+      --accent-2: #2cb67d;
+      --accent-3: #ff8ba7;
+      --accent-4: #05d9e8;
+      --border: rgba(255, 255, 255, 0.18);
+      --shadow: 0 28px 80px rgba(10, 0, 35, 0.55);
+      --radius-lg: 28px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+      --font-heading: 'Clash Display', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(120% 100% at 10% 10%, rgba(127, 90, 240, 0.24), transparent 55%),
+        radial-gradient(110% 90% at 80% 20%, rgba(5, 217, 232, 0.18), transparent 60%),
+        radial-gradient(140% 130% at 50% 80%, rgba(44, 182, 125, 0.16), transparent 65%),
+        var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(130deg, rgba(127, 90, 240, 0.18), rgba(5, 217, 232, 0.08)),
+        url('noise.png');
+      pointer-events: none;
+      opacity: 0.7;
+      mix-blend-mode: screen;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(1.8rem, 4vw, 3rem) clamp(1.4rem, 5vw, 3.6rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.1rem 1.6rem;
+      border-radius: var(--radius-lg);
+      background: rgba(10, 3, 24, 0.7);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: clamp(1rem, 3vw, 2rem);
+      z-index: 10;
+    }
+
+    nav {
+      display: flex;
+      gap: clamp(1rem, 2.2vw, 1.6rem);
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      position: relative;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-4));
+      border-radius: 999px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--white);
+    }
+
+    nav a:hover::after,
+    nav a:focus::after {
+      transform: scaleX(1);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(130deg, var(--accent), var(--accent-4));
+      box-shadow: 0 8px 24px rgba(127, 90, 240, 0.35);
+    }
+
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--white);
+      background: linear-gradient(120deg, var(--accent), var(--accent-4));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 18px 40px rgba(127, 90, 240, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .cta-pill:hover,
+    .cta-pill:focus {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(127, 90, 240, 0.55);
+    }
+
+    .burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .burger span {
+      width: 18px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 999px;
+      display: block;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .burger span + span {
+      margin-top: 5px;
+    }
+
+    .burger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .burger.active {
+      background: rgba(255, 255, 255, 0.18);
+      transform: scale(0.95);
+    }
+
+    .burger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      padding: clamp(4rem, 10vw, 5rem) clamp(1.8rem, 6vw, 2.6rem) clamp(2.4rem, 6vw, 3rem);
+      display: grid;
+      gap: 1.6rem;
+      background: rgba(5, 2, 12, 0.92);
+      backdrop-filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      z-index: 30;
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .mobile-nav .cta-pill {
+      width: 100%;
+      justify-content: center;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4rem, 9vw, 6.6rem);
+      margin-top: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    section {
+      display: grid;
+      gap: clamp(1.6rem, 4vw, 2.6rem);
+    }
+
+    .section-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.05;
+    }
+
+    .section-sub {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.3vw, 1.2rem);
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      gap: clamp(1.8rem, 5vw, 3.2rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: clamp(2rem, 6vw, 3.2rem);
+      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: clamp(1.4rem, 4vw, 2.2rem);
+      text-align: left;
+    }
+
+    .hero-title {
+      display: grid;
+      gap: 1.2rem;
+      justify-items: start;
+    }
+
+    .hero-title h1 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title h1 span {
+      background: linear-gradient(120deg, var(--accent-3), var(--accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title p {
+      margin: 0;
+      max-width: 520px;
+      font-size: clamp(1.05rem, 2.5vw, 1.24rem);
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      margin: 0;
+      border-radius: 32px;
+      padding: clamp(1.6rem, 4vw, 2.6rem);
+      background: linear-gradient(140deg, rgba(127, 90, 240, 0.22), rgba(5, 217, 232, 0.12));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), transparent 55%);
+      pointer-events: none;
+    }
+
+    .browser-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(5, 2, 12, 0.9);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 6, 32, 0.95);
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .browser-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .browser-dots span:nth-child(1) { background: #ff5f57; }
+    .browser-dots span:nth-child(2) { background: #febb2e; }
+    .browser-dots span:nth-child(3) { background: #28c840; }
+
+    .browser-url {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+      font-family: 'Space Grotesk', monospace;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .browser-img {
+      width: 100%;
+      display: block;
+      border: none;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .preview-caption {
+      margin: 1rem 0 0 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    .demo-section {
+      display: grid;
+      gap: clamp(1.6rem, 4vw, 2.4rem);
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 2, 12, 0.85);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 28px;
+    }
+
+    .workflow-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(1.4rem, 4vw, 2.2rem);
+    }
+
+    .workflow-card {
+      position: relative;
+      padding: clamp(1.4rem, 4vw, 1.9rem);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 60px rgba(6, 0, 30, 0.35);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .workflow-card img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 14px 40px rgba(8, 0, 28, 0.4);
+    }
+
+    .workflow-card figcaption {
+      margin: 0;
+      font-size: 0.96rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* How it works */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: clamp(1rem, 3vw, 1.8rem);
+    }
+
+    .how-card {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: clamp(1.4rem, 4vw, 1.9rem);
+      display: grid;
+      gap: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .how-card::after {
+      content: attr(data-step);
+      position: absolute;
+      top: 1.2rem;
+      right: 1.4rem;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+    }
+
+    .how-card h3 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+    }
+
+    .how-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Why section */
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(1rem, 3vw, 1.8rem);
+    }
+
+    .value-card {
+      position: relative;
+      padding: clamp(1.6rem, 4vw, 2.2rem);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(160deg, rgba(127, 90, 240, 0.22), rgba(5, 217, 232, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 60px rgba(10, 0, 35, 0.4);
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .value-card h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-family: var(--font-heading);
+    }
+
+    .value-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .value-icon {
+      font-size: 1.5rem;
+    }
+
+    /* Vision */
+    .vision-card {
+      display: grid;
+      gap: 1.4rem;
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 4vw, 2.6rem);
+      background: var(--surface-strong);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 139, 167, 0.16), transparent 60%);
+      pointer-events: none;
+    }
+
+    .vision-card h3 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-family: var(--font-heading);
+    }
+
+    .vision-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .vision-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 139, 167, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Proof */
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(1rem, 3vw, 1.6rem);
+    }
+
+    .proof-card {
+      padding: clamp(1.4rem, 4vw, 1.9rem);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      gap: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-card cite {
+      font-style: normal;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.9rem;
+    }
+
+    .proof-card::before {
+      content: '“';
+      position: absolute;
+      top: -24px;
+      left: 18px;
+      font-size: 5rem;
+      color: rgba(255, 255, 255, 0.08);
+      font-family: var(--font-heading);
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 0.6rem;
+    }
+
+    .stat {
+      padding: 1rem 1.2rem;
+      border-radius: var(--radius-sm);
+      background: rgba(5, 217, 232, 0.08);
+      border: 1px solid rgba(5, 217, 232, 0.2);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--accent-4);
+    }
+
+    /* Waitlist */
+    .waitlist {
+      display: grid;
+      gap: clamp(1.4rem, 3vw, 2rem);
+      padding: clamp(1.8rem, 4vw, 2.6rem);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(125deg, rgba(127, 90, 240, 0.28), rgba(5, 217, 232, 0.16));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: var(--shadow);
+    }
+
+    .waitlist form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    label {
+      display: grid;
+      gap: 0.55rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(5, 2, 12, 0.7);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(127, 90, 240, 0.8);
+      box-shadow: 0 0 0 3px rgba(127, 90, 240, 0.25);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .waitlist-note {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      padding: clamp(1.2rem, 3vw, 1.8rem);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .faq-item h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-family: var(--font-heading);
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: clamp(3rem, 6vw, 4rem);
+      padding: 1.6rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus {
+      color: var(--white);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      header {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+      }
+
+      .cta-pill {
+        order: 2;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-title {
+        justify-items: center;
+      }
+
+      .hero-title p {
+        max-width: 100%;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-title h1 {
+        font-size: clamp(2.4rem, 8vw, 3.4rem);
+      }
+
+      .hero-visual {
+        padding: 1.4rem;
+      }
+
+      .workflow-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-visual {
+        border-radius: 24px;
+        padding: 1.2rem;
+      }
+
+      .browser-bar {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .browser-url {
+        width: 100%;
+      }
+
+      .video-frame {
+        border-radius: 22px;
+      }
+
+      .video-frame iframe {
+        border-radius: 22px;
+      }
+
+      .value-grid,
+      .proof-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">✦</span>
+        Lenoir Plus
+      </div>
+      <nav aria-label="Primary">
+        <a href="#hero">Home</a>
+        <a href="#how">How it works</a>
+        <a href="#demo">Demo</a>
+        <a href="#why">Why us</a>
+        <a href="#vision">Vision</a>
+        <a href="#proof">Proof</a>
+        <a href="#waitlist">Waitlist</a>
+      </nav>
+      <a class="cta-pill" href="#waitlist">Request invite</a>
+      <button class="burger" id="mobileMenuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
+      <a href="#hero">Home</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
+      <a href="#why">Why us</a>
+      <a href="#vision">Vision</a>
+      <a href="#proof">Proof</a>
+      <a href="#waitlist">Waitlist</a>
+      <a class="cta-pill" href="#waitlist">Request invite</a>
+    </nav>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="hero-title">
+              <h1>Ship redesigns <span>at feed speed.</span></h1>
+              <p>Lenoir Plus is the AI browser built for Gen Z creators who want to remix live websites, drop their vibe, and hand developers production-ready code without touching a dev console.</p>
+            </div>
+            <div class="hero-actions">
+              <a class="cta-pill" href="#waitlist">🌈 Join the waitlist</a>
+              <a class="cta-pill" href="#demo" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);box-shadow:none;">👀 Watch the demo</a>
+            </div>
+          </div>
+          <figure class="hero-visual" aria-label="Lenoir browser preview">
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="browser-url">lenoir://glow-up?creator=@yara</div>
+              </div>
+              <img class="browser-img" src="homescreen.jpeg" alt="Screenshot of the Lenoir Plus browser redesigning a hero section" loading="lazy">
+            </div>
+            <figcaption class="preview-caption">Upload your screenshot, prompt the glow-up, export clean HTML/CSS.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="demo" class="demo-section" aria-labelledby="demo-heading">
+        <div>
+          <div class="section-eyebrow">Live demo</div>
+          <h2 class="section-title" id="demo-heading">Watch Lenoir Plus remix a homepage in 45 seconds.</h2>
+          <p class="section-sub">Peek the workflow from prompt to publish with real UI. Tap fullscreen for the full glow-up.</p>
+        </div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Lenoir Plus demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <section id="workflow" aria-labelledby="workflow-heading">
+        <div>
+          <div class="section-eyebrow">Workflow snapshots</div>
+          <h2 class="section-title" id="workflow-heading">See the browser and AI assistant in action.</h2>
+          <p class="section-sub">Drop into a live page, ask the assistant to declutter, or jump to the homescreen to launch another glow-up. Every surface is tuned for fast iteration.</p>
+        </div>
+        <div class="workflow-gallery">
+          <figure class="workflow-card">
+            <img src="homescreen.jpeg" alt="Lenoir Plus AI assistant cleaning up a live CNN article" loading="lazy">
+            <figcaption>Spin up the AI assistant on any live site. Remove clutter, redesign sections, and swap copy with natural language prompts.</figcaption>
+          </figure>
+          <figure class="workflow-card">
+            <img src="appstore.jpeg" alt="Lenoir Plus homescreen launcher with apps and quick links" loading="lazy">
+            <figcaption>Launch projects from a familiar homescreen. Pin inspo tabs, jump back into client builds, and keep experiments one tap away.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="how">
+        <div>
+          <div class="section-eyebrow">How it works</div>
+          <h2 class="section-title">From idea to live glow-up in three beats.</h2>
+          <p class="section-sub">You bring the vibe, Lenoir Plus handles the code. Every step is unbelievably fast, collaborative, and tuned for social-native teams.</p>
+        </div>
+        <div class="how-grid" role="list">
+          <article class="how-card" data-step="1" role="listitem">
+            <h3>Drop any URL</h3>
+            <p>Open your current landing page or a dream inspo link. Lenoir Plus clones the live DOM so you can remix on the spot.</p>
+            <div class="chip-row">
+              <span class="chip">Live DOM</span>
+              <span class="chip">Instant import</span>
+            </div>
+          </article>
+          <article class="how-card" data-step="2" role="listitem">
+            <h3>Prompt the glow-up</h3>
+            <p>Speak your vibe. “Give this hero Coachella energy.” “Swap copy to Gen Z casual.” The AI instantly edits layout, typography, and tone.</p>
+            <div class="chip-row">
+              <span class="chip">Natural language</span>
+              <span class="chip">Brand guardrails</span>
+            </div>
+          </article>
+          <article class="how-card" data-step="3" role="listitem">
+            <h3>Ship the code</h3>
+            <p>Export clean HTML/CSS, send a review link, or publish to staging. No handoff friction. No late-night bug hunts.</p>
+            <div class="chip-row">
+              <span class="chip">Production-ready</span>
+              <span class="chip">Team review</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="why">
+        <div>
+          <div class="section-eyebrow">Why Lenoir Plus</div>
+          <h2 class="section-title">Built for the creators who move culture.</h2>
+          <p class="section-sub">This isn’t another static builder. Lenoir Plus is an AI design tool that keeps up with fast launches, feedback loops, and brand collabs.</p>
+        </div>
+        <div class="value-grid">
+          <div class="value-card">
+            <span class="value-icon">⚡</span>
+            <h3>Lightning launch energy</h3>
+            <p>Move from moodboard to live page in a single session. Cut iteration cycles from weeks to hours.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">🎨</span>
+            <h3>Drip-worthy visuals</h3>
+            <p>AI understands brand palettes, meme culture, and modern typography. Tweaks stay on vibe.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">🤝</span>
+            <h3>Squad-ready collabs</h3>
+            <p>Invite teammates, collect emoji reactions, and ship with confidence knowing devs have the clean code ready.</p>
+          </div>
+        </div>
+        <div class="stats-bar" aria-label="Product stats">
+          <div class="stat"><strong>120+</strong>Website glow-ups launched in private beta.</div>
+          <div class="stat"><strong>&lt;24h</strong>Average turnaround for feedback loops.</div>
+          <div class="stat"><strong>18 countries</strong>Creators already shipping with Lenoir.</div>
+        </div>
+      </section>
+
+      <section id="vision">
+        <div class="vision-card">
+          <span class="vision-tag">Vision Mode · Coming Soon</span>
+          <h3>Dream a vibe, watch Lenoir rebuild the entire site.</h3>
+          <p>Upload a concept shot, paste your Pinterest board, or type “make it look like 2030 streetwear.” Vision Mode spins a full layout, content, and accessibility pass in under two minutes.</p>
+        </div>
+      </section>
+
+      <section id="proof">
+        <div>
+          <div class="section-eyebrow">Creators already winning</div>
+          <h2 class="section-title">The receipts hit different.</h2>
+          <p class="section-sub">From solo founders to design squads, Lenoir Plus helps teams drop fresh pages without begging dev to free up sprint time.</p>
+        </div>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <blockquote>“Lanched our rebrand in 48 hours instead of 3 weeks. Investors thought we hired an agency.”</blockquote>
+            <cite>— Zuri K · Founder, Weekend Studios</cite>
+          </article>
+          <article class="proof-card">
+            <blockquote>“We mix TikTok trends straight into the site. Lenoir lets us experiment until engagement spikes.”</blockquote>
+            <cite>— Dani S · Growth Lead, Lumen Labs</cite>
+          </article>
+          <article class="proof-card">
+            <blockquote>“No more 2am CSS fights. I prompt, review, and send devs code that actually matches the mock.”</blockquote>
+            <cite>— Milo P · Senior Designer, Flux Collective</cite>
+          </article>
+        </div>
+      </section>
+
+      <section id="waitlist" class="waitlist" aria-labelledby="waitlist-title">
+        <div>
+          <div class="section-eyebrow">Request Invite</div>
+          <h2 class="section-title" id="waitlist-title">Get the drop. Build the future web.</h2>
+          <p class="section-sub">Invites ship weekly to creators, founders, and teams shipping interactive experiences. Tell us how you’ll use Lenoir Plus.</p>
+        </div>
+        <form action="send-invite.php" method="POST" aria-describedby="waitlist-note">
+          <div class="form-grid">
+            <label for="full-name">Full name
+              <input id="full-name" name="name" type="text" autocomplete="name" placeholder="Sky Ramirez" required>
+            </label>
+            <label for="email">Email
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="sky@studio.cool" required>
+            </label>
+          </div>
+          <label for="handle">Social or portfolio
+            <input id="handle" name="handle" type="text" placeholder="@yoursocial or https://your.site">
+          </label>
+          <label for="use-case">What are you building?
+            <textarea id="use-case" name="message" placeholder="Drop a quick vibe check on your project." maxlength="480" required></textarea>
+          </label>
+          <button class="cta-pill" type="submit">Submit &amp; get in line</button>
+          <p class="waitlist-note" id="waitlist-note">We review every request in under 24 hours. Approved creators get onboarding, live co-build time, and private community access.</p>
+        </form>
+      </section>
+
+      <section id="faq">
+        <div>
+          <div class="section-eyebrow">FAQ</div>
+          <h2 class="section-title">Before you smash that apply button.</h2>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Is Lenoir Plus invite-only?</h3>
+            <p>Yep! We open new creator waves every Monday so the squad stays tight and support stays real.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Do I need to code?</h3>
+            <p>Nah. Prompts plus visual editing gets you 90% there. When you need code, Lenoir gives you clean, production-ready exports.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What platforms are supported?</h3>
+            <p>Lenoir Plus runs on macOS and Windows. Linux is on the radar — drop your request in the waitlist form.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2025 Lenoir Plus — Built by creators for creators.</span>
+      <div class="footer-links" aria-label="Footer links">
+        <a href="mailto:hello@lenoir.app">Email</a>
+        <a href="https://twitter.com/lenoir" target="_blank" rel="noopener">Twitter</a>
+        <a href="#waitlist">Request invite</a>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (function() {
+      const toggleButton = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      if (!toggleButton || !mobileNav) return;
+
+      const closeMenu = () => {
+        mobileNav.classList.remove('open');
+        toggleButton.classList.remove('active');
+        toggleButton.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+      };
+
+      const openMenu = () => {
+        mobileNav.classList.add('open');
+        toggleButton.classList.add('active');
+        toggleButton.setAttribute('aria-expanded', 'true');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+      };
+
+      const toggleMenu = () => {
+        if (mobileNav.classList.contains('open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      };
+
+      toggleButton.addEventListener('click', toggleMenu);
+
+      mobileNav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape' && mobileNav.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

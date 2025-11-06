@@ -1,0 +1,1342 @@
+/**
+ * Theme System - Standard and Neo-Brutalist Themes
+ * Applied to the entire Lenoir browser interface
+ */
+
+/* ============================================
+   STANDARD THEME (V3 Design)
+   ============================================ */
+
+:root[data-theme="standard"] {
+    /* Colors - V3 Palette */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #0f0f0f;
+    --bg-tertiary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --accent-primary: #4a9eff;
+    --accent-secondary: #667eea;
+    --border-color: #2a2a2a;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    
+    /* Spacing */
+    --border-radius: 6px;
+    --border-width: 1px;
+    --transition: all 0.2s ease;
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 600;
+}
+
+/* ============================================
+   STANDARD THEME SPECIFIC OVERRIDES (V3 Style)
+   ============================================ */
+
+[data-theme="standard"] body {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+[data-theme="standard"] .titlebar {
+    background: #0f0f0f !important;
+    border-bottom: 1px solid #2a2a2a !important;
+    height: 32px !important;
+}
+
+[data-theme="standard"] .window-control {
+    background: transparent !important;
+    color: #888 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    width: 28px !important;
+    height: 28px !important;
+    box-shadow: none !important;
+}
+
+[data-theme="standard"] .window-control:hover {
+    background: #2a2a2a !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .window-control.close:hover {
+    background: #ff3b30 !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .left-sidebar,
+[data-theme="standard"] .sidebar {
+    background: #1a1a1a !important;
+    border-right: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] .sidebar-btn {
+    background: #2a2a2a !important;
+    color: #888 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+[data-theme="standard"] .sidebar-btn:hover {
+    background: #3a3a3a !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .sidebar-btn#home-btn {
+    background: #3a3a3a !important;
+}
+
+[data-theme="standard"] .sidebar-btn#home-btn:hover {
+    background: #4a9eff !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .favorite-item,
+[data-theme="standard"] .tab {
+    background: transparent !important;
+    color: #ccc !important;
+    border-radius: 6px !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+[data-theme="standard"] .favorite-item:hover,
+[data-theme="standard"] .tab:hover {
+    background: #2a2a2a !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .tab.active {
+    background: #2a2a2a !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .favorite-icon {
+    background: #3a3a3a !important;
+    color: #888 !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="standard"] .section-title {
+    color: #666 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+[data-theme="standard"] .top-nav {
+    background: #1a1a1a !important;
+    border-bottom: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] .address-bar {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .address-bar:focus {
+    border-color: #4a9eff !important;
+}
+
+[data-theme="standard"] button,
+[data-theme="standard"] .button {
+    background: #2a2a2a !important;
+    color: #888 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+[data-theme="standard"] button:hover,
+[data-theme="standard"] .button:hover {
+    background: #3a3a3a !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .app-shortcut {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="standard"] .app-shortcut:hover {
+    background: #3a3a3a !important;
+    transform: translateY(-2px);
+}
+
+[data-theme="standard"] .ai-sidebar {
+    background: #1a1a1a !important;
+    border-left: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] .ai-sidebar-header {
+    background: #0f0f0f !important;
+    border-bottom: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] input,
+[data-theme="standard"] textarea,
+[data-theme="standard"] select {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    color: #fff !important;
+    border-radius: 6px !important;
+}
+
+[data-theme="standard"] input:focus,
+[data-theme="standard"] textarea:focus,
+[data-theme="standard"] select:focus {
+    border-color: #4a9eff !important;
+}
+
+/* Settings Page Standard Theme */
+[data-theme="standard"] .settings-sidebar {
+    background: #1a1a1a !important;
+    border-right: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] .nav-item {
+    background: transparent !important;
+    color: #ccc !important;
+    border-radius: 6px !important;
+}
+
+[data-theme="standard"] .nav-item:hover {
+    background: #2a2a2a !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .nav-item.active {
+    background: #4a9eff !important;
+    color: #fff !important;
+}
+
+[data-theme="standard"] .setting-group {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 12px !important;
+}
+
+[data-theme="standard"] .theme-option,
+[data-theme="standard"] .wallpaper-option {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+}
+
+[data-theme="standard"] .theme-option:hover,
+[data-theme="standard"] .wallpaper-option:hover {
+    background: #3a3a3a !important;
+}
+
+[data-theme="standard"] .theme-option.active,
+[data-theme="standard"] .wallpaper-option.active {
+    background: #4a9eff !important;
+    border-color: #4a9eff !important;
+    color: #fff !important;
+}
+
+/* Links and Anchors */
+[data-theme="standard"] a {
+    color: #4a9eff !important;
+    text-decoration: none !important;
+}
+
+[data-theme="standard"] a:hover {
+    color: #6bb5ff !important;
+    text-decoration: underline !important;
+}
+
+/* Icons */
+[data-theme="standard"] .app-icon,
+[data-theme="standard"] i,
+[data-theme="standard"] svg {
+    filter: none !important;
+}
+
+[data-theme="standard"] .app-icon {
+    background: #3a3a3a !important;
+    border: 1px solid #4a4a4a !important;
+}
+
+/* Scrollbars */
+[data-theme="standard"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+[data-theme="standard"] ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+[data-theme="standard"] ::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 4px;
+}
+
+[data-theme="standard"] ::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+
+/* Modals and Overlays */
+[data-theme="standard"] .modal,
+[data-theme="standard"] .overlay {
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-theme="standard"] .modal-content {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 12px !important;
+}
+
+/* Badges and Tags */
+[data-theme="standard"] .badge,
+[data-theme="standard"] .tag {
+    background: #3a3a3a !important;
+    color: #ccc !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+}
+
+/* Tooltips */
+[data-theme="standard"] .tooltip {
+    background: #0f0f0f !important;
+    color: #fff !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dropdown Menus */
+[data-theme="standard"] .dropdown,
+[data-theme="standard"] .menu {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="standard"] .dropdown-item,
+[data-theme="standard"] .menu-item {
+    color: #ccc !important;
+}
+
+[data-theme="standard"] .dropdown-item:hover,
+[data-theme="standard"] .menu-item:hover {
+    background: #3a3a3a !important;
+    color: #fff !important;
+}
+
+/* Progress Bars */
+[data-theme="standard"] .progress-bar {
+    background: #2a2a2a !important;
+    border-radius: 4px !important;
+}
+
+[data-theme="standard"] .progress-fill {
+    background: #4a9eff !important;
+    border-radius: 4px !important;
+}
+
+/* Checkboxes and Radio Buttons */
+[data-theme="standard"] input[type="checkbox"],
+[data-theme="standard"] input[type="radio"] {
+    accent-color: #4a9eff !important;
+}
+
+/* Dividers */
+[data-theme="standard"] hr,
+[data-theme="standard"] .divider {
+    border-color: #2a2a2a !important;
+}
+
+/* Code Blocks */
+[data-theme="standard"] code,
+[data-theme="standard"] pre {
+    background: #0f0f0f !important;
+    color: #4a9eff !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 4px !important;
+}
+
+/* Tables */
+[data-theme="standard"] table {
+    border-collapse: collapse !important;
+}
+
+[data-theme="standard"] th {
+    background: #2a2a2a !important;
+    color: #fff !important;
+    border: 1px solid #3a3a3a !important;
+}
+
+[data-theme="standard"] td {
+    background: #1a1a1a !important;
+    color: #ccc !important;
+    border: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] tr:hover td {
+    background: #2a2a2a !important;
+}
+
+/* App Store Specific */
+[data-theme="standard"] .appstore-container {
+    background: #1a1a1a !important;
+}
+
+[data-theme="standard"] .appstore-header {
+    background: #0f0f0f !important;
+    border-bottom: 1px solid #2a2a2a !important;
+}
+
+[data-theme="standard"] .category-btn {
+    background: #2a2a2a !important;
+    color: #888 !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="standard"] .category-btn:hover,
+[data-theme="standard"] .category-btn.active {
+    background: #4a9eff !important;
+    color: #fff !important;
+    border-color: #4a9eff !important;
+}
+
+[data-theme="standard"] .app-card {
+    background: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 12px !important;
+}
+
+[data-theme="standard"] .app-card:hover {
+    background: #3a3a3a !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ============================================
+   NEO GLASS MODERN THEME (Apple-inspired)
+   ============================================ */
+
+:root[data-theme="glass"] {
+    /* Colors */
+    --bg-primary: rgba(255, 255, 255, 0.7);
+    --bg-secondary: rgba(255, 255, 255, 0.5);
+    --bg-tertiary: rgba(255, 255, 255, 0.3);
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --accent-primary: #007AFF;
+    --accent-secondary: #5856D6;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    
+    /* Spacing */
+    --border-radius: 20px;
+    --border-width: 1px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 600;
+}
+
+/* ============================================
+   GLASS THEME SPECIFIC OVERRIDES
+   ============================================ */
+
+[data-theme="glass"] body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    color: var(--text-primary);
+    backdrop-filter: blur(20px);
+}
+
+[data-theme="glass"] button,
+[data-theme="glass"] .button,
+[data-theme="glass"] input[type="button"],
+[data-theme="glass"] input[type="submit"] {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    border-radius: 12px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-theme="glass"] button:hover,
+[data-theme="glass"] .button:hover {
+    background: rgba(255, 255, 255, 0.8) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="glass"] button:active,
+[data-theme="glass"] .button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="glass"] input,
+[data-theme="glass"] textarea,
+[data-theme="glass"] select {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="glass"] input:focus,
+[data-theme="glass"] textarea:focus,
+[data-theme="glass"] select:focus {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(0, 122, 255, 0.5) !important;
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="glass"] .card,
+[data-theme="glass"] .panel,
+[data-theme="glass"] .container {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px !important;
+}
+
+[data-theme="glass"] h1,
+[data-theme="glass"] h2,
+[data-theme="glass"] h3,
+[data-theme="glass"] h4,
+[data-theme="glass"] h5,
+[data-theme="glass"] h6 {
+    font-weight: 600 !important;
+    letter-spacing: -0.5px;
+}
+
+/* Sidebar */
+[data-theme="glass"] .sidebar {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Top Navigation */
+[data-theme="glass"] .top-nav {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Address Bar */
+[data-theme="glass"] .address-bar {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    border-radius: 12px !important;
+}
+
+/* Tabs */
+[data-theme="glass"] .tab {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    border-radius: 12px !important;
+    margin-right: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-theme="glass"] .tab:hover {
+    background: rgba(255, 255, 255, 0.7) !important;
+    transform: translateY(-2px);
+}
+
+[data-theme="glass"] .tab.active {
+    background: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* AI Sidebar */
+[data-theme="glass"] .ai-sidebar {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Home Screen Apps */
+[data-theme="glass"] .app-shortcut {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-theme="glass"] .app-shortcut:hover {
+    background: rgba(255, 255, 255, 0.8) !important;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="glass"] .app-icon {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1)) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Scrollbars */
+[data-theme="glass"] ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[data-theme="glass"] ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+[data-theme="glass"] ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="glass"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Settings Page Glass Theme */
+[data-theme="glass"] .titlebar {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="glass"] .titlebar-title {
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .window-control {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="glass"] .window-control:hover {
+    background: rgba(255, 59, 48, 0.8) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
+[data-theme="glass"] .settings-container {
+    background: transparent !important;
+}
+
+[data-theme="glass"] .settings-sidebar {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="glass"] .nav-item {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .nav-item:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+    transform: translateX(4px);
+}
+
+[data-theme="glass"] .nav-item.active {
+    background: rgba(0, 122, 255, 0.8) !important;
+    color: white !important;
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
+}
+
+[data-theme="glass"] .settings-content {
+    background: transparent !important;
+}
+
+[data-theme="glass"] .settings-section {
+    background: transparent !important;
+}
+
+[data-theme="glass"] .settings-section h2 {
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .setting-group {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="glass"] .setting-label .label-text {
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .setting-label .label-description {
+    color: #6e6e73 !important;
+}
+
+[data-theme="glass"] .theme-option {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="glass"] .theme-option:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="glass"] .theme-option.active {
+    background: rgba(0, 122, 255, 0.2) !important;
+    border-color: rgba(0, 122, 255, 0.5) !important;
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
+}
+
+[data-theme="glass"] .theme-name {
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .theme-description {
+    color: #6e6e73 !important;
+}
+
+[data-theme="glass"] .wallpaper-option {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="glass"] .wallpaper-option:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
+    transform: translateY(-4px) !important;
+}
+
+[data-theme="glass"] .wallpaper-option.active {
+    background: rgba(0, 122, 255, 0.2) !important;
+    border-color: rgba(0, 122, 255, 0.5) !important;
+}
+
+/* App Store Glass Theme */
+[data-theme="glass"] .window-controls {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="glass"] .window-title {
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .windows-button {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="glass"] .windows-button:hover {
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="glass"] .windows-button.close-win:hover {
+    background: rgba(255, 59, 48, 0.8) !important;
+    color: white !important;
+}
+
+[data-theme="glass"] .appstore-container {
+    background: transparent !important;
+}
+
+[data-theme="glass"] .appstore-header {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="glass"] .category-btn {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    color: #1d1d1f !important;
+}
+
+[data-theme="glass"] .category-btn:hover,
+[data-theme="glass"] .category-btn.active {
+    background: rgba(0, 122, 255, 0.8) !important;
+    color: white !important;
+}
+
+[data-theme="glass"] .app-card {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="glass"] .app-card:hover {
+    background: rgba(255, 255, 255, 0.7) !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Links and Anchors - Glass */
+[data-theme="glass"] a {
+    color: #007AFF !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+[data-theme="glass"] a:hover {
+    color: #0051D5 !important;
+    text-decoration: underline !important;
+}
+
+/* Icons - Glass */
+[data-theme="glass"] .app-icon,
+[data-theme="glass"] i {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important;
+}
+
+/* Badges and Tags - Glass */
+[data-theme="glass"] .badge,
+[data-theme="glass"] .tag {
+    background: rgba(0, 122, 255, 0.15) !important;
+    color: #007AFF !important;
+    border-radius: 12px !important;
+    padding: 6px 12px !important;
+    font-weight: 600 !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Tooltips - Glass */
+[data-theme="glass"] .tooltip {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    color: #1d1d1f !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Dropdown Menus - Glass */
+[data-theme="glass"] .dropdown,
+[data-theme="glass"] .menu {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="glass"] .dropdown-item,
+[data-theme="glass"] .menu-item {
+    color: #1d1d1f !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="glass"] .dropdown-item:hover,
+[data-theme="glass"] .menu-item:hover {
+    background: rgba(0, 122, 255, 0.1) !important;
+    color: #007AFF !important;
+}
+
+/* Progress Bars - Glass */
+[data-theme="glass"] .progress-bar {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+[data-theme="glass"] .progress-fill {
+    background: linear-gradient(90deg, #007AFF, #5856D6) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3) !important;
+}
+
+/* Checkboxes and Radio - Glass */
+[data-theme="glass"] input[type="checkbox"],
+[data-theme="glass"] input[type="radio"] {
+    accent-color: #007AFF !important;
+}
+
+/* Dividers - Glass */
+[data-theme="glass"] hr,
+[data-theme="glass"] .divider {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Code Blocks - Glass */
+[data-theme="glass"] code,
+[data-theme="glass"] pre {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #007AFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Tables - Glass */
+[data-theme="glass"] table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+[data-theme="glass"] th {
+    background: rgba(0, 122, 255, 0.1) !important;
+    color: #1d1d1f !important;
+    font-weight: 600 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="glass"] td {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+    color: #1d1d1f !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="glass"] tr:hover td {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Modals - Glass */
+[data-theme="glass"] .modal,
+[data-theme="glass"] .overlay {
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(20px) !important;
+}
+
+[data-theme="glass"] .modal-content {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ============================================
+   NEO-BRUTALIST THEME
+   ============================================ */
+
+:root[data-theme="brutalist"] {
+    /* Colors */
+    --bg-primary: #F5F3EE;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #FFC857;
+    --text-primary: #111111;
+    --text-secondary: #333333;
+    --accent-primary: #FF5A36;
+    --accent-secondary: #1F7A8C;
+    --border-color: #111111;
+    --shadow: 4px 4px 0 0 #111111;
+    
+    /* Spacing */
+    --border-radius: 0;
+    --border-width: 3px;
+    --transition: none;
+    
+    /* Typography */
+    --font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
+    --font-weight-normal: 700;
+    --font-weight-bold: 900;
+}
+
+/* ============================================
+   BRUTALIST THEME SPECIFIC OVERRIDES
+   ============================================ */
+
+[data-theme="brutalist"] body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="brutalist"] button,
+[data-theme="brutalist"] .button,
+[data-theme="brutalist"] input[type="button"],
+[data-theme="brutalist"] input[type="submit"] {
+    border: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: var(--font-weight-bold) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition) !important;
+}
+
+[data-theme="brutalist"] button:hover,
+[data-theme="brutalist"] .button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--border-color) !important;
+}
+
+[data-theme="brutalist"] input,
+[data-theme="brutalist"] textarea,
+[data-theme="brutalist"] select {
+    border: var(--border-width) solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--shadow) !important;
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="brutalist"] .card,
+[data-theme="brutalist"] .panel,
+[data-theme="brutalist"] .container {
+    border: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--bg-secondary) !important;
+}
+
+[data-theme="brutalist"] h1,
+[data-theme="brutalist"] h2,
+[data-theme="brutalist"] h3,
+[data-theme="brutalist"] h4,
+[data-theme="brutalist"] h5,
+[data-theme="brutalist"] h6 {
+    font-weight: var(--font-weight-bold) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Sidebar */
+[data-theme="brutalist"] .sidebar {
+    background: var(--bg-secondary) !important;
+    border-right: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+/* Top Navigation */
+[data-theme="brutalist"] .top-nav {
+    background: var(--bg-secondary) !important;
+    border-bottom: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+/* Address Bar */
+[data-theme="brutalist"] .address-bar {
+    border: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--bg-secondary) !important;
+}
+
+/* Tabs */
+[data-theme="brutalist"] .tab {
+    border: var(--border-width) solid var(--border-color) !important;
+    box-shadow: 3px 3px 0 0 var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--bg-secondary) !important;
+    margin-right: 8px !important;
+}
+
+[data-theme="brutalist"] .tab.active {
+    background: var(--bg-tertiary) !important;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--border-color) !important;
+}
+
+/* AI Sidebar */
+[data-theme="brutalist"] .ai-sidebar {
+    background: var(--bg-secondary) !important;
+    border-left: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+/* Home Screen Apps */
+[data-theme="brutalist"] .app-shortcut {
+    border: var(--border-width) solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--bg-secondary) !important;
+}
+
+[data-theme="brutalist"] .app-shortcut:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--border-color) !important;
+    background: var(--bg-tertiary) !important;
+}
+
+/* Scrollbars */
+[data-theme="brutalist"] ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+[data-theme="brutalist"] ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+    border: var(--border-width) solid var(--border-color);
+}
+
+[data-theme="brutalist"] ::-webkit-scrollbar-thumb {
+    background: var(--text-primary);
+    border: var(--border-width) solid var(--border-color);
+}
+
+[data-theme="brutalist"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+/* Links and Anchors - Brutalist */
+[data-theme="brutalist"] a {
+    color: #FF5A36 !important;
+    text-decoration: none !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-bottom: 3px solid #FF5A36 !important;
+}
+
+[data-theme="brutalist"] a:hover {
+    color: #111111 !important;
+    background: #FF5A36 !important;
+    border-bottom: 3px solid #111111 !important;
+    transform: translate(-2px, -2px) !important;
+}
+
+/* Icons - Brutalist */
+[data-theme="brutalist"] .app-icon,
+[data-theme="brutalist"] i {
+    filter: drop-shadow(4px 4px 0 #111111) !important;
+}
+
+[data-theme="brutalist"] svg {
+    filter: none !important;
+}
+
+/* Badges and Tags - Brutalist */
+[data-theme="brutalist"] .badge,
+[data-theme="brutalist"] .tag {
+    background: #FFC857 !important;
+    color: #111111 !important;
+    border: 3px solid #111111 !important;
+    box-shadow: 3px 3px 0 0 #111111 !important;
+    border-radius: 0 !important;
+    padding: 8px 16px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+/* Tooltips - Brutalist */
+[data-theme="brutalist"] .tooltip {
+    background: #111111 !important;
+    color: #FFC857 !important;
+    border: 3px solid #FFC857 !important;
+    box-shadow: 4px 4px 0 0 #111111 !important;
+    border-radius: 0 !important;
+    font-weight: 700 !important;
+}
+
+/* Dropdown Menus - Brutalist */
+[data-theme="brutalist"] .dropdown,
+[data-theme="brutalist"] .menu {
+    background: #F5F3EE !important;
+    border: 3px solid #111111 !important;
+    box-shadow: 6px 6px 0 0 #111111 !important;
+    border-radius: 0 !important;
+}
+
+[data-theme="brutalist"] .dropdown-item,
+[data-theme="brutalist"] .menu-item {
+    color: #111111 !important;
+    font-weight: 700 !important;
+    border-bottom: 2px solid #111111 !important;
+}
+
+[data-theme="brutalist"] .dropdown-item:hover,
+[data-theme="brutalist"] .menu-item:hover {
+    background: #FFC857 !important;
+    color: #111111 !important;
+    transform: translateX(4px) !important;
+}
+
+/* Progress Bars - Brutalist */
+[data-theme="brutalist"] .progress-bar {
+    background: #F5F3EE !important;
+    border: 3px solid #111111 !important;
+    box-shadow: 4px 4px 0 0 #111111 !important;
+    border-radius: 0 !important;
+    height: 32px !important;
+}
+
+[data-theme="brutalist"] .progress-fill {
+    background: #FF5A36 !important;
+    border-right: 3px solid #111111 !important;
+    box-shadow: inset 0 0 0 2px #111111 !important;
+}
+
+/* Checkboxes and Radio - Brutalist */
+[data-theme="brutalist"] input[type="checkbox"],
+[data-theme="brutalist"] input[type="radio"] {
+    appearance: none !important;
+    width: 24px !important;
+    height: 24px !important;
+    border: 3px solid #111111 !important;
+    background: #FFFFFF !important;
+    box-shadow: 3px 3px 0 0 #111111 !important;
+    cursor: pointer !important;
+}
+
+[data-theme="brutalist"] input[type="checkbox"]:checked,
+[data-theme="brutalist"] input[type="radio"]:checked {
+    background: #FF5A36 !important;
+}
+
+[data-theme="brutalist"] input[type="checkbox"]:checked::after {
+    content: '✓' !important;
+    display: block !important;
+    color: #111111 !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    text-align: center !important;
+    line-height: 18px !important;
+}
+
+/* Dividers - Brutalist */
+[data-theme="brutalist"] hr,
+[data-theme="brutalist"] .divider {
+    border: none !important;
+    height: 4px !important;
+    background: #111111 !important;
+    box-shadow: 0 4px 0 0 #111111 !important;
+}
+
+/* Code Blocks - Brutalist */
+[data-theme="brutalist"] code,
+[data-theme="brutalist"] pre {
+    background: #111111 !important;
+    color: #FFC857 !important;
+    border: 3px solid #111111 !important;
+    box-shadow: 4px 4px 0 0 #111111 !important;
+    border-radius: 0 !important;
+    font-weight: 700 !important;
+    padding: 12px !important;
+}
+
+/* Tables - Brutalist */
+[data-theme="brutalist"] table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border: 3px solid #111111 !important;
+    box-shadow: 6px 6px 0 0 #111111 !important;
+}
+
+[data-theme="brutalist"] th {
+    background: #FFC857 !important;
+    color: #111111 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    border: 3px solid #111111 !important;
+    padding: 16px !important;
+}
+
+[data-theme="brutalist"] td {
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    border: 3px solid #111111 !important;
+    font-weight: 700 !important;
+    padding: 12px !important;
+}
+
+[data-theme="brutalist"] tr:hover td {
+    background: #FF5A36 !important;
+    color: #FFFFFF !important;
+}
+
+/* Modals - Brutalist */
+[data-theme="brutalist"] .modal,
+[data-theme="brutalist"] .overlay {
+    background: rgba(17, 17, 17, 0.9) !important;
+}
+
+[data-theme="brutalist"] .modal-content {
+    background: #F5F3EE !important;
+    border: 4px solid #111111 !important;
+    box-shadow: 8px 8px 0 0 #111111 !important;
+    border-radius: 0 !important;
+}
+
+/* List Items - Brutalist */
+[data-theme="brutalist"] ul,
+[data-theme="brutalist"] ol {
+    list-style: none !important;
+}
+
+[data-theme="brutalist"] li::before {
+    content: '▪' !important;
+    color: #FF5A36 !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
+    width: 1em !important;
+    margin-left: -1em !important;
+}
+
+/* Headings - Brutalist */
+[data-theme="brutalist"] h1::before,
+[data-theme="brutalist"] h2::before,
+[data-theme="brutalist"] h3::before {
+    content: '█ ' !important;
+    color: #FF5A36 !important;
+}
+
+/* Selection - Brutalist */
+[data-theme="brutalist"] ::selection {
+    background: #FF5A36 !important;
+    color: #FFFFFF !important;
+}

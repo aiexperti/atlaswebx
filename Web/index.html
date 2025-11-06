@@ -1,0 +1,1515 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lenoir – AI Browser for Website Design & Live Redesign | No Code Website Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lenoir is the first AI-powered browser for live website redesign. Edit, restyle, and publish any site instantly — no code required. Join early access.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lenoir.app/">
+  <meta property="og:title" content="Lenoir – AI Browser for Website Design & Live Redesign">
+  <meta property="og:description" content="Edit, restyle, and publish any site instantly with Lenoir — the AI browser for live website redesign.">
+  <meta property="og:url" content="https://lenoir.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://lenoir.app/social-preview.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Lenoir",
+    "operatingSystem": "macOS, Windows",
+    "applicationCategory": "WebApplication",
+    "description": "AI browser for live website redesign and no-code editing.",
+    "url": "https://lenoir.app",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39731799-8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-39731799-8');
+  </script>
+  
+  <style>
+    :root {
+      --bg: #040308;
+      --text: #f5f5f7;
+      --muted: #a4a5c7;
+      --accent: #4a9eff;
+      --accent-dark: #3b7fd9;
+      --glass: rgba(11, 8, 21, 0.62);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --shadow-soft: 0 22px 60px rgba(6, 0, 18, 0.55);
+      --shadow-window: 0 30px 70px rgba(6, 0, 18, 0.55);
+      --font: "SF Pro Display","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;}
+    html,body{margin:0;min-height:100%;}
+    body{
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(90% 120% at 15% 0%, rgba(45,85,160,.45) 0%, rgba(4,3,8,0) 65%),
+        radial-gradient(70% 80% at 80% 100%, rgba(74,158,255,.35) 0%, rgba(4,3,8,0) 70%),
+        radial-gradient(100% 100% at 50% 15%, rgba(91,164,255,.28) 0%, rgba(4,3,8,0) 65%),
+        #040308;
+      overflow-x:hidden;
+    }
+    body::before,body::after{
+      position:fixed;inset:0;content:"";pointer-events:none;
+    }
+    body::before{
+      opacity:.55;
+      background-image:
+        radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,.85) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 80% 35%, rgba(255,255,255,.7) 0, transparent 50%),
+        radial-gradient(1.5px 1.5px at 45% 80%, rgba(255,255,255,.65) 0, transparent 55%);
+      background-size:520px 520px,640px 640px,480px 480px;
+      animation:drift 46s linear infinite;
+    }
+    body::after{
+      opacity:.75;
+      mix-blend-mode:screen;
+      background:
+        radial-gradient(50% 55% at 25% 30%, rgba(74,158,255,.16), transparent 68%),
+        radial-gradient(42% 45% at 77% 45%, rgba(91,164,255,.12), transparent 70%),
+        radial-gradient(38% 40% at 55% 80%, rgba(59,142,232,.14), transparent 70%);
+      animation:pulse 18s ease-in-out infinite;
+    }
+    @keyframes drift{0%{transform:translateY(0);}50%{transform:translateY(-28px);}100%{transform:translateY(0);}}
+    @keyframes pulse{0%,100%{opacity:.65;}50%{opacity:.85;}}
+    
+    /* Smooth scrolling */
+    html{scroll-behavior:smooth;}
+    
+    /* Parallax and animations */
+    .parallax{transform:translateZ(0);will-change:transform;}
+    
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(30px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    
+    @keyframes fadeIn{
+      from{opacity:0;}
+      to{opacity:1;}
+    }
+    
+    @keyframes scaleIn{
+      from{opacity:0;transform:scale(0.95);}
+      to{opacity:1;transform:scale(1);}
+    }
+    
+    @keyframes slideInLeft{
+      from{opacity:0;transform:translateX(-30px);}
+      to{opacity:1;transform:translateX(0);}
+    }
+    
+    @keyframes slideInRight{
+      from{opacity:0;transform:translateX(30px);}
+      to{opacity:1;transform:translateX(0);}
+    }
+    
+    .animate-on-scroll{
+      opacity:0;
+      animation:fadeInUp 0.8s ease forwards;
+    }
+    
+    .animate-delay-1{animation-delay:0.1s;}
+    .animate-delay-2{animation-delay:0.2s;}
+    .animate-delay-3{animation-delay:0.3s;}
+    .animate-delay-4{animation-delay:0.4s;}
+    
+    /* Lightbox */
+    .lightbox{
+      display:none;
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,.95);
+      z-index:10000;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+      backdrop-filter:blur(10px);
+      animation:fadeIn .3s ease;
+    }
+    .lightbox.active{display:flex;}
+    .lightbox-content{
+      position:relative;
+      max-width:90vw;
+      max-height:90vh;
+      animation:scaleIn .3s ease;
+    }
+    .lightbox-content img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:12px;
+      box-shadow:0 40px 100px rgba(0,0,0,.8);
+    }
+    .lightbox-close{
+      position:absolute;
+      top:-50px;
+      right:0;
+      width:40px;
+      height:40px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .3s ease;
+    }
+    .lightbox-close:hover{
+      background:rgba(255,255,255,.2);
+      transform:rotate(90deg);
+    }
+    .lightbox-close::before,
+    .lightbox-close::after{
+      content:'';
+      position:absolute;
+      width:20px;
+      height:2px;
+      background:#fff;
+    }
+    .lightbox-close::before{transform:rotate(45deg);}
+    .lightbox-close::after{transform:rotate(-45deg);}
+    .lightbox-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:50px;
+      height:50px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .3s ease;
+      font-size:1.5rem;
+      color:#fff;
+    }
+    .lightbox-nav:hover{background:rgba(255,255,255,.2);}
+    .lightbox-prev{left:-70px;}
+    .lightbox-next{right:-70px;}
+    .lightbox-caption{
+      position:absolute;
+      bottom:-40px;
+      left:0;
+      right:0;
+      text-align:center;
+      color:rgba(255,255,255,.8);
+      font-size:.95rem;
+    }
+    @media (max-width:860px){
+      .lightbox-nav{width:40px;height:40px;font-size:1.2rem;}
+      .lightbox-prev{left:10px;}
+      .lightbox-next{right:10px;}
+      .lightbox-close{top:10px;right:10px;}
+    }
+    
+    /* Video Modal */
+    .video-modal{
+      display:none;
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,.95);
+      z-index:10000;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+      backdrop-filter:blur(10px);
+      animation:fadeIn .3s ease;
+    }
+    .video-modal.active{display:flex;}
+    .video-modal-content{
+      position:relative;
+      width:100%;
+      max-width:1200px;
+      aspect-ratio:16/9;
+      animation:scaleIn .3s ease;
+    }
+    .video-modal-content iframe{
+      width:100%;
+      height:100%;
+      border:none;
+      border-radius:12px;
+      box-shadow:0 40px 100px rgba(0,0,0,.8);
+    }
+    .video-modal-close{
+      position:absolute;
+      top:-50px;
+      right:0;
+      width:40px;
+      height:40px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .3s ease;
+    }
+    .video-modal-close:hover{
+      background:rgba(255,255,255,.2);
+      transform:rotate(90deg);
+    }
+    .video-modal-close::before,
+    .video-modal-close::after{
+      content:'';
+      position:absolute;
+      width:20px;
+      height:2px;
+      background:#fff;
+    }
+    .video-modal-close::before{transform:rotate(45deg);}
+    .video-modal-close::after{transform:rotate(-45deg);}
+    @media (max-width:860px){
+      .video-modal{padding:1rem;}
+      .video-modal-close{top:10px;right:10px;}
+      .video-modal-content{max-width:100%;}
+    }
+
+    .layout{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:clamp(1.6rem,3vw,3rem);}
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.9rem clamp(1.4rem,3vw,2rem);
+      border-radius:999px;
+      background:rgba(8,6,16,.65);
+      border:1px solid rgba(255,255,255,.1);
+      backdrop-filter:blur(18px);
+      margin-bottom:clamp(3.4rem,8vw,5.8rem);
+    }
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.95rem;}
+    .brand-badge{width:32px;height:32px;border-radius:11px;display:grid;place-items:center;background-color: aliceblue;}
+    .brand-badge img{width:100%;height:100%;object-fit:contain;}
+    nav{display:flex;gap:clamp(1rem,2vw,1.8rem);font-size:.95rem;}
+    nav a{color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s ease,opacity .2s ease;}
+    nav a:hover{color:#fff;}
+    
+    .burger-menu{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+    .burger-menu span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s ease;}
+    .burger-menu.active span:nth-child(1){transform:rotate(45deg) translate(7px,7px);}
+    .burger-menu.active span:nth-child(2){opacity:0;}
+    .burger-menu.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-7px);}
+    
+    .mobile-nav{
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(4,3,8,.98);
+      backdrop-filter:blur(20px);
+      z-index:9998;
+      padding:80px 20px 20px;
+      overflow-y:auto;
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(-20px);
+      transition:opacity .3s ease,visibility .3s ease,transform .3s ease;
+    }
+    .mobile-nav.active{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0);
+      display:flex;
+      flex-direction:column;
+      gap:1.5rem;
+    }
+    .mobile-nav a{
+      color:rgba(255,255,255,.85);
+      text-decoration:none;
+      font-size:1.4rem;
+      font-weight:500;
+      padding:1rem 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      transition:color .2s ease;
+      opacity:0;
+      transform:translateX(-20px);
+      animation:slideIn .3s ease forwards;
+    }
+    .mobile-nav.active a:nth-child(1){animation-delay:.1s;}
+    .mobile-nav.active a:nth-child(2){animation-delay:.15s;}
+    .mobile-nav.active a:nth-child(3){animation-delay:.2s;}
+    .mobile-nav.active a:nth-child(4){animation-delay:.25s;}
+    .mobile-nav.active a:nth-child(5){animation-delay:.3s;}
+    .mobile-nav.active a:nth-child(6){animation-delay:.35s;}
+    .mobile-nav.active a:nth-child(7){animation-delay:.4s;}
+    .mobile-nav a:hover{color:#fff;}
+    .mobile-nav .cta-pill{margin-top:1rem;}
+    
+    .close-menu{
+      position:absolute;
+      top:20px;
+      right:20px;
+      width:40px;
+      height:40px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .3s ease;
+      z-index:9999;
+    }
+    .close-menu:hover{
+      background:rgba(255,255,255,.2);
+      transform:rotate(90deg);
+    }
+    .close-menu::before,
+    .close-menu::after{
+      content:'';
+      position:absolute;
+      width:20px;
+      height:2px;
+      background:#fff;
+    }
+    .close-menu::before{transform:rotate(45deg);}
+    .close-menu::after{transform:rotate(-45deg);}
+    
+    @keyframes slideIn{
+      to{opacity:1;transform:translateX(0);}
+    }
+    .cta-pill{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:.45rem;padding:.75rem 1.6rem;border-radius:999px;
+      font-weight:600;font-size:.95rem;text-decoration:none;color:var(--text);
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(16px);transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+    }
+    .cta-pill.primary{
+      background:linear-gradient(120deg,#5ba4ff,#4a9eff 55%,#3b8ee8);
+      border:1px solid rgba(255,255,255,.26);
+      box-shadow:0 18px 32px rgba(74,158,255,.35);
+    }
+    .cta-pill.primary:hover{transform:translateY(-4px);box-shadow:0 24px 44px rgba(74,158,255,.48);}
+    .cta-pill.secondary:hover{transform:translateY(-3px);background:rgba(255,255,255,.14);}
+
+    main{display:flex;flex-direction:column;gap:clamp(4rem,9vw,7rem);margin-bottom:clamp(5rem,10vw,8rem);}
+    .hero{text-align:center;display:grid;gap:clamp(2rem,5vw,3.2rem);}
+    .hero-badge{
+      display:inline-flex;gap:.55rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.18em;
+      padding:.65rem 1.4rem;border-radius:999px;background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(12px);
+    }
+    .hero-icon{
+      width:84px;height:84px;border-radius:22px;
+      display:grid;place-items:center;
+      box-shadow:0 24px 40px rgba(74,158,255,.35);margin:0 auto;
+      overflow:hidden;
+      background-color: #fff;
+    }
+    .hero-icon img{width:100%;height:100%;object-fit:contain;}
+    .hero h1{margin:0;font-size:clamp(2.4rem,5.8vw,3.9rem);line-height:1.05;max-width:780px;justify-self:center;}
+    .hero h2{margin:0 auto;max-width:720px;font-weight:500;font-size:clamp(1.1rem,2.6vw,1.55rem);color:rgba(255,255,255,.78);}
+    .hero-summary{margin:0 auto;max-width:760px;font-size:clamp(1.08rem,2.4vw,1.5rem);line-height:1.6;color:rgba(255,255,255,.88);}
+    .hero-points{margin:clamp(.6rem,1.6vw,1rem) auto 0;padding:0;display:grid;gap:.75rem;list-style:none;max-width:720px;font-size:1rem;color:rgba(255,255,255,.75);text-align:left;}
+    .hero-points li{display:flex;gap:.55rem;align-items:flex-start;}
+    .hero-points li::before{content:"•";font-weight:700;color:rgba(255,255,255,.55);margin-top:.1rem;}
+    .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
+    .hero-proof{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:clamp(1rem,2vw,1.5rem);font-size:.95rem;color:rgba(255,255,255,.72);}
+    .hero-proof span{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);}
+    .hero-note{font-weight:500;color:#d6d7e5;font-size:.96rem;}
+    .hero-note span{background:rgba(255,255,255,.12);padding:.25rem .65rem;border-radius:999px;font-size:.82rem;}
+
+    .hero-visual{
+      position:relative;display:grid;justify-items:center;
+      padding:clamp(1.6rem,4vw,2.8rem);
+      border-radius:36px;
+      background:radial-gradient(circle at 30% 20%, rgba(74,158,255,.18), transparent 60%),rgba(10,7,18,.75);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(18px);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+    .hero-visual::after{content:"";position:absolute;inset:2px;border-radius:34px;border:1px solid rgba(255,255,255,.05);pointer-events:none;}
+
+    .hero-gallery{position:relative;width:100%;max-width:900px;display:grid;justify-items:center;}
+    .hero-main-window{
+      width:100%;border-radius:28px;background:rgba(8,7,15,.88);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow-window);
+      overflow:hidden;backdrop-filter:blur(18px);position:relative;
+    }
+    .hero-main-window::before{
+      content:"";
+      position:absolute;top:0;left:0;right:0;height:46px;
+      background:radial-gradient(circle at 15% 50%, #ff5f57 0 8px, transparent 9px),
+                  radial-gradient(circle at 30% 50%, #febc2e 0 8px, transparent 9px),
+                  radial-gradient(circle at 45% 50%, #28c840 0 8px, transparent 9px),
+                  rgba(10,9,24,.85);
+      border-bottom:1px solid rgba(255,255,255,.08);z-index:2;
+    }
+    .hero-main-window img{display:block;width:100%;height:auto;margin-top:46px;}
+    .hero-main-caption{
+      position:absolute;top:10px;left:50%;transform:translateX(-50%);
+      font-size:.85rem;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.04em;
+      z-index:3;
+    }
+
+    .hero-side-window{
+      position:absolute;width:min(42%,340px);
+      border-radius:24px;background:rgba(12,10,24,.88);
+      border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px);
+      overflow:hidden;box-shadow:0 26px 50px rgba(3,0,12,.55);
+    }
+    .hero-side-window::before{
+      content:"";position:absolute;inset:0;height:40px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+    }
+    .hero-side-window img{display:block;width:100%;height:auto;margin-top:40px;}
+    .hero-side-window--left{top:-38px;left:-6%;transform:rotate(-6deg);}
+    .hero-side-window--right{bottom:-48px;right:-6%;transform:rotate(7deg);}
+
+    .section{display:grid;gap:clamp(1.6rem,3vw,2.6rem);scroll-margin-top:100px;}
+    .section-header{display:flex;flex-direction:column;gap:.6rem;max-width:680px;}
+    .section-eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.82rem;color:rgba(255,255,255,.55);}
+    .section-title{margin:0;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;}
+    .section-sub{margin:0;color:var(--muted);font-size:1.05rem;}
+    .glass{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(2rem,4vw,3rem);box-shadow:var(--shadow-soft);backdrop-filter:blur(24px);}
+    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(1.4rem,3vw,2rem);}
+    .card{
+      background:rgba(10,8,20,.72);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-soft);padding:clamp(1.8rem,3vw,2.4rem);display:grid;gap:1.1rem;
+      transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 32px 70px rgba(74,158,255,.15);
+      border-color:rgba(74,158,255,.2);
+    }
+    .card .label{display:inline-flex;align-items:center;gap:.45rem;font-size:.85rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.55rem 1.25rem;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);}
+    .card p{margin:0;color:var(--muted);line-height:1.6;}
+    .feature-list{list-style:none;margin:0;padding:0;display:grid;gap:.8rem;font-size:1rem;}
+    .feature-list li{display:flex;gap:.6rem;}
+    .feature-list li::before{content:"•";color:rgba(255,255,255,.55);font-weight:700;}
+
+    .plan-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
+    .plan-step{
+      padding:1.6rem;border-radius:22px;
+      background:rgba(8,6,18,.75);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 38px rgba(5,0,18,.4);
+      display:grid;gap:.6rem;text-align:left;
+      transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+    }
+    .plan-step:hover{
+      transform:translateY(-4px);
+      box-shadow:0 24px 48px rgba(74,158,255,.2);
+      border-color:rgba(74,158,255,.15);
+    }
+    .plan-step span{font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+    .plan-step strong{font-size:1.2rem;}
+
+    .stakes{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+    .stake-card{
+      padding:1.6rem;border-radius:22px;background:rgba(12,9,24,.78);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 40px rgba(5,0,18,.45);
+    }
+    .stake-card h3{margin:0 0 .6rem 0;font-size:1.2rem;}
+    .stake-card p{margin:0;color:var(--muted);}
+
+    .hero-browser-preview figure,
+    figure.hero-browser-preview{margin:0;}
+    figure.hero-browser-preview{width:min(100%,960px);margin:0 auto;border-radius:32px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(6,0,18,.55);background:linear-gradient(145deg,rgba(10,8,20,.92),rgba(6,5,14,.95));}
+    figure.hero-browser-preview .browser-chrome{display:flex;align-items:center;gap:1rem;padding:1rem 1.4rem;background:linear-gradient(180deg,rgba(20,15,35,.95),rgba(15,10,25,.98));border-bottom:1px solid rgba(255,255,255,.08);}
+    figure.hero-browser-preview .browser-dots{display:flex;gap:.5rem;}
+    figure.hero-browser-preview .browser-dots span{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.18);}
+    figure.hero-browser-preview .browser-dots span:nth-child(1){background:#ff5f57;}
+    figure.hero-browser-preview .browser-dots span:nth-child(2){background:#ffbd2e;}
+    figure.hero-browser-preview .browser-dots span:nth-child(3){background:#28ca42;}
+    figure.hero-browser-preview .browser-url{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.5rem 1rem;font-size:.85rem;font-family:"SF Mono","Menlo",monospace;color:rgba(255,255,255,.65);}
+    figure.hero-browser-preview .browser-screenshot{width:100%;height:auto;display:block;}
+    .screenshot-label{padding:1.2rem 1.6rem;font-size:1rem;font-weight:600;color:var(--text);background:linear-gradient(135deg,rgba(12,6,28,.85),rgba(6,5,14,.92));border-top:1px solid rgba(255,255,255,.08);}
+
+    .steps-grid{display:grid;gap:clamp(1.2rem,3vw,1.8rem);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .step-card{background:rgba(10,8,20,.76);border-radius:22px;border:1px solid rgba(255,255,255,.1);padding:clamp(1.8rem,3vw,2.4rem);display:grid;gap:.8rem;box-shadow:var(--shadow-soft);text-align:left;}
+    .step-number{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff;font-weight:600;font-size:.95rem;}
+    .step-card h3{margin:0;font-size:1.2rem;color:#fff;}
+    .step-card p{margin:0;color:var(--muted);line-height:1.6;}
+
+    .social-proof-grid{display:grid;gap:clamp(1.4rem,3vw,2rem);grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+
+    .waitlist-form{display:grid;gap:clamp(1.2rem,3vw,1.8rem);}
+    .form-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+    .waitlist-form .form-row{display:grid;gap:.55rem;text-align:left;}
+    .waitlist-form label{font-size:.92rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.72);}
+    .waitlist-form input,
+    .waitlist-form textarea{width:100%;padding:.85rem 1rem;border-radius:16px;border:1px solid rgba(255,255,255,.2);background:rgba(4,3,8,.65);color:#fff;font-family:var(--font);font-size:1rem;transition:border .2s ease,box-shadow .2s ease;}
+    .waitlist-form input:focus,
+    .waitlist-form textarea:focus{outline:none;border-color:rgba(255,255,255,.45);box-shadow:0 0 0 3px rgba(255,255,255,.18);}
+    .waitlist-form textarea{min-height:140px;resize:vertical;}
+    .form-footnote{margin:0;font-size:.9rem;color:rgba(255,255,255,.68);}
+
+    .screenshot-gallery{display:grid;gap:clamp(1.6rem,3vw,2.4rem);}
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(1.4rem,3vw,2rem);}
+    .gallery-card{position:relative;border-radius:24px;background:rgba(9,7,17,.8);border:1px solid rgba(255,255,255,.1);overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 24px 50px rgba(5,0,12,.55);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer;}
+    .gallery-card:hover{transform:translateY(-6px);box-shadow:0 32px 60px rgba(5,0,12,.65);}
+    .gallery-card img{width:100%;height:auto;display:block;}
+    .gallery-label{position:absolute;bottom:0;left:0;right:0;padding:1.1rem 1.4rem;background:linear-gradient(180deg,transparent 0%,rgba(6,5,14,.95) 100%);font-size:.95rem;font-weight:500;color:rgba(255,255,255,.85);}
+
+    .why-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .why-item{display:flex;gap:.65rem;align-items:center;padding:1.2rem 1.4rem;border-radius:18px;background:rgba(10,8,20,.78);border:1px solid rgba(255,255,255,.08);font-weight:600;}
+    .why-item::before{content:"✅";font-size:1.1rem;}
+
+    .quote-card{position:relative;border-radius:24px;background:rgba(8,6,18,.8);border:1px solid rgba(255,255,255,.1);padding:clamp(2.2rem,4vw,3rem);box-shadow:0 26px 60px rgba(5,0,15,.45);overflow:hidden;}
+    .quote-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 25%, rgba(74,158,255,.18), transparent 70%);pointer-events:none;}
+    blockquote{margin:0 0 1.2rem;font-size:clamp(1.4rem,3.1vw,2rem);line-height:1.45;font-weight:600;color:#fdfdff;}
+    cite{font-style:normal;text-transform:uppercase;letter-spacing:.08em;font-size:.9rem;color:rgba(255,255,255,.55);}
+
+    .faq-grid{display:grid;gap:1.2rem;}
+    .faq-item{padding:1.6rem;border-radius:22px;background:rgba(10,8,18,.76);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 46px rgba(5,0,16,.45);}
+    .faq-item h3{margin:0 0 .7rem;font-size:1.1rem;}
+    .faq-item p{margin:0;color:var(--muted);line-height:1.6;}
+
+    .contact-card{display:grid;gap:1.4rem;padding:clamp(2.2rem,5vw,3.2rem);border-radius:28px;background:rgba(10,7,20,.85);border:1px solid rgba(255,255,255,.12);box-shadow:0 28px 60px rgba(5,0,20,.5);backdrop-filter:blur(20px);}
+    .contact-card form{display:grid;gap:1.1rem;}
+    .contact-card label{display:grid;gap:.4rem;font-size:.95rem;color:rgba(255,255,255,.75);}
+    .contact-card input,
+    .contact-card textarea{
+      padding:.85rem 1rem;border-radius:16px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.05);
+      color:#fff;font-size:.95rem;
+      font-family:inherit;
+    }
+    .contact-card textarea{min-height:140px;resize:vertical;}
+    .contact-card button{
+      justify-self:flex-start;
+      border:none;
+      cursor:pointer;
+      padding:.85rem 1.6rem;
+      border-radius:999px;
+      font-weight:600;
+      font-size:.95rem;
+      color:#fff;
+      background:linear-gradient(120deg,#5ba4ff,#4a9eff 55%,#3b8ee8);
+      box-shadow:0 18px 32px rgba(74,158,255,.35);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .contact-card button:hover{transform:translateY(-4px);box-shadow:0 24px 44px rgba(74,158,255,.48);}
+
+    .final-cta{text-align:center;display:grid;gap:1.4rem;padding:clamp(2.6rem,6vw,3.8rem);border-radius:32px;background:linear-gradient(160deg,rgba(74,158,255,.32),rgba(33,11,70,.7));border:1px solid rgba(255,255,255,.12);box-shadow:0 32px 70px rgba(16,0,45,.55);backdrop-filter:blur(22px);}
+    .final-cta h2{margin:0;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.1;}
+
+    footer{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:space-between;align-items:center;padding:clamp(1.6rem,3vw,2.4rem) 0;border-top:1px solid rgba(255,255,255,.08);font-size:.95rem;color:rgba(255,255,255,.55);}
+    footer nav{display:flex;gap:1.2rem;}
+    footer nav a{color:rgba(255,255,255,.55);text-decoration:none;}
+    footer nav a:hover{color:var(--text);}
+
+    @media (max-width:860px){
+      .layout{padding:clamp(1rem,3vw,1.5rem);}
+      header{flex-wrap:nowrap;gap:1.1rem;padding:.8rem 1.2rem;margin-bottom:2rem;}
+      nav{display:none;}
+      .burger-menu{display:flex;z-index:9999;}
+      header .cta-pill{display:none;}
+      .brand{font-size:.85rem;}
+      .brand-badge{width:28px;height:28px;font-size:.85rem;background-color: aliceblue}
+      
+      .hero{gap:1.8rem;}
+      .hero h1{font-size:clamp(1.8rem,7vw,2.4rem);line-height:1.15;}
+      .hero h2{font-size:clamp(1rem,4vw,1.2rem);}
+      .hero-icon{width:70px;height:70px;font-size:1.8rem; background: #fff; }
+      .hero-badge{font-size:.75rem;padding:.5rem 1.1rem;}
+      .hero-visual{padding:1.2rem;border-radius:24px;}
+      .hero-main-window{border-radius:18px;}
+      
+      .hero-gallery{
+        display:flex;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        scroll-behavior:smooth;
+        gap:1rem;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .hero-gallery::-webkit-scrollbar{display:none;}
+      .hero-main-window,
+      .hero-side-window{
+        flex:0 0 90%;
+        scroll-snap-align:center;
+        position:static;
+        transform:none;
+        display:block;
+        width:100%;
+        max-width:none;
+      }
+      .hero-main-window::before,
+      .hero-side-window::before{display:none;}
+      .hero-main-window img,
+      .hero-side-window img{margin-top:0;}
+      .hero-main-caption{display:none;}
+      
+      .hero-carousel-dots{
+        display:flex;
+        justify-content:center;
+        gap:.6rem;
+        margin-top:1.5rem;
+      }
+      .hero-carousel-dot{
+        width:8px;
+        height:8px;
+        border-radius:50%;
+        background:rgba(255,255,255,.3);
+        cursor:pointer;
+        transition:all .3s ease;
+      }
+      .hero-carousel-dot.active{
+        width:24px;
+        border-radius:4px;
+        background:var(--accent);
+      }
+      
+      .section{gap:1.4rem;}
+      .section-title{font-size:clamp(1.6rem,6vw,2rem);}
+      .section-sub{font-size:.95rem;}
+      .section-eyebrow{font-size:.75rem;}
+      
+      .two-col,.plan-grid,.stakes,.why-grid,.gallery-grid{
+        grid-template-columns:1fr;
+        gap:1rem;
+      }
+      
+      .card,.plan-step,.stake-card,.faq-item{
+        padding:1.4rem;
+        border-radius:18px;
+      }
+      
+      .gallery-card{border-radius:18px;}
+      .gallery-label{padding:.9rem 1.2rem;font-size:.85rem;}
+      
+      .screenshot-gallery{position:relative;overflow:hidden;}
+      .gallery-grid{
+        display:flex;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        scroll-behavior:smooth;
+        gap:1rem;
+        padding-bottom:1rem;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .gallery-grid::-webkit-scrollbar{display:none;}
+      .gallery-card{
+        flex:0 0 85%;
+        scroll-snap-align:center;
+      }
+      
+      .carousel-dots{
+        display:flex;
+        justify-content:center;
+        gap:.6rem;
+        margin-top:1.2rem;
+      }
+      .carousel-dot{
+        width:8px;
+        height:8px;
+        border-radius:50%;
+        background:rgba(255,255,255,.3);
+        cursor:pointer;
+        transition:all .3s ease;
+      }
+      .carousel-dot.active{
+        width:24px;
+        border-radius:4px;
+        background:var(--accent);
+      }
+      
+      .contact-card{padding:1.6rem;border-radius:20px;}
+      .contact-card input,.contact-card textarea{padding:.75rem .9rem;font-size:.9rem;}
+      .contact-card textarea{min-height:120px;}
+      
+      .final-cta{padding:2rem 1.4rem;border-radius:24px;}
+      .final-cta h2{font-size:clamp(1.8rem,7vw,2.2rem);}
+      
+      .quote-card{padding:1.6rem;border-radius:20px;}
+      blockquote{font-size:clamp(1.2rem,5vw,1.6rem);}
+      
+      footer{flex-direction:column;align-items:flex-start;gap:.8rem;}
+      footer nav{flex-wrap:wrap;gap:.8rem;}
+    }
+
+    @supports not ((backdrop-filter:blur(16px))){
+      header,.cta-pill,.hero-visual,.glass,.card,.plan-step,.stake-card,.gallery-card,.contact-card,.final-cta{background-color:rgba(10,8,18,.95);}
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <header>
+      <div class="brand">
+        <div class="brand-badge">
+          <img src="icon.png" alt="Lenoir Logo">
+        </div>
+        Lenoir Browser
+      </div>
+      <nav>
+        <a href="#hero">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#why">Why Lenoir</a>
+        <a href="#vision">Vision</a>
+        <a href="#proof">Customer stories</a>
+        <a href="#waitlist">Request invite</a>
+      </nav>
+      <a class="cta-pill primary" href="#waitlist">🔒 Request invite</a>
+      <div class="burger-menu" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+      <div class="close-menu" onclick="toggleMobileMenu()"></div>
+      <a href="#hero" onclick="toggleMobileMenu()">Product</a>
+      <a href="#how" onclick="toggleMobileMenu()">How it works</a>
+      <a href="#why" onclick="toggleMobileMenu()">Why Lenoir</a>
+      <a href="#vision" onclick="toggleMobileMenu()">Vision</a>
+      <a href="#proof" onclick="toggleMobileMenu()">Customer stories</a>
+      <a class="cta-pill primary" href="#waitlist" onclick="toggleMobileMenu()">🔒 Request invite</a>
+    </div>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-badge">Invite-only · limited seats</div>
+        <div class="hero-icon">
+          <img src="icon.png" alt="Lenoir Browser">
+        </div>
+        <h1>The AI browser that builds websites instantly.</h1>
+        <h2>Edit any live site with natural language and publish production-ready code in minutes.</h2>
+        <p class="hero-summary">Lenoir is the AI website builder made for the real web — open a URL, prompt the fix, and hand developers export-ready HTML/CSS without leaving your browser.</p>
+        <ul class="hero-points">
+          <li>Live website editor that works directly on the DOM — no staging sites, no copy-paste exports.</li>
+          <li>No-code prompts adjust layout, copy, and accessibility while keeping your brand guidelines tight.</li>
+          <li>Export clean HTML/CSS or share review-ready links with teammates instantly.</li>
+        </ul>
+        <div class="hero-cta" role="group" aria-label="Primary actions">
+          <a class="cta-pill primary" href="#waitlist">🔒 Request Invite</a>
+          <a class="cta-pill secondary" href="#demo">🎥 Watch 45-sec demo</a>
+        </div>
+        <div class="hero-proof">
+          <span role="status">🔥 120+ redesigns shipped in private beta</span>
+          <span role="status">✅ Response time under 24 hours</span>
+          <span role="status">🌍 Creators in 18 countries</span>
+        </div>
+        <p class="hero-note"><span aria-hidden="true">⭐</span> Invite-only access · We onboard 100 creators each month.</p>
+
+        <div class="hero-visual">
+          <div class="hero-gallery" id="heroGallery">
+            <div class="hero-main-window">
+              <span class="hero-main-caption">Live redesign in Lenoir</span>
+              <img src="homescreen.jpeg" alt="Lenoir Homescreen Interface" loading="lazy">
+            </div>
+            <div class="hero-side-window hero-side-window--left">
+              <img src="appstore.jpeg" alt="Lenoir App Store" loading="lazy">
+            </div>
+            <div class="hero-side-window hero-side-window--right">
+              <img src="remix.jpeg" alt="Lenoir Remix Tools" loading="lazy">
+            </div>
+          </div>
+          <div class="hero-carousel-dots" id="heroCarouselDots">
+            <span class="hero-carousel-dot active" onclick="scrollToHeroSlide(0)"></span>
+            <span class="hero-carousel-dot" onclick="scrollToHeroSlide(1)"></span>
+            <span class="hero-carousel-dot" onclick="scrollToHeroSlide(2)"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="demo">
+        <div class="section-header">
+          <div class="section-eyebrow">AI browser for live website design</div>
+          <h2 class="section-title">See how the AI browser powers live website redesign.</h2>
+          <p class="section-sub">Watch the browser redesign a hero section live, audit accessibility, and deliver ready-to-ship code in under a minute.</p>
+        </div>
+        <figure class="hero-browser-preview" aria-labelledby="demo-caption">
+          <div class="browser-chrome">
+            <div class="browser-dots" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="browser-url">lenoir://demo/live-redesign</div>
+          </div>
+          <img src="demo-highlights.gif" alt="Animated walkthrough showing Lenoir editing a live hero section" class="browser-screenshot" loading="lazy">
+          <figcaption id="demo-caption" class="screenshot-label">⚡ Prompt, preview, and export — all in one tab.</figcaption>
+        </figure>
+      </section>
+
+      <!-- MODES (existing content) -->
+      <section class="section" id="modes">
+        <div class="section-header">
+          <div class="section-eyebrow">Features</div>
+          <h2 class="section-title">Two modes built for AI-powered website design.</h2>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="label">🔹 Tweaker Mode — For Fun & Creativity</div>
+            <p>Play with websites like they’re your canvas:</p>
+            <ul class="feature-list">
+              <li>Change layouts, styles, fonts in one click</li>
+              <li>Apply creative filters (Retro, Minimal, Cyberpunk…)</li>
+              <li>Experiment and learn design</li>
+            </ul>
+            <p><strong>Free Forever.</strong> For creators who love to tweak.</p>
+          </div>
+          <div class="card">
+            <div class="label">🔷 Designer Mode — For Work & Productivity</div>
+            <p>Professional tools without complexity:</p>
+            <ul class="feature-list">
+              <li>Live DOM editing with AI</li>
+              <li>Fix UX issues instantly</li>
+              <li>Rewrite and improve content</li>
+              <li>Export clean HTML/CSS</li>
+              <li>(Coming soon) 1-click FTP deployment</li>
+            </ul>
+            <p><strong>Your website. Just better.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="plan">
+        <div class="section-header">
+          <div class="section-eyebrow">How it works</div>
+          <h2 class="section-title">Your workflow goes from idea → live page in three steps.</h2>
+          <p class="section-sub">Lenoir guides you from inspiration to launch without juggling browsers, builders, and design tools.</p>
+        </div>
+        <div class="steps-grid" role="list">
+          <article class="step-card" role="listitem">
+            <div class="step-number">1</div>
+            <h3>Open any live page</h3>
+            <p>Audit UX, detect issues, or highlight areas to improve directly on production URLs — no staging copy required.</p>
+          </article>
+          <article class="step-card" role="listitem">
+            <div class="step-number">2</div>
+            <h3>Give Lenoir a prompt</h3>
+            <p>Describe the change you want. Lenoir edits layout, content, and accessibility in context, keeping your brand voice.</p>
+          </article>
+          <article class="step-card" role="listitem">
+            <div class="step-number">3</div>
+            <h3>Export or publish</h3>
+            <p>Ship clean HTML/CSS into your stack or hand developers an annotated diff. Vision Mode generates fresh concepts in minutes.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- STAKES/SUCCESS (StoryBrand: show success vs failure) -->
+      <section class="section" id="stakes">
+        <div class="section-header">
+          <div class="section-eyebrow">Why now</div>
+          <h2 class="section-title">Stop shipping slow sites. Start shipping live redesigns.</h2>
+        </div>
+        <div class="stakes">
+          <div class="stake-card">
+            <h3>Ship faster</h3>
+            <p>No more tickets or handoffs. Edit in the moment you notice a problem.</p>
+          </div>
+          <div class="stake-card">
+            <h3>Stay on brand</h3>
+            <p>Tell Lenoir your style and it keeps every tweak aligned to the rules you set.</p>
+          </div>
+          <div class="stake-card">
+            <h3>Win the click</h3>
+            <p>Conversion improvements happen in minutes, not weeks. That’s the power of a browser built to create.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADVANCED AI -->
+      <section class="section" id="advanced-ai">
+        <div class="section-header">
+          <div class="section-eyebrow">Vision Mode</div>
+          <h2 class="section-title">A redesign process that takes days → seconds.</h2>
+        </div>
+        <div class="glass">
+          <div class="coming-soon">Coming soon</div>
+          <p style="font-size:1.15rem;color:#d9daec;">
+            Design from a single prompt. Upload your reference image or say “make it like Apple but darker” → Lenoir rebuilds your entire website with fresh content and a modern layout.
+          </p>
+        </div>
+      </section>
+
+      <!-- WHY -->
+      <section class="section" id="why-lenoir">
+        <div class="section-header">
+          <div class="section-eyebrow">Why Lenoir?</div>
+          <h2 class="section-title">Designers, founders, and marketers finally share one flow.</h2>
+          <p class="section-sub">Ship experiments faster than static builders and without dev backlogs. Learn how the <a href="#plan">Lenoir workflow</a> keeps teams aligned.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-item">Real-time DOM editing with AI guardrails</div>
+          <div class="why-item">Content, layout, and accessibility in one prompt</div>
+          <div class="why-item">Version history & exports for developer handoff</div>
+          <div class="why-item">Invite reviewers with comment-only mode</div>
+        </div>
+      </section>
+
+      <section class="section" id="social-proof">
+        <div class="section-header">
+          <div class="section-eyebrow">Customer stories</div>
+          <h2 class="section-title">Teams are already shipping live redesigns with Lenoir.</h2>
+          <p class="section-sub">We highlight a few early adopters while we polish full case studies.</p>
+        </div>
+        <div class="social-proof-grid">
+          <article class="quote-card" aria-label="Founder testimonial">
+            <blockquote>“Lenoir helped us turn a Notion landing page into a polished product site overnight. Dev only needed the exported HTML.”</blockquote>
+            <cite>Amélie Laurent · Founder, Studio Mona</cite>
+          </article>
+          <article class="quote-card" aria-label="Marketing testimonial">
+            <blockquote>“I fix hero copy, images, and contrast issues in minutes, then share a review link with stakeholders. It beats screen recordings.”</blockquote>
+            <cite>Jacob Lee · Growth Lead, Relay</cite>
+          </article>
+          <article class="quote-card" aria-label="Agency testimonial">
+            <blockquote>“Our agency uses Lenoir to prototype client updates live. Feedback cycles dropped from a week to an afternoon.”</blockquote>
+            <cite>Nina Patel · Creative Director, Surface Labs</cite>
+          </article>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <div class="section-eyebrow">FAQ</div>
+          <h2 class="section-title">Answers before you request an invite.</h2>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Is Lenoir available to everyone?</h3>
+            <p>Lenoir is invite-only while we onboard creators in waves. <a href="#waitlist">Request an invite</a> and we’ll reach out as new seats open.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Do I need to code?</h3>
+            <p>No. Ask Lenoir in natural language, tweak visually, or accept AI suggestions. You can export clean HTML/CSS whenever you want.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What browsers or platforms do you support?</h3>
+            <p>Lenoir is a standalone browser for macOS and Windows (Linux in exploration). We’re optimizing for high-performance creative workflows.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Can a team use Lenoir together?</h3>
+            <p>Team workspaces and shared design systems are on the roadmap. Early access members get priority when collaboration launches.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="section-header">
+          <div class="section-eyebrow">Contact</div>
+          <h2 class="section-title">Have a question or partnership idea?</h2>
+          <p class="section-sub">We’d love to hear how you want to use Lenoir. Drop us a message and we’ll reply within 48 hours.</p>
+        </div>
+        <div class="contact-card">
+          <form action="#" method="post">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required>
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@company.com" required>
+            </label>
+            <label>
+              Message
+              <textarea name="message" placeholder="Tell us about your project, team, or question..." required></textarea>
+            </label>
+            <button type="submit">Send message</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="final-cta" id="waitlist" aria-labelledby="waitlist-heading">
+        <div>
+          <h2 id="waitlist-heading">Join the invite-only waitlist.</h2>
+          <p class="final-cta-subheadline">We review new requests every Monday and onboard 100 creators per month.</p>
+        </div>
+        <form class="waitlist-form" id="inviteForm" action="send-invite.php" method="POST" aria-describedby="waitlist-note">
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="full-name">Full name</label>
+              <input id="full-name" name="name" type="text" autocomplete="name" placeholder="Jordan Rivera" required>
+            </div>
+            <div class="form-row">
+              <label for="email">Work email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@studio.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="use-case">What do you want to build with Lenoir?</label>
+            <textarea id="use-case" name="message" placeholder="Tell us in one or two sentences." maxlength="480" required></textarea>
+          </div>
+          <div class="hero-cta" role="group" aria-label="Submit waitlist request">
+            <button class="cta-pill primary" type="submit">Request invite</button>
+            <a class="cta-pill secondary" href="mailto:hello@lenoir.app?subject=Lenoir%20Partnership">Partner with us</a>
+          </div>
+          <p class="form-footnote" id="waitlist-note">We respond within 24 hours. Approved teams receive onboarding, demo access, and export templates.</p>
+          <div id="formMessage" style="display:none;padding:1rem;border-radius:12px;font-size:.95rem;"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer aria-label="Footer">
+      <div>Copyright © 2025 Lenoir — The browser that builds.</div>
+      <nav aria-label="Secondary navigation">
+        <a href="#product">Product</a>
+        <a href="#demo">Demo</a>
+        <a href="#social-proof">Customer stories</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <div class="lightbox-close" onclick="closeLightbox()"></div>
+      <div class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1)">‹</div>
+      <img id="lightboxImage" src="" alt="">
+      <div class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1)">›</div>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-content">
+      <div class="video-modal-close" onclick="closeVideoModal()"></div>
+      <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Google Analytics Event Tracking Helper
+    function trackEvent(category, action, label, value) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+          'event_category': category,
+          'event_label': label,
+          'value': value
+        });
+      }
+    }
+
+    function toggleMobileMenu() {
+      const burger = document.querySelector('.burger-menu');
+      const mobileNav = document.getElementById('mobileNav');
+      
+      burger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      
+      // Prevent body scroll when menu is open
+      if (mobileNav.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+        trackEvent('Navigation', 'mobile_menu_open', 'Mobile Menu Opened');
+      } else {
+        document.body.style.overflow = '';
+        trackEvent('Navigation', 'mobile_menu_close', 'Mobile Menu Closed');
+      }
+    }
+
+    // Carousel functionality
+    function scrollToSlide(index) {
+      const gallery = document.getElementById('galleryGrid');
+      const cards = gallery.querySelectorAll('.gallery-card');
+      const dots = document.querySelectorAll('.carousel-dot');
+      
+      if (cards[index]) {
+        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+      
+      // Update active dot
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    // Hero carousel functionality
+    function scrollToHeroSlide(index) {
+      const heroGallery = document.getElementById('heroGallery');
+      const windows = heroGallery.querySelectorAll('.hero-main-window, .hero-side-window');
+      const dots = document.querySelectorAll('.hero-carousel-dot');
+      
+      if (windows[index]) {
+        windows[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+      
+      // Update active dot
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    // Update dots on scroll
+    if (window.innerWidth <= 860) {
+      // Screenshots gallery carousel
+      const gallery = document.getElementById('galleryGrid');
+      if (gallery) {
+        gallery.addEventListener('scroll', () => {
+          const cards = gallery.querySelectorAll('.gallery-card');
+          const dots = document.querySelectorAll('.carousel-dot');
+          const scrollLeft = gallery.scrollLeft;
+          const cardWidth = cards[0]?.offsetWidth || 0;
+          const gap = 16; // 1rem gap
+          const currentIndex = Math.round(scrollLeft / (cardWidth + gap));
+          
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+          });
+        });
+      }
+
+      // Hero gallery carousel
+      const heroGallery = document.getElementById('heroGallery');
+      if (heroGallery) {
+        heroGallery.addEventListener('scroll', () => {
+          const windows = heroGallery.querySelectorAll('.hero-main-window, .hero-side-window');
+          const dots = document.querySelectorAll('.hero-carousel-dot');
+          const scrollLeft = heroGallery.scrollLeft;
+          const windowWidth = windows[0]?.offsetWidth || 0;
+          const gap = 16; // 1rem gap
+          const currentIndex = Math.round(scrollLeft / (windowWidth + gap));
+          
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+          });
+        });
+      }
+    }
+
+    // Parallax effect on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          
+          // Parallax background
+          const bgBefore = document.querySelector('body::before');
+          if (document.body) {
+            document.body.style.setProperty('--scroll', scrolled * 0.5 + 'px');
+          }
+          
+          // Parallax hero visual
+          const heroVisual = document.querySelector('.hero-visual');
+          if (heroVisual) {
+            const heroOffset = heroVisual.getBoundingClientRect().top;
+            if (heroOffset < window.innerHeight && heroOffset > -heroVisual.offsetHeight) {
+              heroVisual.style.transform = `translateY(${scrolled * 0.15}px)`;
+            }
+          }
+          
+          // Animate sections on scroll
+          const sections = document.querySelectorAll('.section, .hero, .final-cta');
+          sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const sectionBottom = section.getBoundingClientRect().bottom;
+            
+            if (sectionTop < window.innerHeight * 0.85 && sectionBottom > 0) {
+              section.style.opacity = '1';
+              section.style.transform = 'translateY(0)';
+            }
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // Initialize sections for animation
+    document.querySelectorAll('.section, .final-cta').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    });
+    
+    // Trigger initial check
+    window.dispatchEvent(new Event('scroll'));
+    
+    // Lightbox functionality
+    let currentLightboxIndex = 0;
+    let lightboxImages = [];
+    
+    function openLightbox(index) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      
+      currentLightboxIndex = index;
+      lightboxImage.src = lightboxImages[index].src;
+      lightboxImage.alt = lightboxImages[index].alt;
+      lightboxCaption.textContent = lightboxImages[index].caption;
+      
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      trackEvent('Engagement', 'screenshot_view', lightboxImages[index].caption || `Screenshot ${index + 1}`);
+    }
+    
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      trackEvent('Engagement', 'lightbox_close', 'Screenshot Lightbox Closed');
+    }
+    
+    function changeLightboxImage(direction) {
+      currentLightboxIndex += direction;
+      
+      if (currentLightboxIndex < 0) {
+        currentLightboxIndex = lightboxImages.length - 1;
+      } else if (currentLightboxIndex >= lightboxImages.length) {
+        currentLightboxIndex = 0;
+      }
+      
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      
+      lightboxImage.src = lightboxImages[currentLightboxIndex].src;
+      lightboxImage.alt = lightboxImages[currentLightboxIndex].alt;
+      lightboxCaption.textContent = lightboxImages[currentLightboxIndex].caption;
+    }
+    
+    // Initialize lightbox for gallery cards
+    document.querySelectorAll('.gallery-card').forEach((card, index) => {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.gallery-label');
+      
+      lightboxImages.push({
+        src: img.src,
+        alt: img.alt,
+        caption: caption ? caption.textContent : ''
+      });
+      
+      card.addEventListener('click', () => openLightbox(index));
+    });
+    
+    // Close lightbox on background click
+    document.getElementById('lightbox')?.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLightbox();
+      }
+    });
+    
+    // Close lightbox on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeVideoModal();
+      } else if (e.key === 'ArrowLeft') {
+        changeLightboxImage(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeLightboxImage(1);
+      }
+    });
+    
+    // Video Modal functionality
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const watchVideoBtn = document.getElementById('watchVideoBtn');
+    
+    // Replace with your YouTube video ID
+    const youtubeVideoId = 'dQw4w9WgXcQ'; // REPLACE THIS with your actual video ID
+    
+    function openVideoModal() {
+      videoFrame.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
+      videoModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      trackEvent('Engagement', 'video_open', 'Watch Video Button Clicked');
+    }
+    
+    function closeVideoModal() {
+      videoModal.classList.remove('active');
+      videoFrame.src = ''; // Stop video playback
+      document.body.style.overflow = '';
+      trackEvent('Engagement', 'video_close', 'Video Modal Closed');
+    }
+    
+    // Open video modal on button click
+    watchVideoBtn?.addEventListener('click', function(e) {
+      e.preventDefault();
+      openVideoModal();
+    });
+    
+    // Close video modal on background click
+    videoModal?.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVideoModal();
+      }
+    });
+    
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href && href !== '#' && href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+            
+            // Track navigation clicks
+            const linkText = this.textContent.trim();
+            trackEvent('Navigation', 'anchor_click', `${linkText} -> ${href}`);
+            
+            // Close mobile menu if open
+            const mobileNav = document.getElementById('mobileNav');
+            if (mobileNav && mobileNav.classList.contains('active')) {
+              toggleMobileMenu();
+            }
+          }
+        }
+      });
+    });
+    
+    // Track CTA button clicks
+    document.querySelectorAll('.cta-pill.primary').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const btnText = this.textContent.trim();
+        trackEvent('CTA', 'primary_cta_click', btnText);
+      });
+    });
+    
+    document.querySelectorAll('.cta-pill.secondary').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const btnText = this.textContent.trim();
+        trackEvent('CTA', 'secondary_cta_click', btnText);
+      });
+    });
+    
+    // Track scroll depth
+    let scrollDepth = 0;
+    let scrollTracked = {25: false, 50: false, 75: false, 100: false};
+    
+    window.addEventListener('scroll', function() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollPercentage = (scrollTop / documentHeight) * 100;
+      
+      if (scrollPercentage >= 25 && !scrollTracked[25]) {
+        scrollTracked[25] = true;
+        trackEvent('Engagement', 'scroll_depth', '25%', 25);
+      } else if (scrollPercentage >= 50 && !scrollTracked[50]) {
+        scrollTracked[50] = true;
+        trackEvent('Engagement', 'scroll_depth', '50%', 50);
+      } else if (scrollPercentage >= 75 && !scrollTracked[75]) {
+        scrollTracked[75] = true;
+        trackEvent('Engagement', 'scroll_depth', '75%', 75);
+      } else if (scrollPercentage >= 95 && !scrollTracked[100]) {
+        scrollTracked[100] = true;
+        trackEvent('Engagement', 'scroll_depth', '100%', 100);
+      }
+    });
+    
+    // Track time on page
+    let timeOnPage = 0;
+    let timeTracked = {30: false, 60: false, 120: false, 300: false};
+    
+    setInterval(function() {
+      timeOnPage += 10;
+      
+      if (timeOnPage >= 30 && !timeTracked[30]) {
+        timeTracked[30] = true;
+        trackEvent('Engagement', 'time_on_page', '30 seconds', 30);
+      } else if (timeOnPage >= 60 && !timeTracked[60]) {
+        timeTracked[60] = true;
+        trackEvent('Engagement', 'time_on_page', '1 minute', 60);
+      } else if (timeOnPage >= 120 && !timeTracked[120]) {
+        timeTracked[120] = true;
+        trackEvent('Engagement', 'time_on_page', '2 minutes', 120);
+      } else if (timeOnPage >= 300 && !timeTracked[300]) {
+        timeTracked[300] = true;
+        trackEvent('Engagement', 'time_on_page', '5 minutes', 300);
+      }
+    }, 10000); // Check every 10 seconds
+
+    // Invitation form submission
+    document.getElementById('inviteForm')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formMessage = document.getElementById('formMessage');
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.textContent;
+      
+      // Disable button and show loading
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      formMessage.style.display = 'none';
+      
+      try {
+        const formData = new FormData(this);
+        const response = await fetch('send-invite.php', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          formMessage.style.display = 'block';
+          formMessage.style.background = 'rgba(74,158,255,.2)';
+          formMessage.style.border = '1px solid rgba(74,158,255,.4)';
+          formMessage.style.color = '#5ba4ff';
+          formMessage.textContent = '✅ ' + result.message;
+          this.reset();
+          
+          // Track successful invite request
+          trackEvent('Conversion', 'invite_request_success', 'Invite Request Submitted Successfully');
+        } else {
+          throw new Error(result.message || 'Something went wrong');
+        }
+      } catch (error) {
+        formMessage.style.display = 'block';
+        formMessage.style.background = 'rgba(255,77,82,.2)';
+        formMessage.style.border = '1px solid rgba(255,77,82,.4)';
+        formMessage.style.color = '#ff6b6b';
+        formMessage.textContent = '❌ ' + error.message;
+        
+        // Track form error
+        trackEvent('Conversion', 'invite_request_error', error.message);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    });
+  </script>
+</body>
+</html>

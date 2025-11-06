@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lenoir — The Browser That Builds</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The first browser made for website creation. Edit and redesign any website with AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --apple-bg: #000000;
+      --apple-text: #f5f5f7;
+      --apple-text-secondary: #86868b;
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-border: rgba(255, 255, 255, 0.1);
+    }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+      background: var(--apple-bg);
+      color: var(--apple-text);
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-content {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--apple-text);
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      display: inline-block;
+      background: var(--apple-blue);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 980px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--apple-blue-hover);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 60px 22px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 17px;
+      line-height: 1.23536;
+      font-weight: 600;
+      letter-spacing: 0.012em;
+      color: var(--apple-blue);
+      margin-bottom: 8px;
+    }
+
+    .hero-headline {
+      font-size: 56px;
+      line-height: 1.07143;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #fff 0%, #999 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subheadline {
+      font-size: 28px;
+      line-height: 1.14286;
+      font-weight: 400;
+      letter-spacing: 0.007em;
+      color: var(--apple-text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary {
+      display: inline-block;
+      background: var(--apple-blue);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .cta-primary:hover {
+      background: var(--apple-blue-hover);
+    }
+
+    .cta-secondary {
+      display: inline-block;
+      color: var(--apple-blue);
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .cta-secondary:hover {
+      text-decoration: underline;
+    }
+
+    .cta-secondary::after {
+      content: " →";
+    }
+
+    /* Browser Preview */
+    .browser-preview {
+      max-width: 1200px;
+      margin: 60px auto 0;
+      padding: 0 22px;
+      position: relative;
+    }
+
+    .browser-window {
+      background: #1d1d1f;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .browser-window:hover {
+      transform: scale(1.02);
+    }
+
+    .browser-titlebar {
+      height: 52px;
+      background: linear-gradient(to bottom, #2d2d2d, #1d1d1d);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .browser-dot:nth-child(1) {
+      background: #ec6a5e;
+    }
+
+    .browser-dot:nth-child(2) {
+      background: #f4bf4f;
+    }
+
+    .browser-dot:nth-child(3) {
+      background: #61c554;
+    }
+
+    .browser-url {
+      flex: 1;
+      margin-left: 80px;
+      margin-right: 80px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: "SF Mono", monospace;
+      text-align: center;
+    }
+
+    .browser-content {
+      position: relative;
+      background: #000;
+    }
+
+    .browser-screenshot {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Feature Grid */
+    .features {
+      max-width: 980px;
+      margin: 120px auto;
+      padding: 0 22px;
+    }
+
+    .features-headline {
+      font-size: 48px;
+      line-height: 1.08349;
+      font-weight: 700;
+      letter-spacing: -0.003em;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--apple-blue), #0077ed);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .feature-title {
+      font-size: 24px;
+      line-height: 1.16667;
+      font-weight: 600;
+      letter-spacing: 0.009em;
+      margin-bottom: 8px;
+    }
+
+    .feature-description {
+      font-size: 17px;
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+      color: var(--apple-text-secondary);
+    }
+
+    /* Final CTA */
+    .final-cta {
+      max-width: 980px;
+      margin: 120px auto;
+      padding: 80px 22px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0, 113, 227, 0.1), rgba(0, 119, 237, 0.05));
+      border-radius: 24px;
+      border: 1px solid rgba(0, 113, 227, 0.2);
+    }
+
+    .final-cta-headline {
+      font-size: 40px;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.003em;
+      margin-bottom: 12px;
+    }
+
+    .final-cta-subheadline {
+      font-size: 21px;
+      line-height: 1.381;
+      font-weight: 400;
+      letter-spacing: 0.011em;
+      color: var(--apple-text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .final-cta-note {
+      font-size: 14px;
+      color: var(--apple-text-secondary);
+      margin-top: 16px;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 22px;
+      text-align: center;
+      border-top: 1px solid var(--apple-border);
+      font-size: 12px;
+      color: var(--apple-text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 734px) {
+      .hero-headline {
+        font-size: 40px;
+        line-height: 1.1;
+      }
+
+      .hero-subheadline {
+        font-size: 21px;
+        line-height: 1.381;
+      }
+
+      .features-headline {
+        font-size: 32px;
+        line-height: 1.125;
+      }
+
+      .final-cta-headline {
+        font-size: 32px;
+      }
+
+      .browser-url {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      .nav-content {
+        padding: 0 16px;
+      }
+
+      .hero,
+      .features,
+      .final-cta,
+      footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--apple-blue);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <a href="#" class="nav-logo">Lenoir</a>
+      <a href="#early-access" class="nav-cta">Request Invite</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-eyebrow">Invite Only</div>
+    <h1 class="hero-headline">The First Browser<br>Made for Website Creation.</h1>
+    <p class="hero-subheadline">Instantly edit and redesign any website with AI.<br>No code. No limits. Live.</p>
+    
+    <div class="hero-cta-group">
+      <a href="#early-access" class="cta-primary">Request Invite</a>
+      <a href="#video" class="cta-secondary">Watch the film</a>
+    </div>
+  </section>
+
+  <!-- Browser Preview -->
+  <section class="browser-preview">
+    <div class="browser-window">
+      <div class="browser-titlebar">
+        <div class="browser-dots">
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+        </div>
+        <div class="browser-url">lenoir://redesigning-the-web</div>
+      </div>
+      <div class="browser-content">
+        <img src="homescreen.jpeg" alt="Lenoir Browser Interface" class="browser-screenshot">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2 class="features-headline">Designed for creators.<br>Built for the web.</h2>
+    
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h3 class="feature-title">AI-Powered</h3>
+        <p class="feature-description">Transform any website with natural language. Just describe what you want.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Instant Results</h3>
+        <p class="feature-description">See changes in real-time. No waiting, no compiling, no complexity.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Beautiful Design</h3>
+        <p class="feature-description">Every edit maintains perfect design consistency and modern aesthetics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="early-access">
+    <h2 class="final-cta-headline">Join the waitlist.</h2>
+    <p class="final-cta-subheadline">Be among the first to experience the future of web creation.</p>
+    
+    <div class="hero-cta-group">
+      <a href="#form" class="cta-primary">Request Invite</a>
+    </div>
+    
+    <p class="final-cta-note">Limited spots available · Invite only</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Copyright © 2025 Lenoir. All rights reserved.</p>
+  </footer>
+</body>
+</html>

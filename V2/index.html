@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lenoir AI Browser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Custom Title Bar -->
+    <div class="titlebar">
+        <div class="titlebar-drag-region"></div>
+        <div class="titlebar-time">14:09</div>
+        <div class="window-controls">
+            <button class="window-control" id="minimize">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <rect x="2" y="5.5" width="8" height="1" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="window-control" id="maximize">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <rect x="2" y="2" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+            <button class="window-control close" id="close">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M2 2 L10 10 M10 2 L2 10" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar" id="left-sidebar">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <button class="sidebar-btn toggle-sidebar-btn" id="toggle-left-sidebar" title="Toggle Sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <button class="sidebar-btn" id="home-btn" title="Home">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </button>
+                <button class="sidebar-btn" id="new-tab-btn" title="New Tab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Favorites Section -->
+            <div class="sidebar-section">
+                <div class="section-title" data-i18n="sidebar.favorites">Favorites</div>
+                <div class="favorites-list" id="favorites-list">
+                    <div class="favorite-item" data-url="https://www.google.com">
+                        <div class="favorite-icon">G</div>
+                        <span data-i18n="app.google">Google</span>
+                    </div>
+                    <div class="favorite-item" data-action="settings">
+                        <div class="favorite-icon">⚙</div>
+                        <span data-i18n="app.settings">Settings</span>
+                    </div>
+                    <div class="favorite-item" data-action="appstore">
+                        <div class="favorite-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" aria-hidden="true" role="img">
+  <rect x="35" y="15" width="50" height="65" rx="8" opacity="0.6"/>
+  <rect x="25" y="20" width="50" height="65" rx="8" opacity="0.8"/>
+  <rect x="15" y="25" width="50" height="65" rx="8"/>
+</svg></div>
+                        <span>App Store</span>
+                    </div>
+                    <div class="favorite-item" data-action="ai-assistant">
+                        <div class="favorite-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                            </svg>
+                        </div>
+                        <span data-i18n="sidebar.aiAssistant">AI Assistant</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="sidebar-section tabs-section">
+                <div class="section-title" data-i18n="sidebar.tabs">Tabs</div>
+                <div class="tabs-list" id="tabs-container"></div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <!-- AI Assistant is always visible on the right -->
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Top Navigation Bar -->
+            <div class="top-nav" id="top-nav">
+                <div class="nav-controls">
+                    <button class="nav-btn" id="back-btn" title="Back">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="forward-btn" title="Forward">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="reload-btn" title="Reload">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="url-bar-container">
+                    <input type="text" class="url-bar" id="url-bar" placeholder="Search or enter URL..." data-i18n-placeholder="search.placeholder">
+                    <button class="rules-indicator" id="rules-indicator" style="display: none;" title="AI Rules Active - Click to disable">
+                        <span class="rules-count">0</span> ⚡
+                    </button>
+                </div>
+                <div class="nav-actions">
+                    <button class="nav-btn" id="close-tab-btn" title="Close Tab">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="ai-toggle-top-btn" title="Toggle AI Assistant">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Home Screen -->
+            <div class="home-screen" id="home-screen">
+                <!-- Home Background -->
+                <div class="home-background"></div>
+                
+                <!-- Home Content -->
+                <div class="home-content">
+                    <!-- Header with Time/Date, Search, and Edit -->
+                    <div class="home-header">
+                        <!-- Time and Date -->
+                        <div class="time-date-container">
+                            <div class="home-time">17:38</div>
+                            <div class="home-date">Wednesday, December 11</div>
+                        </div>
+
+                        <!-- Search Bar -->
+                        <div class="home-search-container">
+                            <div class="home-search-bar">
+                                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                </svg>
+                                <input type="text" class="home-search-input" id="home-search-input" placeholder="Search or enter URL..." data-i18n-placeholder="search.placeholder">
+                            </div>
+                        </div>
+
+                        <!-- Edit Mode Button -->
+                        <button class="edit-mode-btn" id="edit-mode-btn" title="Edit Home Screen">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <span>Edit</span>
+                        </button>
+                    </div>
+
+                    <!-- App Grid Pages -->
+                    <div class="app-pages-container">
+                        <div class="app-pages" id="app-pages">
+                            <!-- Page 1 -->
+                            <div class="app-page active">
+                                <div class="app-grid">
+                                    <div class="app-shortcut" data-url="https://www.youtube.com">
+                                        <div class="app-icon">
+                                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f7/f8/6e/f7f86e9a-b7e3-6f4e-3d9f-5a7f0b0c6b0c/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.png" style="width: 100%; height: 100%; border-radius: 22%;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                            <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%); border-radius: 22%; align-items: center; justify-content: center;">
+                                                <span style="color: #fff; font-size: 32px;">▶</span>
+                                            </div>
+                                        </div>
+                                        <div class="app-name">YouTube</div>
+                                    </div>
+
+                                    <div class="app-shortcut" data-url="https://www.google.com">
+                                        <div class="app-icon">
+                                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7e/a1/38/7ea13874-8e93-3f48-2b9f-8a7f0b0c6b0c/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.png" style="width: 100%; height: 100%; border-radius: 22%;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                            <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, #FFFFFF 0%, #E8E8E8 100%); border-radius: 22%; align-items: center; justify-content: center;">
+                                                <span style="color: #4285F4; font-size: 32px; font-weight: bold;">G</span>
+                                            </div>
+                                        </div>
+                                        <div class="app-name">Google</div>
+                                    </div>
+
+                                    <div class="app-shortcut" data-action="appstore">
+                                        <div class="app-icon">
+                                            <img src="icons/appstore.png" style="width: 100%; height: 100%; border-radius: 22%; object-fit: cover;">
+                                        </div>
+                                        <div class="app-name">App Store</div>
+                                    </div>
+
+                                    <div class="app-shortcut" data-action="settings">
+                                        <div class="app-icon">
+                                            <img src="icons/settings.png" style="width: 100%; height: 100%; border-radius: 22%; object-fit: cover;">
+                                        </div>
+                                        <div class="app-name">Settings</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page Indicators -->
+                    <div class="page-indicators">
+                        <div class="page-dot active"></div>
+                        <div class="page-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Browser View Container -->
+        <div class="browser-view" id="browser-view"></div>
+        </div>
+
+        <!-- AI Assistant Sidebar -->
+        <div class="ai-sidebar" id="ai-sidebar">
+            <div class="ai-header">
+                <div class="ai-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                    <span data-i18n="ai.title">AI Assistant</span>
+                </div>
+                <div class="ai-header-actions">
+                    <button class="ai-action-btn" id="ai-inspector-btn" title="Inspector Mode: Click to select elements">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/>
+                            <path d="M13 13l6 6"/>
+                        </svg>
+                    </button>
+                    <button class="ai-action-btn" id="ai-settings-btn" title="AI Settings">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                        </svg>
+                    </button>
+                    <button class="ai-action-btn" id="clear-chat-btn" title="Clear chat for this site">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                    </button>
+                    <button class="ai-action-btn" id="clear-rules-btn" title="Clear all rules for this site">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </button>
+                    <button class="ai-close" id="toggle-ai-sidebar" title="Toggle AI">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="ai-suggestions">
+                <button class="ai-suggestion">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    <span data-i18n="ai.suggestion1">Redesign this page with modern UI</span>
+                </button>
+                <button class="ai-suggestion">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                    </svg>
+                    <span data-i18n="ai.suggestion2">Remove ads and clutter</span>
+                </button>
+                <button class="ai-suggestion">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9"/>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                    </svg>
+                    <span data-i18n="ai.suggestion3">Change colors and fonts</span>
+                </button>
+            </div>
+
+            <div class="ai-chat" id="ai-chat">
+                <div class="ai-messages" id="ai-messages">
+                    <div class="ai-message assistant">
+                        <div class="message-avatar">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+                                <circle cx="9" cy="14" r="1"/>
+                                <circle cx="15" cy="14" r="1"/>
+                            </svg>
+                        </div>
+                        <div class="message-content" data-i18n="ai.welcome">
+                            Hello! I'm Lenoir's AI assistant. I can redesign this page, remove clutter, change colors, or transform any website to match your style. What would you like to create today?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-input-container">
+                <input type="text" class="ai-input" id="ai-input" placeholder="Ask anything..." data-i18n-placeholder="ai.placeholder">
+                <button class="ai-send" id="ai-send">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="app-manager.js"></script>
+    
+    <!-- AI Assistant Module (Separate folder) -->
+    <script src="ai-assistant/ai-dom-analyzer.js"></script>
+    <script src="ai-assistant/ai-network-monitor.js"></script>
+    <script src="ai-assistant/ai-storage-analyzer.js"></script>
+    <script src="ai-assistant/ai-treatment.js"></script>
+    <script src="ai-assistant/ai-router.js"></script>
+    <script src="ai-assistant/ai-task-manager.js"></script>
+    <script src="ai-assistant/ai-inspector.js"></script>
+    <script src="ai-assistant/ai-web-editor.js"></script>
+    <script src="ai-assistant/ai-api-handler.js"></script>
+    <script src="ai-assistant/ai-ui-handler.js"></script>
+    <script src="ai-assistant/ai-popup.js"></script>
+    <script src="ai-assistant/ai-enhancer.js"></script>
+    <script src="ai-assistant/ai-engine.js"></script>
+    <script src="ai-assistant/pointer/pointer-ai-handler.js"></script>
+    <script src="ai-assistant/ai-controller.js"></script>
+    
+    <script src="renderer.js"></script>
+</body>
+</html>

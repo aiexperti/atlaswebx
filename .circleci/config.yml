@@ -1,0 +1,110 @@
+version: 2.1
+
+# Orbs for easier configuration
+orbs:
+  win: circleci/windows@5.0
+
+jobs:
+  # Build for Windows
+  build-windows:
+    executor:
+      name: win/default
+      size: medium
+    
+    steps:
+      - checkout
+      
+      - run:
+          name: Install Node.js
+          command: |
+            choco install nodejs-lts -y
+            refreshenv
+      
+      - run:
+          name: Verify Node Installation
+          command: |
+            node --version
+            npm --version
+      
+      - run:
+          name: Install Dependencies
+          command: npm install
+      
+      - run:
+          name: Install electron-builder
+          command: npm install --save-dev electron-builder
+      
+      - run:
+          name: Build Windows Application
+          command: npm run build:win
+      
+      - store_artifacts:
+          path: dist
+          destination: windows-builds
+      
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/*
+
+  # Build for macOS (optional)
+  build-macos:
+    macos:
+      xcode: 14.2.0
+    
+    steps:
+      - checkout
+      
+      - run:
+          name: Install Node.js
+          command: |
+            brew install node
+      
+      - run:
+          name: Install Dependencies
+          command: npm install
+      
+      - run:
+          name: Install electron-builder
+          command: npm install --save-dev electron-builder
+      
+      - run:
+          name: Build macOS Application
+          command: npm run build:mac
+      
+      - store_artifacts:
+          path: dist
+          destination: macos-builds
+
+  # Build for Linux (optional)
+  build-linux:
+    docker:
+      - image: cimg/node:18.0
+    
+    steps:
+      - checkout
+      
+      - run:
+          name: Install Dependencies
+          command: npm install
+      
+      - run:
+          name: Install electron-builder
+          command: npm install --save-dev electron-builder
+      
+      - run:
+          name: Build Linux Application
+          command: npm run build:linux
+      
+      - store_artifacts:
+          path: dist
+          destination: linux-builds
+
+workflows:
+  version: 2
+  build-all-platforms:
+    jobs:
+      - build-windows
+      # Uncomment to build for other platforms
+      # - build-macos
+      # - build-linux

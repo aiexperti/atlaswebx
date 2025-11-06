@@ -1,0 +1,27 @@
+{
+  "git": {
+    "user": {
+      "name": "YOUR_NAME",
+      "email": "YOUR_EMAIL@example.com"
+    },
+    "branch": {
+      "default": "main"
+    }
+  },
+  "bitbucket": {
+    "workspace": "YOUR_WORKSPACE_NAME",
+    "repo_slug": "YOUR_REPO_NAME",
+    "api_token": "YOUR_API_TOKEN",
+    "is_private": true,
+    "description": "Your project description",
+    "use_existing_repo": false
+  },
+  "_instructions": {
+    "step1": "Copy this file to 'git-config.json'",
+    "step2": "Fill in your actual credentials in git-config.json",
+    "step3": "Get API token from: https://bitbucket.org/account/settings/app-passwords/",
+    "step4": "Permissions needed: Repository (Read, Write, Admin)",
+    "step5": "If using existing repo, set use_existing_repo to true",
+    "step6": "Run: ./setup-bitbucket.sh"
+  }
+}

@@ -26,6 +26,9 @@ Thumbs.db
 .env
 .env.local
 
+# Git configuration (contains credentials)
+git-config.json
+
 # Package manager
 package-lock.json
 yarn.lock

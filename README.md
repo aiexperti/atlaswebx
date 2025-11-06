@@ -1,4 +1,4 @@
-# Lenoir AI Browser
+# Atlasweb
 
 A modern AI-powered browser built with Electron, featuring an integrated AI assistant sidebar inspired by ChatGPT Atlas, Perplexity Comet, and Dia Browser.
 

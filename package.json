@@ -6,10 +6,8 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
-    "build": "electron-builder",
-    "build:win": "electron-builder --win",
-    "build:mac": "electron-builder --mac",
-    "build:linux": "electron-builder --linux"
+    "build": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win",
+    "build:win": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win"
   },
   "build": {
     "appId": "com.atlasweb.browser",
@@ -39,24 +37,8 @@
         }
       ],
       "icon": "icon.png",
-      "sign": false,
-      "verifyUpdateCodeSignature": false
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "icon": "icon.png",
-      "category": "public.app-category.productivity"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "icon": "icon.png",
-      "category": "Network"
+      "signingHashAlgorithms": ["sha256"],
+      "signDlls": false
     }
   },
   "keywords": [
@@ -68,6 +50,7 @@
   "author": "Lenoir Official",
   "license": "MIT",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^27.0.0",
     "electron-builder": "^24.13.3"
   },

@@ -45,6 +45,8 @@ jobs:
       - run:
           name: Build Windows Application
           command: npm run build:win
+          environment:
+            CSC_IDENTITY_AUTO_DISCOVERY: false
       
       - run:
           name: List build outputs
@@ -62,64 +64,8 @@ jobs:
           paths:
             - dist/*
 
-  # Build for macOS (optional)
-  build-macos:
-    macos:
-      xcode: 14.2.0
-    
-    steps:
-      - checkout
-      
-      - run:
-          name: Install Node.js
-          command: |
-            brew install node
-      
-      - run:
-          name: Install Dependencies
-          command: npm install
-      
-      - run:
-          name: Install electron-builder
-          command: npm install --save-dev electron-builder
-      
-      - run:
-          name: Build macOS Application
-          command: npm run build:mac
-      
-      - store_artifacts:
-          path: dist
-          destination: macos-builds
-
-  # Build for Linux (optional)
-  build-linux:
-    docker:
-      - image: cimg/node:18.0
-    
-    steps:
-      - checkout
-      
-      - run:
-          name: Install Dependencies
-          command: npm install
-      
-      - run:
-          name: Install electron-builder
-          command: npm install --save-dev electron-builder
-      
-      - run:
-          name: Build Linux Application
-          command: npm run build:linux
-      
-      - store_artifacts:
-          path: dist
-          destination: linux-builds
-
 workflows:
   version: 2
-  build-all-platforms:
+  build-windows-only:
     jobs:
       - build-windows
-      # Uncomment to build for other platforms
-      # - build-macos
-      # - build-linux

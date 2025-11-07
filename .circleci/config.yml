@@ -1,59 +1,38 @@
 version: 2.1
 
-# Orbs for easier configuration
-orbs:
-  win: circleci/windows@5.0
-
 jobs:
-  # Build for Windows
+  # Build for Windows using Docker with Wine (fastest option)
   build-windows:
-    executor:
-      name: win/default
-      size: medium
+    docker:
+      - image: electronuserland/builder:wine
+    
+    resource_class: large
     
     steps:
       - checkout
       
       - run:
-          name: Install Node.js 20
-          command: |
-            choco install nodejs --version=20.11.0 -y --force
-            refreshenv
-      
-      - run:
-          name: Verify Node Installation
+          name: Verify Node.js (pre-installed)
           command: |
             node --version
             npm --version
-      
-      - run:
-          name: Update npm
-          command: npm install -g npm@10.2.5
-      
-      - run:
-          name: Clear npm cache
-          command: npm cache clean --force
       
       - run:
           name: Install Dependencies
           command: npm install --legacy-peer-deps
       
       - run:
-          name: Install electron-builder
-          command: npm install --save-dev electron-builder
-      
-      - run:
           name: Build Windows Application
-          command: npm run build:win
-          environment:
-            CSC_IDENTITY_AUTO_DISCOVERY: false
+          command: |
+            export CSC_IDENTITY_AUTO_DISCOVERY=false
+            npm run build:win
       
       - run:
           name: List build outputs
           command: |
-            dir dist
+            ls -lh dist/
             echo "Listing all .exe files:"
-            dir dist\*.exe /s
+            find dist/ -name "*.exe" -type f
       
       - store_artifacts:
           path: dist

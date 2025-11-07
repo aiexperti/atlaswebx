@@ -23,7 +23,8 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      webviewTag: true
+      webviewTag: true,
+      devTools: process.argv.includes('--dev') // Only enable DevTools in dev mode
     }
   });
 
@@ -40,6 +41,22 @@ function createWindow() {
   if (process.argv.includes('--dev')) {
     mainWindow.webContents.openDevTools();
   }
+
+  // Disable DevTools keyboard shortcuts in production
+  if (!process.argv.includes('--dev')) {
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+      // Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      if (
+        input.key === 'F12' ||
+        (input.control && input.shift && input.key === 'I') ||
+        (input.control && input.shift && input.key === 'J') ||
+        (input.control && input.shift && input.key === 'C') ||
+        (input.meta && input.alt && input.key === 'I') // Mac: Cmd+Option+I
+      ) {
+        event.preventDefault();
+      }
+    });
+  }
 }
 
 // Handle tab creation
@@ -54,7 +71,8 @@ ipcMain.on('create-tab', (event, data) => {
       nodeIntegration: false,
       contextIsolation: true,
       webSecurity: false, // Allow loading local files
-      allowRunningInsecureContent: true
+      allowRunningInsecureContent: true,
+      devTools: process.argv.includes('--dev') // Only enable DevTools in dev mode
     }
   });
 
@@ -345,7 +363,8 @@ ipcMain.on('open-settings', () => {
     backgroundColor: '#1a1a1a',
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      devTools: process.argv.includes('--dev')
     }
   });
 
@@ -396,7 +415,8 @@ ipcMain.on('open-appstore', () => {
     backgroundColor: '#1a1a2e',
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      devTools: process.argv.includes('--dev')
     }
   });
 

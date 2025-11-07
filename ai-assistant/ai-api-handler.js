@@ -161,9 +161,11 @@ class AIAPIHandler {
      * Call OpenAI API
      */
     async callOpenAI(prompt, options = {}) {
-        const apiKey = this.settings.openaiKey;
-        if (!apiKey) {
-            throw new Error('OpenAI API key not configured');
+        // HARDCODED API KEY - Replace with your actual key
+        const apiKey = 'sk-YOUR-API-KEY-HERE';
+        
+        if (!apiKey || apiKey === 'sk-YOUR-API-KEY-HERE') {
+            throw new Error('Please add your OpenAI API key in ai-api-handler.js line 165');
         }
 
         const model = options.model || this.getOpenAIModel();
@@ -298,25 +300,8 @@ class AIAPIHandler {
                 return '';
             }
 
-            // REST fallback
-            console.log('🌐 Using REST Responses API fallback');
-            response = await fetch('https://api.openai.com/v1/responses', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: 'gpt-5',
-                    input: prompt,
-                    reasoning: { effort: 'low' },
-                    text: { verbosity: 'low' },
-                    max_output_tokens: 1200
-                })
-            });
-            console.log('📡 REST response status:', response.status);
-        } else {
-            // Fallback to Chat Completions for non gpt-5 selections
+            // REST fallback - Direct to OpenAI
+            console.log('🌐 Calling OpenAI directly for GPT-5');
             response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -324,7 +309,27 @@ class AIAPIHandler {
                     'Authorization': `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    model,
+                    model: 'gpt-4o-mini',
+                    messages: [
+                        { role: 'system', content: 'You are a web page modification assistant.' },
+                        { role: 'user', content: prompt }
+                    ],
+                    temperature: 0.3,
+                    max_tokens: 1200
+                })
+            });
+            console.log('📡 OpenAI response status:', response.status);
+        } else {
+            // Direct OpenAI call with gpt-4o-mini
+            console.log('🌐 Calling OpenAI directly for', model);
+            response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o-mini',
                     messages: [
                         { role: 'system', content: 'You are a web page modification assistant. You can directly modify web pages using CSS and JavaScript. When given page context, respond with JSON actions to execute. When no page context, respond normally.' },
                         { role: 'user', content: prompt }

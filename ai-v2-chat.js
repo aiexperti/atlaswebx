@@ -160,18 +160,21 @@ class AIV2Chat {
     }
 
     async callGPT4o(userMessage) {
+        // HARDCODED API KEY - Replace with your actual key
+        const apiKey = 'sk-YOUR-API-KEY-HERE';
+        
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.apiKey}`
+                'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'gpt-4o',
+                model: 'gpt-4o-mini',
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are a helpful AI assistant integrated into the Lenoir browser. You can help users with browsing, answer questions, and provide assistance. Be concise and friendly.'
+                        content: 'You are a helpful AI assistant integrated into the Atlasweb browser. You can help users with browsing, answer questions, and provide assistance. Be concise and friendly.'
                     },
                     ...this.conversationHistory.slice(-10), // Keep last 10 messages for context
                     {

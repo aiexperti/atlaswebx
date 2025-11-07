@@ -1,0 +1,85 @@
+version: 2.1
+
+# Alternative configuration using Docker with Wine for Windows builds
+
+jobs:
+  # Build for Windows using Docker + Wine
+  build-windows-docker:
+    docker:
+      - image: electronuserland/builder:wine
+    
+    resource_class: large
+    
+    steps:
+      - checkout
+      
+      - run:
+          name: Install Dependencies
+          command: |
+            npm install --legacy-peer-deps
+      
+      - run:
+          name: Build Windows Application
+          command: |
+            npm run build:win
+      
+      - store_artifacts:
+          path: dist
+          destination: windows-builds
+      
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/*
+
+  # Native Windows build (original method)
+  build-windows-native:
+    machine:
+      image: windows-server-2022-gui:current
+    
+    resource_class: windows.medium
+    
+    steps:
+      - checkout
+      
+      - run:
+          name: Install Node.js via NVM
+          shell: bash.exe
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 20.11.0
+            nvm use 20.11.0
+            node --version
+            npm --version
+      
+      - run:
+          name: Install Dependencies
+          shell: bash.exe
+          command: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm install --legacy-peer-deps
+      
+      - run:
+          name: Build Windows Application
+          shell: bash.exe
+          command: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm run build:win
+      
+      - store_artifacts:
+          path: dist
+          destination: windows-builds
+
+workflows:
+  version: 2
+  build-all:
+    jobs:
+      # Use Docker method (faster, uses Wine)
+      - build-windows-docker
+      
+      # Or use native Windows (slower, but true Windows build)
+      # - build-windows-native

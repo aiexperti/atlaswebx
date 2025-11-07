@@ -15,9 +15,9 @@ jobs:
       - checkout
       
       - run:
-          name: Install Node.js
+          name: Install Node.js 20
           command: |
-            choco install nodejs-lts -y
+            choco install nodejs --version=20.11.0 -y --force
             refreshenv
       
       - run:
@@ -27,8 +27,16 @@ jobs:
             npm --version
       
       - run:
+          name: Update npm
+          command: npm install -g npm@10.2.5
+      
+      - run:
+          name: Clear npm cache
+          command: npm cache clean --force
+      
+      - run:
           name: Install Dependencies
-          command: npm install
+          command: npm install --legacy-peer-deps
       
       - run:
           name: Install electron-builder

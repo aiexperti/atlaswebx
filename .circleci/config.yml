@@ -46,6 +46,13 @@ jobs:
           name: Build Windows Application
           command: npm run build:win
       
+      - run:
+          name: List build outputs
+          command: |
+            dir dist
+            echo "Listing all .exe files:"
+            dir dist\*.exe /s
+      
       - store_artifacts:
           path: dist
           destination: windows-builds

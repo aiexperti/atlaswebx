@@ -29,17 +29,25 @@
     ],
     "win": {
       "target": [
-        "nsis",
-        "portable"
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
       ],
-      "icon": "icons/icon.ico"
+      "icon": "icon.png",
+      "sign": false,
+      "verifyUpdateCodeSignature": false
     },
     "mac": {
       "target": [
         "dmg",
         "zip"
       ],
-      "icon": "icons/icon.icns",
+      "icon": "icon.png",
       "category": "public.app-category.productivity"
     },
     "linux": {
@@ -47,7 +55,7 @@
         "AppImage",
         "deb"
       ],
-      "icon": "icons/icon.png",
+      "icon": "icon.png",
       "category": "Network"
     }
   },

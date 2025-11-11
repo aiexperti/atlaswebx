@@ -271,8 +271,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact & Support
 
-- **Issues:** [GitHub Issues](https://github.com/yourusername/atlaswebx/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/atlaswebx/discussions)
+- **Issues:** [GitHub Issues](https://github.com/aiexperti/atlaswebx/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/aiexperti/atlaswebx/discussions)
 - **Email:** your.email@example.com
 
 ---
@@ -283,6 +283,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⭐ Star us on GitHub — it helps!
 
-[Report Bug](https://github.com/yourusername/atlaswebx/issues) • [Request Feature](https://github.com/yourusername/atlaswebx/issues) • [Documentation](https://github.com/yourusername/atlaswebx/wiki)
+[Report Bug](https://github.com/aiexperti/atlaswebx/issues) • [Request Feature](https://github.com/yourusername/atlaswebx/issues) • [Documentation](https://github.com/aiexperti/atlaswebx/wiki)
 
 </div>

@@ -81,7 +81,7 @@ class AIUIHandler {
                 </svg>
             </div>
             <div class="message-content">
-                Hello! I'm Lenoir's AI assistant. I can redesign this page, remove clutter, change colors, or transform any website to match your style. What would you like to create today?
+                Hello! I'm AtlaswebX AI assistant. I can redesign this page, remove clutter, change colors, or transform any website to match your style. What would you like to create today?
             </div>
         `;
         this.aiMessages.appendChild(welcome);

@@ -36,8 +36,24 @@ class AIV2Chat {
             }
         });
         
+        // Clear conversation button
+        document.getElementById('ai-clear-btn')?.addEventListener('click', () => {
+            this.clearConversation();
+        });
+        
         // Auto-resize textarea
         this.input?.addEventListener('input', () => this.autoResizeTextarea());
+        
+        // Listen for AI key updates from settings
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.on('ai-keys-updated', (event, aiSettings) => {
+            console.log('🔄 AI keys updated, reloading...');
+            this.apiKey = aiSettings.openaiKey || null;
+            if (this.apiKey && typeof AIV2Router !== 'undefined') {
+                this.router = new AIV2Router(this.apiKey);
+                console.log('✅ AI Router reinitialized with new key');
+            }
+        });
         
         console.log('✅ AI V2 Chat initialized');
     }
@@ -46,23 +62,32 @@ class AIV2Chat {
         try {
             const settings = JSON.parse(localStorage.getItem('ai-settings') || '{}');
             
-            // Try localStorage first, then fall back to environment variable
-            this.apiKey = settings.openaiKey || process.env.OPENAI_API_KEY || null;
+            console.log('🔍 Loading API key from localStorage:', {
+                hasAiSettings: !!localStorage.getItem('ai-settings'),
+                settingsKeys: Object.keys(settings),
+                hasOpenAIKey: !!settings.openaiKey,
+                keyLength: settings.openaiKey?.length || 0
+            });
+            
+            // Load API key from localStorage settings only
+            this.apiKey = settings.openaiKey || null;
             
             if (!this.apiKey) {
-                console.warn('⚠️ No OpenAI API key found in settings or .env file');
+                console.warn('⚠️ No OpenAI API key found in settings. Please add your API key in Settings.');
+                console.log('💡 Tip: Go to Settings (gear icon) → AI Settings → Enter your OpenAI API key → Save');
             } else {
-                const source = settings.openaiKey ? 'localStorage' : '.env file';
-                console.log('✅ OpenAI API key loaded from:', source);
+                console.log('✅ OpenAI API key loaded from settings (length:', this.apiKey.length, ')');
                 
                 // Initialize router with API key
                 if (typeof AIV2Router !== 'undefined') {
                     this.router = new AIV2Router(this.apiKey);
                     console.log('✅ AI Router initialized with GPT-4o-mini');
+                } else {
+                    console.error('❌ AIV2Router is not defined! Check script loading order.');
                 }
             }
         } catch (error) {
-            console.error('Failed to load API key:', error);
+            console.error('❌ Failed to load API key:', error);
         }
     }
 
@@ -77,8 +102,11 @@ class AIV2Chat {
         const message = this.input.value.trim();
         if (!message) return;
         
+        // Reload API key in case it was just set in settings
+        this.loadAPIKey();
+        
         if (!this.apiKey || !this.router) {
-            this.addErrorMessage('Please set your OpenAI API key in settings first.');
+            this.addErrorMessage('Please set your OpenAI API key in Settings first. Go to Settings → AI Settings and enter your OpenAI API key.');
             return;
         }
         
@@ -319,6 +347,18 @@ class AIV2Chat {
         return formatted;
     }
 
+    clearConversation() {
+        // Confirm before clearing
+        if (this.conversationHistory.length > 0) {
+            if (!confirm('Clear all messages in this conversation?')) {
+                return;
+            }
+        }
+        
+        this.clearChat();
+        console.log('🗑️ Conversation cleared');
+    }
+
     clearChat() {
         this.conversationHistory = [];
         this.messagesWrapper.innerHTML = `
@@ -331,7 +371,13 @@ class AIV2Chat {
                 </div>
                 <div class="ai-message-bubble">
                     <div class="ai-message-content">
-                        Hello! I'm your AI assistant powered by GPT-4o. I can help you browse, modify websites, and answer questions. How can I help you today?
+                        Hello! I'm your AI assistant powered by GPT-4o-mini. I can help you with:
+                        <br>• Analyzing page content
+                        <br>• Modifying websites
+                        <br>• Web searches
+                        <br>• Navigation
+                        <br>• General questions
+                        <br><br>What would you like to do?
                     </div>
                 </div>
             </div>

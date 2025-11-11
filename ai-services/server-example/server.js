@@ -1,4 +1,4 @@
-// Example Node.js/Express Server for Lenoir Browser
+// Example Node.js/Express Server for AtlaswebX
 // This handles authentication, subscriptions, and credits
 
 const express = require('express');
@@ -141,8 +141,8 @@ app.post('/api/create-checkout', authenticateToken, async (req, res) => {
                 quantity: 1,
             }],
             mode: 'subscription',
-            success_url: `https://lenoir-browser.com/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: 'https://lenoir-browser.com/pricing',
+            success_url: `https://atlaswebx.dev/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: 'https://atlaswebx.dev/pricing',
         });
         
         res.json({ url: session.url });

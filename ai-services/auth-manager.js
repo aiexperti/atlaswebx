@@ -5,7 +5,7 @@ const https = require('https');
 class AuthManager {
     constructor() {
         this.store = new Store({ name: 'auth' });
-        this.apiUrl = 'api.lenoir-browser.com'; // Your API server
+        this.apiUrl = 'api.atlaswebx.dev'; // Your API server
         // For development: 'localhost:3000'
     }
 
@@ -256,7 +256,7 @@ class AuthManager {
      */
     openWebsite(page = 'login') {
         const { shell } = require('electron');
-        const url = `https://lenoir-browser.com/${page}`;
+        const url = `https://atlaswebx.dev/${page}`;
         shell.openExternal(url);
     }
 
@@ -266,7 +266,7 @@ class AuthManager {
     openSubscriptionPage() {
         const { shell } = require('electron');
         const token = this.getToken();
-        const url = `https://lenoir-browser.com/subscription?token=${token}`;
+        const url = `https://atlaswebx.dev/subscription?token=${token}`;
         shell.openExternal(url);
     }
 }

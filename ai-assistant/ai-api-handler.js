@@ -18,20 +18,20 @@ class AIAPIHandler {
     }
 
     /**
-     * Load AI settings from localStorage with .env fallback
+     * Load AI settings from localStorage only (no .env fallback)
      */
     loadSettings() {
         const aiSettings = JSON.parse(localStorage.getItem('ai-settings') || '{}');
-        const generalSettings = JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
+        const generalSettings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
         
-        // Check localStorage first, then fall back to environment variables
-        const openaiKey = aiSettings.openaiKey || generalSettings.openaiKey || process.env.OPENAI_API_KEY || '';
-        const anthropicKey = aiSettings.anthropicKey || generalSettings.anthropicKey || process.env.ANTHROPIC_API_KEY || '';
-        const googleKey = aiSettings.googleKey || generalSettings.googleKey || process.env.GOOGLE_API_KEY || '';
+        // Load API keys from localStorage only (no environment variable fallback)
+        const openaiKey = aiSettings.openaiKey || generalSettings.openaiKey || '';
+        const anthropicKey = aiSettings.anthropicKey || generalSettings.anthropicKey || '';
+        const googleKey = aiSettings.googleKey || generalSettings.googleKey || '';
         
         console.log('🔑 Loading API keys:', {
             hasOpenAI: !!openaiKey,
-            source: aiSettings.openaiKey ? 'localStorage' : (process.env.OPENAI_API_KEY ? '.env file' : 'none'),
+            source: aiSettings.openaiKey ? 'ai-settings' : (generalSettings.openaiKey ? 'atlaswebx-settings' : 'none'),
             hasAnthropic: !!anthropicKey,
             hasGoogle: !!googleKey,
             openaiKeyLength: openaiKey.length

@@ -28,9 +28,72 @@ navItems.forEach(item => {
     });
 });
 
+// Load wallpapers from folder
+async function loadWallpapersFromFolder() {
+    const fs = require('fs');
+    const path = require('path');
+    const wallpaperDir = path.join(__dirname, '../wallpaper');
+    
+    try {
+        const files = fs.readdirSync(wallpaperDir);
+        const imageFiles = files.filter(file => {
+            const ext = path.extname(file).toLowerCase();
+            return ['.jpg', '.jpeg', '.png', '.webp', '.gif'].includes(ext);
+        });
+        
+        console.log('📁 Found wallpapers:', imageFiles);
+        
+        // Get wallpaper grid container
+        const wallpaperGrid = document.querySelector('.wallpaper-grid');
+        
+        // Find the custom wallpaper option to insert before it
+        const customOption = document.querySelector('.wallpaper-option[data-wallpaper="custom"]');
+        
+        // Add each image as a wallpaper option
+        imageFiles.forEach((file, index) => {
+            const wallpaperPath = path.join(wallpaperDir, file);
+            const wallpaperId = `wallpaper-${index}`;
+            const displayName = file.replace(/\.(jpg|jpeg|png|webp|gif)$/i, '').replace(/[-_]/g, ' ');
+            
+            const option = document.createElement('div');
+            option.className = 'wallpaper-option';
+            option.setAttribute('data-wallpaper', wallpaperId);
+            option.setAttribute('data-wallpaper-path', wallpaperPath);
+            
+            // Set first image as default if no wallpaper is selected
+            if (index === 0 && !localStorage.getItem('atlaswebx-settings')) {
+                option.classList.add('active');
+            }
+            
+            option.innerHTML = `
+                <div class="wallpaper-preview" style="background-image: url('file://${wallpaperPath}'); background-size: cover; background-position: center;"></div>
+                <span>${displayName}</span>
+            `;
+            
+            // Insert before custom option
+            wallpaperGrid.insertBefore(option, customOption);
+            
+            // Add click handler
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                autoSaveSettings();
+            });
+        });
+        
+        return imageFiles.length > 0 ? `wallpaper-0` : 'gradient-purple';
+    } catch (error) {
+        console.error('Error loading wallpapers:', error);
+        return 'gradient-purple';
+    }
+}
+
 // Load saved settings
-function loadSettings() {
-    const settings = JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
+async function loadSettings() {
+    // Load wallpapers from folder first
+    const defaultWallpaper = await loadWallpapersFromFolder();
+    
+    const settings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
     
     // General
     if (settings.siteName) {
@@ -41,22 +104,21 @@ function loadSettings() {
     }
     
     // Wallpaper
-    if (settings.wallpaper) {
-        document.querySelectorAll('.wallpaper-option').forEach(option => {
-            option.classList.remove('active');
-            if (option.getAttribute('data-wallpaper') === settings.wallpaper) {
-                option.classList.add('active');
-            }
-        });
-        
-        // Load custom wallpaper preview if exists
-        if (settings.wallpaper === 'custom') {
-            const customImage = localStorage.getItem('custom-wallpaper');
-            if (customImage) {
-                const customPreview = document.getElementById('custom-preview');
-                customPreview.style.backgroundImage = `url(${customImage})`;
-                customPreview.classList.add('has-image');
-            }
+    const selectedWallpaper = settings.wallpaper || defaultWallpaper;
+    document.querySelectorAll('.wallpaper-option').forEach(option => {
+        option.classList.remove('active');
+        if (option.getAttribute('data-wallpaper') === selectedWallpaper) {
+            option.classList.add('active');
+        }
+    });
+    
+    // Load custom wallpaper preview if exists
+    if (selectedWallpaper === 'custom') {
+        const customImage = localStorage.getItem('custom-wallpaper');
+        if (customImage) {
+            const customPreview = document.getElementById('custom-preview');
+            customPreview.style.backgroundImage = `url(${customImage})`;
+            customPreview.classList.add('has-image');
         }
     }
     
@@ -87,6 +149,33 @@ function loadSettings() {
     }
 }
 
+// Auto-save function
+function autoSaveSettings() {
+    const activeWallpaper = document.querySelector('.wallpaper-option.active');
+    const wallpaperId = activeWallpaper?.getAttribute('data-wallpaper') || 'gradient-purple';
+    const wallpaperPath = activeWallpaper?.getAttribute('data-wallpaper-path') || null;
+    
+    const settings = {
+        siteName: document.getElementById('site-name').value,
+        homepage: document.getElementById('homepage').value,
+        wallpaper: wallpaperId,
+        wallpaperPath: wallpaperPath,
+        searchEngine: document.querySelector('input[name="search-engine"]:checked')?.value || 'google',
+        aiModel: document.querySelector('input[name="ai-model"]:checked')?.value || 'gpt-4',
+        language: document.getElementById('language-select').value
+    };
+    
+    localStorage.setItem('atlaswebx-settings', JSON.stringify(settings));
+    
+    // Send settings to main window
+    ipcRenderer.send('settings-updated', settings);
+    
+    // Show subtle save indicator
+    showAutoSaveIndicator();
+    
+    console.log('⚡ Settings auto-saved');
+}
+
 // Wallpaper selection
 document.querySelectorAll('.wallpaper-option').forEach(option => {
     option.addEventListener('click', () => {
@@ -100,6 +189,9 @@ document.querySelectorAll('.wallpaper-option').forEach(option => {
         
         document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('active'));
         option.classList.add('active');
+        
+        // Auto-save
+        autoSaveSettings();
     });
 });
 
@@ -123,6 +215,9 @@ document.getElementById('wallpaper-upload').addEventListener('change', (e) => {
         
         // Store image data
         localStorage.setItem('custom-wallpaper', imageData);
+        
+        // Auto-save
+        autoSaveSettings();
     };
     reader.readAsDataURL(file);
 });
@@ -143,21 +238,49 @@ function updateRadioOptions(name) {
 document.querySelectorAll('input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', () => {
         updateRadioOptions(radio.name);
+        // Auto-save
+        autoSaveSettings();
     });
+});
+
+// Auto-save on text input changes (with debounce)
+let autoSaveTimeout;
+function debounceAutoSave() {
+    clearTimeout(autoSaveTimeout);
+    autoSaveTimeout = setTimeout(() => {
+        autoSaveSettings();
+    }, 500); // Wait 500ms after user stops typing
+}
+
+// Add auto-save to text inputs
+document.getElementById('site-name')?.addEventListener('input', debounceAutoSave);
+document.getElementById('homepage')?.addEventListener('input', debounceAutoSave);
+
+// Add auto-save to language select
+document.getElementById('language-select')?.addEventListener('change', () => {
+    autoSaveSettings();
+    // Apply translations immediately
+    const settings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
+    applyTranslations(settings.language);
 });
 
 // Save settings
 document.getElementById('save-btn').addEventListener('click', () => {
+    const activeWallpaper = document.querySelector('.wallpaper-option.active');
+    const wallpaperId = activeWallpaper?.getAttribute('data-wallpaper') || 'gradient-purple';
+    const wallpaperPath = activeWallpaper?.getAttribute('data-wallpaper-path') || null;
+    
     const settings = {
         siteName: document.getElementById('site-name').value,
         homepage: document.getElementById('homepage').value,
-        wallpaper: document.querySelector('.wallpaper-option.active')?.getAttribute('data-wallpaper') || 'gradient-purple',
+        wallpaper: wallpaperId,
+        wallpaperPath: wallpaperPath,
         searchEngine: document.querySelector('input[name="search-engine"]:checked')?.value || 'google',
         aiModel: document.querySelector('input[name="ai-model"]:checked')?.value || 'gpt-4',
         language: document.getElementById('language-select').value
     };
     
-    localStorage.setItem('lenoir-settings', JSON.stringify(settings));
+    localStorage.setItem('atlaswebx-settings', JSON.stringify(settings));
     
     // Save AI settings separately
     saveAISettings();
@@ -176,12 +299,48 @@ document.getElementById('save-btn').addEventListener('click', () => {
 // Reset settings
 document.getElementById('reset-btn').addEventListener('click', () => {
     if (confirm('Are you sure you want to reset all settings to defaults?')) {
-        localStorage.removeItem('lenoir-settings');
+        localStorage.removeItem('atlaswebx-settings');
         location.reload();
     }
 });
 
-// Notification
+// Auto-save indicator (subtle)
+function showAutoSaveIndicator() {
+    // Remove existing indicator
+    const existing = document.getElementById('auto-save-indicator');
+    if (existing) existing.remove();
+    
+    const indicator = document.createElement('div');
+    indicator.id = 'auto-save-indicator';
+    indicator.style.cssText = `
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        background: rgba(74, 158, 255, 0.9);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: fadeInOut 1.5s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    `;
+    indicator.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Saved
+    `;
+    document.body.appendChild(indicator);
+    
+    setTimeout(() => indicator.remove(), 1500);
+}
+
+// Notification (for manual save)
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.style.cssText = `
@@ -230,6 +389,24 @@ style.textContent = `
             opacity: 0;
         }
     }
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        20% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        80% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    }
 `;
 document.head.appendChild(style);
 
@@ -252,10 +429,35 @@ function applyTranslations(lang) {
 
 // Load and apply current language
 function loadLanguage() {
-    const settings = JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
+    const settings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
     const lang = settings.language || 'en';
     applyTranslations(lang);
 }
+
+// Auto-save AI settings on input changes (with debounce)
+let aiAutoSaveTimeout;
+function debounceAISave() {
+    clearTimeout(aiAutoSaveTimeout);
+    aiAutoSaveTimeout = setTimeout(() => {
+        saveAISettings();
+        showAutoSaveIndicator();
+    }, 500); // Wait 500ms after user stops typing
+}
+
+// Add auto-save to AI settings inputs
+document.getElementById('openai-api-key')?.addEventListener('input', debounceAISave);
+document.getElementById('anthropic-api-key')?.addEventListener('input', debounceAISave);
+document.getElementById('google-api-key')?.addEventListener('input', debounceAISave);
+
+// Add auto-save to AI checkboxes
+document.getElementById('ai-web-interaction')?.addEventListener('change', () => {
+    saveAISettings();
+    showAutoSaveIndicator();
+});
+document.getElementById('ai-auto-rules')?.addEventListener('change', () => {
+    saveAISettings();
+    showAutoSaveIndicator();
+});
 
 // AI Settings - API Keys
 function loadAISettings() {
@@ -308,12 +510,12 @@ function saveAISettings() {
     // Save to localStorage
     localStorage.setItem('ai-settings', JSON.stringify(aiSettings));
     
-    // Also save to lenoir-settings as backup
-    const lenoirSettings = JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
-    lenoirSettings.openaiKey = aiSettings.openaiKey;
-    lenoirSettings.anthropicKey = aiSettings.anthropicKey;
-    lenoirSettings.googleKey = aiSettings.googleKey;
-    localStorage.setItem('lenoir-settings', JSON.stringify(lenoirSettings));
+    // Also save to atlaswebx-settings as backup
+    const atlaswebxSettings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
+    atlaswebxSettings.openaiKey = aiSettings.openaiKey;
+    atlaswebxSettings.anthropicKey = aiSettings.anthropicKey;
+    atlaswebxSettings.googleKey = aiSettings.googleKey;
+    localStorage.setItem('atlaswebx-settings', JSON.stringify(atlaswebxSettings));
     
     console.log('✅ AI settings saved to localStorage');
     

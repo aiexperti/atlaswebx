@@ -361,7 +361,7 @@ Code:`;
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are a helpful AI assistant integrated into the Lenoir browser. Be concise, friendly, and helpful.'
+                        content: 'You are a helpful AI assistant integrated into the AtlaswebX browser. Be concise, friendly, and helpful.'
                     },
                     ...conversationHistory.slice(-6), // Keep last 6 messages
                     {

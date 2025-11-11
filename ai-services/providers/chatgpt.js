@@ -3,7 +3,7 @@ const https = require('https');
 
 class ChatGPTService {
     constructor() {
-        this.apiKey = process.env.OPENAI_API_KEY || '';
+        this.apiKey = ''; // API key must be set via setApiKey() method
         this.model = 'gpt-4'; // or 'gpt-3.5-turbo'
         this.apiUrl = 'api.openai.com';
     }

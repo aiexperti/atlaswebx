@@ -2,8 +2,8 @@ const { app, BrowserWindow, BrowserView, ipcMain, session, Menu, shell, globalSh
 const path = require('path');
 const fs = require('fs');
 
-// Load environment variables from .env file
-require('dotenv').config();
+// Note: API keys are now managed through the Settings UI
+// No need to load from .env file
 
 let mainWindow;
 let settingsWindow = null;
@@ -92,6 +92,151 @@ ipcMain.on('create-tab', (event, data) => {
     y: topNavHeight, 
     width: bounds.width - leftSidebarWidth - aiSidebarWidth, 
     height: bounds.height - topNavHeight 
+  });
+
+  // Set custom user agent
+  view.webContents.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36');
+
+  // Add context menu
+  view.webContents.on('context-menu', (event, params) => {
+    const { Menu, MenuItem } = require('electron');
+    const menu = new Menu();
+
+    // Add "Back" if can go back
+    if (view.webContents.canGoBack()) {
+      menu.append(new MenuItem({
+        label: 'Back',
+        click: () => view.webContents.goBack()
+      }));
+    }
+
+    // Add "Forward" if can go forward
+    if (view.webContents.canGoForward()) {
+      menu.append(new MenuItem({
+        label: 'Forward',
+        click: () => view.webContents.goForward()
+      }));
+    }
+
+    // Add "Reload"
+    menu.append(new MenuItem({
+      label: 'Reload',
+      accelerator: 'CmdOrCtrl+R',
+      click: () => view.webContents.reload()
+    }));
+
+    menu.append(new MenuItem({ type: 'separator' }));
+
+    // If there's selected text, add copy
+    if (params.selectionText) {
+      menu.append(new MenuItem({
+        label: 'Copy',
+        accelerator: 'CmdOrCtrl+C',
+        click: () => view.webContents.copy()
+      }));
+    }
+
+    // If editable field, add paste
+    if (params.isEditable) {
+      menu.append(new MenuItem({
+        label: 'Paste',
+        accelerator: 'CmdOrCtrl+V',
+        click: () => view.webContents.paste()
+      }));
+
+      menu.append(new MenuItem({
+        label: 'Cut',
+        accelerator: 'CmdOrCtrl+X',
+        click: () => view.webContents.cut()
+      }));
+
+      menu.append(new MenuItem({
+        label: 'Select All',
+        accelerator: 'CmdOrCtrl+A',
+        click: () => view.webContents.selectAll()
+      }));
+
+      menu.append(new MenuItem({ type: 'separator' }));
+    }
+
+    // If there's a link
+    if (params.linkURL) {
+      menu.append(new MenuItem({
+        label: 'Open Link in New Tab',
+        click: () => {
+          mainWindow.webContents.send('create-tab-from-link', params.linkURL);
+        }
+      }));
+
+      menu.append(new MenuItem({
+        label: 'Copy Link Address',
+        click: () => {
+          const { clipboard } = require('electron');
+          clipboard.writeText(params.linkURL);
+        }
+      }));
+
+      menu.append(new MenuItem({ type: 'separator' }));
+    }
+
+    // If there's an image
+    if (params.mediaType === 'image') {
+      menu.append(new MenuItem({
+        label: 'Open Image in New Tab',
+        click: () => {
+          mainWindow.webContents.send('create-tab-from-link', params.srcURL);
+        }
+      }));
+
+      menu.append(new MenuItem({
+        label: 'Copy Image Address',
+        click: () => {
+          const { clipboard } = require('electron');
+          clipboard.writeText(params.srcURL);
+        }
+      }));
+
+      menu.append(new MenuItem({
+        label: 'Save Image As...',
+        click: () => {
+          view.webContents.downloadURL(params.srcURL);
+        }
+      }));
+
+      menu.append(new MenuItem({ type: 'separator' }));
+    }
+
+    // Add "Copy Page URL"
+    menu.append(new MenuItem({
+      label: 'Copy Page URL',
+      click: () => {
+        const { clipboard } = require('electron');
+        clipboard.writeText(view.webContents.getURL());
+      }
+    }));
+
+    // Add "New Tab"
+    menu.append(new MenuItem({
+      label: 'New Tab',
+      accelerator: 'CmdOrCtrl+T',
+      click: () => {
+        mainWindow.webContents.send('create-new-tab');
+      }
+    }));
+
+    menu.append(new MenuItem({ type: 'separator' }));
+
+    // Add "Inspect Element" in dev mode
+    if (process.argv.includes('--dev')) {
+      menu.append(new MenuItem({
+        label: 'Inspect Element',
+        click: () => {
+          view.webContents.inspectElement(params.x, params.y);
+        }
+      }));
+    }
+
+    menu.popup();
   });
 
   view.webContents.loadURL(url);
@@ -1216,5 +1361,19 @@ ipcMain.handle('clear-cache', async () => {
   } catch (error) {
     console.error('❌ Failed to clear cache:', error);
     return { success: false, error: error.message };
+  }
+});
+
+// Handle AI key updates from settings
+ipcMain.on('update-ai-keys', (event, aiSettings) => {
+  console.log('🔑 AI keys updated from settings:', {
+    hasOpenAI: !!aiSettings.openaiKey,
+    hasAnthropic: !!aiSettings.anthropicKey,
+    hasGoogle: !!aiSettings.googleKey
+  });
+  
+  // Notify main window to reload AI services with new keys
+  if (mainWindow && mainWindow.webContents) {
+    mainWindow.webContents.send('ai-keys-updated', aiSettings);
   }
 });

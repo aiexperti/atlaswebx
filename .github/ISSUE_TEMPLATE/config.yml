@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/yourusername/atlaswebx/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Documentation
+    url: https://github.com/yourusername/atlaswebx#readme
+    about: Read the full documentation
+  - name: 🚀 Quick Start Guide
+    url: https://github.com/yourusername/atlaswebx/blob/main/QUICK_START.md
+    about: Get started with AtlaswebX in 5 minutes

@@ -5,10 +5,11 @@ async function main() {
     // Create AI manager
     const aiManager = new AIManager();
 
-    // Set API keys (replace with your actual keys)
-    aiManager.setApiKey('chatgpt', process.env.OPENAI_API_KEY || 'your-key-here');
-    aiManager.setApiKey('claude', process.env.ANTHROPIC_API_KEY || 'your-key-here');
-    aiManager.setApiKey('gemini', process.env.GOOGLE_AI_API_KEY || 'your-key-here');
+    // Set API keys (replace with your actual keys from settings)
+    // In a real application, these would come from the Settings UI
+    aiManager.setApiKey('chatgpt', 'your-openai-key-here');
+    aiManager.setApiKey('claude', 'your-anthropic-key-here');
+    aiManager.setApiKey('gemini', 'your-google-key-here');
 
     console.log('Available providers:', aiManager.getProviders());
     console.log('Current provider:', aiManager.currentProvider);

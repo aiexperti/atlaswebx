@@ -74,7 +74,7 @@ loadSidebarState();
 // Inject custom dark scrollbar into websites
 function injectCustomScrollbar(tabId) {
     const scrollbarCSS = `
-        /* Custom Dark Scrollbar - Lenoir Style */
+        /* Custom Dark Scrollbar - AtlaswebX Style */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -230,6 +230,16 @@ ipcRenderer.on('tab-created', (event, { tabId, url }) => {
     // Auto-apply saved rules for this domain
     setTimeout(() => {
     }, 1500); // Wait 1.5 seconds for page to fully load
+});
+
+// Handle context menu: Open link in new tab
+ipcRenderer.on('create-tab-from-link', (event, url) => {
+    createTab(url);
+});
+
+// Handle context menu: New tab
+ipcRenderer.on('create-new-tab', () => {
+    createTab('https://www.google.com');
 });
 
 ipcRenderer.on('tab-navigated', (event, { tabId, url }) => {
@@ -604,23 +614,9 @@ homeSearchInput.addEventListener('keypress', (e) => {
     }
 });
 
-// App Shortcuts
-document.querySelectorAll('.app-shortcut').forEach(shortcut => {
-    shortcut.addEventListener('click', () => {
-        const url = shortcut.getAttribute('data-url');
-        const action = shortcut.getAttribute('data-action');
-        
-        if (action === 'app-store') {
-            // Open a modal or page for app management
-            alert('App Store - Coming soon! Here you can add custom apps and shortcuts.');
-        } else if (action === 'settings') {
-            // Open settings page
-            ipcRenderer.send('open-settings');
-        } else if (url) {
-            createTab(url);
-        }
-    });
-});
+// App Shortcuts - Handled by app-manager.js
+// Note: Event listeners for .app-shortcut are managed by app-manager.js
+// to avoid duplicate tab creation
 
 // Favorite Items
 document.querySelectorAll('.favorite-item').forEach(favorite => {
@@ -675,7 +671,7 @@ document.getElementById('ai-toggle-top-btn')?.addEventListener('click', () => {
  * Hide on home page, show on websites (respecting user toggle state)
  */
 function updateAISidebarVisibility(url) {
-    const isHomePage = !url || url === 'about:blank' || url.includes('lenoir://home');
+    const isHomePage = !url || url === 'about:blank' || url.includes('atlaswebx://home');
     const aiSidebar = document.getElementById('ai-sidebar');
     
     if (isHomePage) {
@@ -1034,6 +1030,11 @@ function applySettings(settings) {
                     homeBackground.style.backgroundSize = 'cover';
                     homeBackground.style.backgroundPosition = 'center';
                 }
+            } else if (settings.wallpaperPath) {
+                // Apply wallpaper from folder
+                homeBackground.style.background = `url('file://${settings.wallpaperPath}')`;
+                homeBackground.style.backgroundSize = 'cover';
+                homeBackground.style.backgroundPosition = 'center';
             } else if (wallpapers[settings.wallpaper]) {
                 // Apply gradient wallpaper
                 homeBackground.style.background = wallpapers[settings.wallpaper];
@@ -1054,7 +1055,7 @@ function applySettings(settings) {
     }
     
     // Store settings for use
-    window.lenoirSettings = settings;
+    window.atlaswebxSettings = settings;
 }
 
 // Translation function
@@ -1089,7 +1090,7 @@ function translateUI(lang) {
 
 // Load settings on startup
 function loadAndApplySettings() {
-    const settings = JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
+    const settings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
     if (Object.keys(settings).length > 0) {
         applySettings(settings);
     }
@@ -1097,7 +1098,7 @@ function loadAndApplySettings() {
 
 // URL Bar - Use selected search engine
 function getSearchUrl(query, searchEngine = 'google') {
-    const settings = window.lenoirSettings || JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
+    const settings = window.atlaswebxSettings || JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
     const engine = settings.searchEngine || searchEngine;
     
     const searchEngines = {

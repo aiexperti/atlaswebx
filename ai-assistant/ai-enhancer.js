@@ -11,7 +11,7 @@ class AIEnhancer {
     }
 
     /**
-     * Initialize with API key (checks localStorage and .env)
+     * Initialize with API key (checks localStorage only)
      */
     initialize(apiKey) {
         // If no API key provided, try to load from localStorage and .env
@@ -19,14 +19,13 @@ class AIEnhancer {
             console.log('🔍 No API key provided, trying to load from storage...');
             try {
                 const aiSettings = JSON.parse(localStorage.getItem('ai-settings') || '{}');
-                const generalSettings = JSON.parse(localStorage.getItem('lenoir-settings') || '{}');
+                const generalSettings = JSON.parse(localStorage.getItem('atlaswebx-settings') || '{}');
                 
-                // Check localStorage first, then .env file
-                apiKey = aiSettings.openaiKey || generalSettings.openaiKey || process.env.OPENAI_API_KEY;
+                // Load API key from localStorage settings only
+                apiKey = aiSettings.openaiKey || generalSettings.openaiKey;
                 
-                const source = aiSettings.openaiKey ? 'localStorage' : 
-                              (generalSettings.openaiKey ? 'lenoir-settings' : 
-                              (process.env.OPENAI_API_KEY ? '.env file' : 'none'));
+                const source = aiSettings.openaiKey ? 'ai-settings' : 
+                              (generalSettings.openaiKey ? 'atlaswebx-settings' : 'none');
                 
                 console.log('🔑 API key source:', source);
                 console.log('🔑 API key found:', apiKey ? 'Yes' : 'No');
@@ -39,7 +38,7 @@ class AIEnhancer {
             this.apiKey = apiKey;
             console.log('✨ AI Enhancer initialized with API key, length:', this.apiKey.length);
         } else {
-            throw new Error('API key is required. Please add your OpenAI API key in Settings or .env file.');
+            throw new Error('API key is required. Please add your OpenAI API key in Settings.');
         }
     }
 

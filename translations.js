@@ -1,9 +1,9 @@
-// Lenoir Browser - Translations
+// AtlaswebX - Translations
 
 const translations = {
     en: {
         // General
-        'app.name': 'Lenoir Browser',
+        'app.name': 'AtlaswebX',
         'search.placeholder': 'Search or enter URL...',
         'home.time': 'Time',
         'home.date': 'Date',
@@ -122,7 +122,7 @@ const translations = {
     
     es: {
         // General
-        'app.name': 'Navegador Lenoir',
+        'app.name': 'AtlaswebX',
         'search.placeholder': 'Buscar o ingresar URL...',
         'home.time': 'Hora',
         'home.date': 'Fecha',
@@ -212,7 +212,7 @@ const translations = {
     
     fr: {
         // General
-        'app.name': 'Navigateur Lenoir',
+        'app.name': 'AtlaswebX',
         'search.placeholder': 'Rechercher ou entrer une URL...',
         'home.time': 'Heure',
         'home.date': 'Date',
@@ -302,7 +302,7 @@ const translations = {
     
     de: {
         // General
-        'app.name': 'Lenoir Browser',
+        'app.name': 'AtlaswebX',
         'search.placeholder': 'Suchen oder URL eingeben...',
         'home.time': 'Zeit',
         'home.date': 'Datum',

@@ -6,7 +6,7 @@ class CreditManager {
     constructor(authManager) {
         this.authManager = authManager;
         this.store = new Store({ name: 'credits' });
-        this.apiUrl = 'api.lenoir-browser.com';
+        this.apiUrl = 'api.atlaswebx.dev';
     }
 
     /**

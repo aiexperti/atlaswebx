@@ -11,7 +11,7 @@ class ThemeManager {
 
     init() {
         // Load saved theme from localStorage
-        const savedTheme = localStorage.getItem('lenoir-theme') || 'standard';
+        const savedTheme = localStorage.getItem('atlaswebx-theme') || 'standard';
         this.setTheme(savedTheme, false);
 
         // Wait for DOM to be ready
@@ -55,7 +55,7 @@ class ThemeManager {
         document.body.setAttribute('data-theme', theme);
         
         // Save to localStorage
-        localStorage.setItem('lenoir-theme', theme);
+        localStorage.setItem('atlaswebx-theme', theme);
         
         // Update button state
         this.updateButtonState();

@@ -1,7 +1,7 @@
 {
-  "name": "lenoir-api-server",
+  "name": "atlaswebx-api-server",
   "version": "1.0.0",
-  "description": "API server for Lenoir Browser authentication and subscriptions",
+  "description": "API server for AtlaswebX authentication and subscriptions",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

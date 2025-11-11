@@ -173,16 +173,15 @@ class AIEngine {
         try {
             console.log('✨ Routing to AI Enhancer (separate layer)...');
             
-            // Get API key from API handler (includes .env fallback)
-            const apiKey = this.apiHandler.settings.openaiKey || process.env.OPENAI_API_KEY;
-            const source = this.apiHandler.settings.openaiKey ? 'API handler' : 
-                          (process.env.OPENAI_API_KEY ? '.env file' : 'none');
+            // Get API key from API handler (settings only)
+            const apiKey = this.apiHandler.settings.openaiKey;
+            const source = this.apiHandler.settings.openaiKey ? 'API handler' : 'none';
             
             console.log('🔑 API key source:', source);
             console.log('🔑 Passing API key to enhancer:', apiKey ? 'Available' : 'Missing');
             
             if (!apiKey) {
-                throw new Error('OpenAI API key not configured. Please add your API key in Settings or .env file.');
+                throw new Error('OpenAI API key not configured. Please add your API key in Settings.');
             }
             
             // Use dedicated AI Enhancer with API key

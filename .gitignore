@@ -48,6 +48,7 @@ Desktop.ini
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 
 # Git configuration (contains credentials)
 git-config.json
@@ -87,6 +88,7 @@ V1/
 V2/
 V3/
 Web/
+backend/
 *.backup
 *.bak
 *.old

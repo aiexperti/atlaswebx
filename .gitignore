@@ -96,6 +96,7 @@ setup-bitbucket-token.sh
 setup-bitbucket.sh
 push-to-atlas.sh
 sync-and-push.sh
+git-config-atlas.json
 
 # AI documentation (internal development docs)
 AI-*.md

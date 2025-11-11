@@ -273,7 +273,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Issues:** [GitHub Issues](https://github.com/aiexperti/atlaswebx/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/aiexperti/atlaswebx/discussions)
-- **Email:** your.email@example.com
+- **Email:** contact@atlaswebx.com
 
 ---
 

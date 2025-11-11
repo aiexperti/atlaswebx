@@ -64,7 +64,7 @@
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/yourusername/atlaswebx.git
+git clone https://github.com/aiexperti/atlaswebx.git
 cd atlaswebx
 ```
 
@@ -283,6 +283,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⭐ Star us on GitHub — it helps!
 
-[Report Bug](https://github.com/aiexperti/atlaswebx/issues) • [Request Feature](https://github.com/yourusername/atlaswebx/issues) • [Documentation](https://github.com/aiexperti/atlaswebx/wiki)
+[Report Bug](https://github.com/aiexperti/atlaswebx/issues) • [Request Feature](https://github.com/aiexperti/atlaswebx/issues) • [Documentation](https://github.com/aiexperti/atlaswebx/wiki)
 
 </div>

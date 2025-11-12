@@ -6,8 +6,14 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
-    "build": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win",
-    "build:win": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win"
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
   },
   "build": {
     "appId": "com.atlaswebx.browser",
@@ -39,6 +45,38 @@
       "icon": "icon.png",
       "signingHashAlgorithms": ["sha256"],
       "signDlls": false
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "category": "public.app-category.productivity",
+      "icon": "icon.png"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        },
+        {
+          "target": "rpm",
+          "arch": ["x64"]
+        }
+      ],
+      "category": "Network",
+      "icon": "icon.png"
     }
   },
   "keywords": [

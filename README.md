@@ -3,6 +3,7 @@
 # 🌐 AtlaswebX
 
 **A Modern AI-Powered Browser Built with Electron**
+![alt](https://atlaswebx.com/screenshot.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Electron](https://img.shields.io/badge/Electron-27.0.0-47848F?logo=electron)](https://www.electronjs.org/)

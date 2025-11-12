@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 AtlaswebX
+# ![alt](https://atlaswebx.com/logo.png) AtlaswebX
 
 **A Modern AI-Powered Browser Built with Electron**
 ![alt](https://atlaswebx.com/screenshot.png)

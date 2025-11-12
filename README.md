@@ -1,6 +1,6 @@
 <div align="center">
 
-# ![alt](https://atlaswebx.com/android-chrome-192x192.png) AtlaswebX
+# ![alt](https://atlaswebx.com/favicon-32x32.png) AtlaswebX
 
 **A Modern AI-Powered Browser Built with Electron**
 ![alt](https://atlaswebx.com/screenshot.png)

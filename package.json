@@ -18,6 +18,7 @@
   "build": {
     "appId": "com.atlaswebx.browser",
     "productName": "AtlaswebX",
+    "publish": null,
     "directories": {
       "output": "dist"
     },
@@ -43,8 +44,8 @@
         }
       ],
       "icon": "icon.png",
-      "signingHashAlgorithms": ["sha256"],
-      "signDlls": false
+      "sign": null,
+      "verifyUpdateCodeSignature": false
     },
     "mac": {
       "target": [

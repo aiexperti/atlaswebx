@@ -486,6 +486,12 @@ function loadAISettings() {
     if (aiSettings.googleKey) {
         document.getElementById('google-api-key').value = aiSettings.googleKey;
     }
+    if (aiSettings.deepseekKey) {
+        document.getElementById('deepseek-api-key').value = aiSettings.deepseekKey;
+    }
+    if (aiSettings.kimiKey) {
+        document.getElementById('kimi-api-key').value = aiSettings.kimiKey;
+    }
     
     document.getElementById('ai-web-interaction').checked = !!aiSettings.webInteraction;
     document.getElementById('ai-auto-rules').checked = !!aiSettings.autoRules;
@@ -496,6 +502,8 @@ function saveAISettings() {
         openaiKey: document.getElementById('openai-api-key').value,
         anthropicKey: document.getElementById('anthropic-api-key').value,
         googleKey: document.getElementById('google-api-key').value,
+        deepseekKey: document.getElementById('deepseek-api-key').value,
+        kimiKey: document.getElementById('kimi-api-key').value,
         webInteraction: document.getElementById('ai-web-interaction').checked,
         autoRules: document.getElementById('ai-auto-rules').checked
     };
@@ -504,7 +512,9 @@ function saveAISettings() {
         hasOpenAI: !!aiSettings.openaiKey,
         openaiKeyLength: aiSettings.openaiKey?.length || 0,
         hasAnthropic: !!aiSettings.anthropicKey,
-        hasGoogle: !!aiSettings.googleKey
+        hasGoogle: !!aiSettings.googleKey,
+        hasDeepSeek: !!aiSettings.deepseekKey,
+        hasKimi: !!aiSettings.kimiKey
     });
     
     // Save to localStorage
@@ -515,6 +525,8 @@ function saveAISettings() {
     atlaswebxSettings.openaiKey = aiSettings.openaiKey;
     atlaswebxSettings.anthropicKey = aiSettings.anthropicKey;
     atlaswebxSettings.googleKey = aiSettings.googleKey;
+    atlaswebxSettings.deepseekKey = aiSettings.deepseekKey;
+    atlaswebxSettings.kimiKey = aiSettings.kimiKey;
     localStorage.setItem('atlaswebx-settings', JSON.stringify(atlaswebxSettings));
     
     console.log('✅ AI settings saved to localStorage');
@@ -593,6 +605,58 @@ document.getElementById('test-google')?.addEventListener('click', async () => {
             showNotification('Google AI key format looks valid! ✓', 'success');
         } else {
             showNotification('Invalid key format. Should start with AI', 'error');
+        }
+    } catch (error) {
+        showNotification('Test failed: ' + error.message, 'error');
+    }
+    
+    btn.textContent = 'Test Connection';
+    btn.disabled = false;
+});
+
+document.getElementById('test-deepseek')?.addEventListener('click', async () => {
+    const key = document.getElementById('deepseek-api-key').value;
+    if (!key) {
+        showNotification('Please enter an API key', 'error');
+        return;
+    }
+    
+    const btn = document.getElementById('test-deepseek');
+    btn.textContent = 'Testing...';
+    btn.disabled = true;
+    
+    try {
+        // Simple validation for now
+        if (key.startsWith('sk-') && key.length > 20) {
+            showNotification('DeepSeek key format looks valid! ✓', 'success');
+        } else {
+            showNotification('Invalid key format. Should start with sk-', 'error');
+        }
+    } catch (error) {
+        showNotification('Test failed: ' + error.message, 'error');
+    }
+    
+    btn.textContent = 'Test Connection';
+    btn.disabled = false;
+});
+
+document.getElementById('test-kimi')?.addEventListener('click', async () => {
+    const key = document.getElementById('kimi-api-key').value;
+    if (!key) {
+        showNotification('Please enter an API key', 'error');
+        return;
+    }
+    
+    const btn = document.getElementById('test-kimi');
+    btn.textContent = 'Testing...';
+    btn.disabled = true;
+    
+    try {
+        // Simple validation for now
+        if (key.startsWith('sk-') && key.length > 20) {
+            showNotification('Kimi key format looks valid! ✓', 'success');
+        } else {
+            showNotification('Invalid key format. Should start with sk-', 'error');
         }
     } catch (error) {
         showNotification('Test failed: ' + error.message, 'error');

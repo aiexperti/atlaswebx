@@ -135,8 +135,19 @@ class AIV2Chat {
                 pageContext.selectedElement = window.aiElementSelector.selectedElement;
             }
             
-            // Route request through AI router (uses GPT-4o-mini)
-            const result = await this.router.routeRequest(message, pageContext);
+            // Get current model selection
+            const modelSelection = window.aiModelSwitcher?.getCurrentSelection() || {
+                provider: 'chatgpt',
+                model: 'gpt-4o-mini'
+            };
+            
+            console.log('🔄 Using AI model:', modelSelection);
+            
+            // Route request through AI router with selected model
+            const result = await this.router.routeRequest(message, pageContext, {
+                provider: modelSelection.provider,
+                model: modelSelection.model
+            });
             
             // Remove typing indicator
             this.removeTypingIndicator();
@@ -160,7 +171,9 @@ class AIV2Chat {
             // Add to conversation history
             this.conversationHistory.push({
                 role: 'assistant',
-                content: result.response
+                content: result.response,
+                provider: modelSelection.provider,
+                model: modelSelection.model
             });
             
         } catch (error) {
@@ -361,6 +374,13 @@ class AIV2Chat {
 
     clearChat() {
         this.conversationHistory = [];
+        
+        // Get current model selection for welcome message
+        const modelSelection = window.aiModelSwitcher?.getCurrentSelection();
+        const providerName = modelSelection?.provider ? 
+            (modelSelection.provider.charAt(0).toUpperCase() + modelSelection.provider.slice(1)) : 
+            'AI';
+        
         this.messagesWrapper.innerHTML = `
             <div class="ai-message ai-message-assistant">
                 <div class="ai-message-avatar">
@@ -371,12 +391,13 @@ class AIV2Chat {
                 </div>
                 <div class="ai-message-bubble">
                     <div class="ai-message-content">
-                        Hello! I'm your AI assistant powered by GPT-4o-mini. I can help you with:
+                        Hello! I'm your multi-AI assistant. I can help you with:
                         <br>• Analyzing page content
                         <br>• Modifying websites
                         <br>• Web searches
                         <br>• Navigation
                         <br>• General questions
+                        <br><br>💡 <strong>Tip:</strong> Switch between ChatGPT, Claude, Gemini, DeepSeek, and Kimi using the dropdowns above!
                         <br><br>What would you like to do?
                     </div>
                 </div>

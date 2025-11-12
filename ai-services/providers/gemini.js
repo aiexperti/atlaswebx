@@ -4,12 +4,21 @@ const https = require('https');
 class GeminiService {
     constructor() {
         this.apiKey = process.env.GOOGLE_AI_API_KEY || '';
-        this.model = 'gemini-pro'; // or 'gemini-pro-vision' for images
+        this.model = 'gemini-2.0-flash-exp'; // Latest Gemini model
         this.apiUrl = 'generativelanguage.googleapis.com';
     }
 
     setApiKey(apiKey) {
         this.apiKey = apiKey;
+    }
+
+    setModel(model) {
+        this.model = model;
+        console.log(`✅ Gemini model set to: ${model}`);
+    }
+
+    getModel() {
+        return this.model;
     }
 
     isConfigured() {

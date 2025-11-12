@@ -1,11 +1,11 @@
-// ChatGPT Service Provider (OpenAI API)
+// Kimi Service Provider (Moonshot AI API)
 const https = require('https');
 
-class ChatGPTService {
+class KimiService {
     constructor() {
-        this.apiKey = ''; // API key must be set via setApiKey() method
-        this.model = 'gpt-4o-mini'; // Default model
-        this.apiUrl = 'api.openai.com';
+        this.apiKey = '';
+        this.model = 'moonshot-v1-32k'; // Default model
+        this.apiUrl = 'api.moonshot.cn';
     }
 
     setApiKey(apiKey) {
@@ -14,7 +14,7 @@ class ChatGPTService {
 
     setModel(model) {
         this.model = model;
-        console.log(`✅ ChatGPT model set to: ${model}`);
+        console.log(`✅ Kimi model set to: ${model}`);
     }
 
     getModel() {
@@ -27,21 +27,23 @@ class ChatGPTService {
 
     async sendMessage(message, options = {}) {
         if (!this.isConfigured()) {
-            throw new Error('ChatGPT API key not configured');
+            throw new Error('Kimi API key not configured');
         }
 
         const messages = this.buildMessages(message, options.history);
 
         const requestData = JSON.stringify({
-            model: options.model || this.model,
+            model: this.model,
             messages: messages,
             temperature: options.temperature || 0.7,
-            max_tokens: options.maxTokens || 2000
+            max_tokens: options.maxTokens || 2000,
+            stream: false
         });
 
         return new Promise((resolve, reject) => {
-            const req = https.request({
+            const requestOptions = {
                 hostname: this.apiUrl,
+                port: 443,
                 path: '/v1/chat/completions',
                 method: 'POST',
                 headers: {
@@ -49,7 +51,9 @@ class ChatGPTService {
                     'Authorization': `Bearer ${this.apiKey}`,
                     'Content-Length': Buffer.byteLength(requestData)
                 }
-            }, (res) => {
+            };
+
+            const req = https.request(requestOptions, (res) => {
                 let data = '';
 
                 res.on('data', (chunk) => {
@@ -59,19 +63,26 @@ class ChatGPTService {
                 res.on('end', () => {
                     try {
                         const response = JSON.parse(data);
+                        
                         if (response.error) {
-                            reject(new Error(response.error.message));
+                            reject(new Error(`Kimi API error: ${response.error.message}`));
+                            return;
+                        }
+
+                        if (response.choices && response.choices.length > 0) {
+                            const content = response.choices[0].message.content;
+                            resolve(content);
                         } else {
-                            resolve(response.choices[0].message.content);
+                            reject(new Error('Invalid response from Kimi API'));
                         }
                     } catch (error) {
-                        reject(error);
+                        reject(new Error(`Failed to parse Kimi response: ${error.message}`));
                     }
                 });
             });
 
             req.on('error', (error) => {
-                reject(error);
+                reject(new Error(`Kimi API request failed: ${error.message}`));
             });
 
             req.write(requestData);
@@ -81,13 +92,13 @@ class ChatGPTService {
 
     async streamMessage(message, onChunk, options = {}) {
         if (!this.isConfigured()) {
-            throw new Error('ChatGPT API key not configured');
+            throw new Error('Kimi API key not configured');
         }
 
         const messages = this.buildMessages(message, options.history);
 
         const requestData = JSON.stringify({
-            model: options.model || this.model,
+            model: this.model,
             messages: messages,
             temperature: options.temperature || 0.7,
             max_tokens: options.maxTokens || 2000,
@@ -95,8 +106,9 @@ class ChatGPTService {
         });
 
         return new Promise((resolve, reject) => {
-            const req = https.request({
+            const requestOptions = {
                 hostname: this.apiUrl,
+                port: 443,
                 path: '/v1/chat/completions',
                 method: 'POST',
                 headers: {
@@ -104,11 +116,13 @@ class ChatGPTService {
                     'Authorization': `Bearer ${this.apiKey}`,
                     'Content-Length': Buffer.byteLength(requestData)
                 }
-            }, (res) => {
-                let fullResponse = '';
+            };
 
+            let fullResponse = '';
+
+            const req = https.request(requestOptions, (res) => {
                 res.on('data', (chunk) => {
-                    const lines = chunk.toString().split('\n').filter(line => line.trim() !== '');
+                    const lines = chunk.toString().split('\n');
                     
                     for (const line of lines) {
                         if (line.startsWith('data: ')) {
@@ -121,14 +135,14 @@ class ChatGPTService {
 
                             try {
                                 const parsed = JSON.parse(data);
-                                const content = parsed.choices[0]?.delta?.content || '';
                                 
-                                if (content) {
+                                if (parsed.choices && parsed.choices[0].delta?.content) {
+                                    const content = parsed.choices[0].delta.content;
                                     fullResponse += content;
                                     onChunk(content);
                                 }
                             } catch (e) {
-                                // Skip invalid JSON
+                                // Skip invalid JSON chunks
                             }
                         }
                     }
@@ -140,7 +154,7 @@ class ChatGPTService {
             });
 
             req.on('error', (error) => {
-                reject(error);
+                reject(new Error(`Kimi streaming failed: ${error.message}`));
             });
 
             req.write(requestData);
@@ -154,28 +168,28 @@ class ChatGPTService {
         // Add system message
         messages.push({
             role: 'system',
-            content: 'You are a helpful AI assistant integrated into a web browser.'
+            content: 'You are Kimi, an AI assistant powered by Moonshot AI. You are helpful, creative, and friendly.'
         });
 
-        // Add conversation history (last 10 messages)
+        // Add recent history (last 10 messages)
         const recentHistory = history.slice(-10);
         for (const msg of recentHistory) {
-            if (msg.role === 'user' || msg.role === 'assistant') {
-                messages.push({
-                    role: msg.role,
-                    content: msg.content
-                });
-            }
+            messages.push({
+                role: msg.role,
+                content: msg.content
+            });
         }
 
-        // Add current message
-        messages.push({
-            role: 'user',
-            content: message
-        });
+        // Add current message if not already in history
+        if (!history.length || history[history.length - 1].content !== message) {
+            messages.push({
+                role: 'user',
+                content: message
+            });
+        }
 
         return messages;
     }
 }
 
-module.exports = ChatGPTService;
+module.exports = KimiService;

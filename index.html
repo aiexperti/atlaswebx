@@ -263,6 +263,48 @@
                 </div>
             </div>
 
+            <!-- AI Model Selector -->
+            <div class="ai-model-selector">
+                <div class="ai-provider-selector">
+                    <label for="ai-provider-select">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                        Provider
+                    </label>
+                    <select id="ai-provider-select" class="ai-select">
+                        <option value="chatgpt">ChatGPT</option>
+                        <option value="claude">Claude</option>
+                        <option value="gemini">Gemini</option>
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="kimi">Kimi (Moonshot AI)</option>
+                    </select>
+                </div>
+                <div class="ai-model-selector-inner">
+                    <label for="ai-model-select">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                        </svg>
+                        Model
+                    </label>
+                    <select id="ai-model-select" class="ai-select">
+                        <option value="gpt-4o">GPT-4o</option>
+                        <option value="gpt-4o-mini" selected>GPT-4o-mini</option>
+                        <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                        <option value="gpt-4">GPT-4</option>
+                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                        <option value="o1">O1</option>
+                        <option value="o1-mini">O1-mini</option>
+                        <option value="o3-mini">O3-mini</option>
+                        <option value="gpt-5-preview">GPT-5 Preview</option>
+                        <option value="gpt-5">GPT-5</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="ai-chat-container" id="ai-chat-container">
                 <div class="ai-messages-wrapper" id="ai-messages-wrapper">
                     <div class="ai-message ai-message-assistant">
@@ -274,12 +316,13 @@
                         </div>
                         <div class="ai-message-bubble">
                             <div class="ai-message-content">
-                                Hello! I'm your AI assistant powered by GPT-4o-mini. I can help you with:
+                                Hello! I'm your multi-AI assistant. I can help you with:
                                 <br>• Analyzing page content
                                 <br>• Modifying websites
                                 <br>• Web searches
                                 <br>• Navigation
                                 <br>• General questions
+                                <br><br>💡 <strong>Tip:</strong> Switch between ChatGPT, Claude, Gemini, DeepSeek, and Kimi using the dropdowns above!
                                 <br><br>What would you like to do?
                             </div>
                         </div>
@@ -324,9 +367,10 @@
     <script src="translations.js"></script>
     <script src="app-manager.js"></script>
     
-    <!-- AI Assistant V2 - Chat with GPT-4o-mini Router -->
+    <!-- AI Assistant V2 - Chat with Multi-Model Support -->
     <script src="ai-v2-router.js"></script>
     <script src="ai-v2-chat.js"></script>
+    <script src="ai-model-switcher.js"></script>
     <script src="ai-element-selector.js"></script>
     
     <script src="renderer.js"></script>

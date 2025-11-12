@@ -98,17 +98,24 @@ class KeyManager {
      * @returns {boolean}
      */
     validateKeyFormat(provider, apiKey) {
-        if (!apiKey || typeof apiKey !== 'string') return false;
+        if (!apiKey || typeof apiKey !== 'string') {
+            return false;
+        }
 
-        switch (provider) {
+        // Basic format validation based on provider
+        switch(provider) {
             case 'chatgpt':
                 return apiKey.startsWith('sk-') && apiKey.length > 20;
             case 'claude':
                 return apiKey.startsWith('sk-ant-') && apiKey.length > 20;
             case 'gemini':
-                return apiKey.startsWith('AI') && apiKey.length > 20;
+                return apiKey.length > 20; // Google API keys vary
+            case 'deepseek':
+                return apiKey.startsWith('sk-') && apiKey.length > 20;
+            case 'kimi':
+                return apiKey.startsWith('sk-') && apiKey.length > 20;
             default:
-                return apiKey.length > 10;
+                return apiKey.length > 10; // Minimal validation for unknown providers
         }
     }
 }

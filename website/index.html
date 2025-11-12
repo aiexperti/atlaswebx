@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AtlaswebX is an open-source AI browser inspired by Tesla design. Seamlessly access ChatGPT, Claude, DeepSeek, Gemini, and more from a single cockpit with GitHub-hosted releases.">
+    <meta name="keywords" content="atlaswebx, open-source browser, AI browser, electron browser, ChatGPT browser, Claude integration, DeepSeek, Gemini, GitHub releases, Windows AI browser">
+    <meta name="author" content="AtlaswebX">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://atlaswebx.com/">
+    <meta property="og:title" content="AtlaswebX - Open Source AI-Powered Web Browser">
+    <meta property="og:description" content="Tesla-inspired AI browser with ChatGPT, Claude, DeepSeek, and Gemini support. Free, open source, and available on GitHub.">
+    <meta property="og:image" content="https://atlaswebx.com/og-image.png">
+    <meta property="og:site_name" content="AtlaswebX">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://atlaswebx.com/">
+    <meta property="twitter:title" content="AtlaswebX - Open Source AI-Powered Web Browser">
+    <meta property="twitter:description" content="Drive the web with ChatGPT, Claude, DeepSeek, and Gemini inside a Tesla-inspired open-source browser.">
+    <meta property="twitter:image" content="https://atlaswebx.com/og-image.png">
+    
+    <title>AtlaswebX - AI-Powered Web Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="canonical" href="https://atlaswebx.com/">
+    <meta name="application-name" content="AtlaswebX">
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@AtlaswebX">
+    <meta name="twitter:creator" content="@AtlaswebX">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AtlaswebX",
+      "description": "AtlaswebX is an open-source AI-powered browser that integrates ChatGPT, Claude, DeepSeek, Gemini, and more within a Tesla-inspired interface.",
+      "applicationCategory": "WebBrowserApplication",
+      "operatingSystem": "Windows 10/11",
+      "softwareVersion": "1.0.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availableDeliveryMethod": "Download"
+      },
+      "downloadUrl": "https://github.com/aiexperti/atlaswebx/releases/latest/download/AtlaswebX-Setup-1.0.0.exe",
+      "codeRepository": "https://github.com/aiexperti/atlaswebx",
+      "softwareHelp": "https://github.com/aiexperti/atlaswebx/wiki",
+      "license": "https://github.com/aiexperti/atlaswebx/blob/v4/LICENSE",
+      "image": "https://atlaswebx.com/og-image.png",
+      "publisher": {
+        "@type": "Organization",
+        "name": "AtlaswebX",
+        "url": "https://github.com/aiexperti/atlaswebx"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="logo.png" alt="AtlaswebX Logo" class="logo">
+                <span class="brand-name">AtlaswebX</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#intelligence">AI Stack</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#docs">Docs</a></li>
+                <li><a href="https://github.com/aiexperti/atlaswebx" target="_blank">GitHub</a></li>
+                <li><a href="#download" class="btn btn-nav">Get Started</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    The <span class="gradient-text">AI cockpit</span> for your web
+                </h1>
+                <p class="hero-subtitle">
+                    AtlaswebX is the free, open-source AI browser built for people who want an alternative to closed copilots
+                    like ChatGPT desktop, Atlas Browser, Perplexity, Arc, and Opera GX. Enjoy a Tesla-inspired cockpit that
+                    safeguards your privacy while giving you full control to run ChatGPT, Claude, DeepSeek, Gemini, self-hosted,
+                    or local models side by side—without ever leaving your tab.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-large btn-primary">
+                        <i class="fa-solid fa-download"></i>
+                        Download for Windows
+                    </a>
+                    <a href="https://github.com/aiexperti/atlaswebx" class="btn btn-large btn-secondary" target="_blank">
+                        <i class="fa-brands fa-github"></i>
+                        View on GitHub
+                    </a>
+                </div>
+                <div class="hero-ai-strip">
+                    <span class="strip-label"><i class="fa-solid fa-circle-nodes"></i> Connected AI Engines</span>
+                    <div class="ai-chips">
+                        <span class="ai-chip"><i class="fa-brands fa-openai"></i> ChatGPT</span>
+                        <span class="ai-chip"><i class="fa-solid fa-sparkles"></i> Claude</span>
+                        <span class="ai-chip"><i class="fa-solid fa-wave-square"></i> DeepSeek</span>
+                        <span class="ai-chip"><i class="fa-solid fa-sun"></i> Gemini</span>
+                        <span class="ai-chip"><i class="fa-solid fa-plus"></i> More</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="screenshot.png" alt="AtlaswebX Browser Screenshot" class="browser-screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Stack Section -->
+    <section id="intelligence" class="ai-intelligence">
+        <div class="container">
+            <div class="ai-intro">
+                <h2>Multi-AI freedom. Single cockpit.</h2>
+                <p>Route prompts to ChatGPT, Claude, DeepSeek, Gemini, or your own self-hosted models with one keystroke. AtlaswebX keeps every provider under your control—without surrendering data to walled-garden browsers.</p>
+            </div>
+            <div class="ai-panels">
+                <div class="ai-panel">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Unified AI Sidebar</h3>
+                    <p>Pin multiple copilots side by side, retain full conversation history, and launch workflows right from the page you are reading.</p>
+                </div>
+                <div class="ai-panel">
+                    <i class="fa-solid fa-toggle-on"></i>
+                    <h3>Instant Model Switching</h3>
+                    <p>Jump across GPT-4o, Claude 3, DeepSeek R1, Gemini 1.5, local LLMs, or on-prem clusters—no lock-in, no tabs to shuffle.</p>
+                </div>
+                <div class="ai-panel">
+                    <i class="fa-solid fa-lock"></i>
+                    <h3>Secure Key Vault</h3>
+                    <p>Your keys never leave your device. Encrypted local storage, zero telemetry, and optional offline mode keep corporate copilots out of your logs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Driving Features</h2>
+            <p class="section-subtitle">The open-source AI browser engineered for privacy-first power users</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3>Performance Cockpit</h3>
+                    <p>Sleek Tesla-inspired interface that keeps latency low, tabs organised, and productivity high—without proprietary clutter.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3>AI Everywhere</h3>
+                    <p>Inline prompts, page summaries, and command palette tools wired for ChatGPT, Claude, DeepSeek, Gemini, local GGUFs, and anything else you connect.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h3>Adaptive Interior</h3>
+                    <p>Switch themes, wallpapers, and layouts. Auto-save locks in personal or team profiles so your cockpit stays tuned to your workflow.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
+                    <h3>Private by Default</h3>
+                    <p>No telemetry. No hidden analytics. Local key storage with encrypted vaults keeps corporate AI platforms out of your browsing history.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <h3>Global Ready</h3>
+                    <p>English, Français, Español, Deutsch, العربية out of the box—with community-driven translations expanding every release.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3>Release Fast Lane</h3>
+                    <p>Electron build pipeline with GitHub Actions delivers verifiable binaries, transparent changelogs, and reproducible builds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots">
+        <div class="container">
+            <h2 class="section-title">See the cockpit</h2>
+            <p class="section-subtitle">A minimalist layout with intelligent overlays and live AI feed</p>
+            
+            <div class="screenshots-grid">
+                <div class="screenshot-item">
+                    <img src="screenshot-browser.png" alt="Browser Interface">
+                    <p>Clean browsing interface</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="screenshot-ai.png" alt="AI Assistant">
+                    <p>Multi-AI assistant sidebar</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="screenshot-settings.png" alt="Settings">
+                    <p>Customization options</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">Download AtlaswebX</h2>
+            <p class="section-subtitle">The privacy-first AI browser for people who refuse platform lock-in</p>
+            
+            <div class="download-card">
+                <div class="download-info">
+                    <h3>AtlaswebX v1.0.0</h3>
+                    <p>Latest stable release • Built November 2025</p>
+                    <ul class="download-features">
+                        <li><i class="fa-solid fa-check"></i> Windows 10/11 (64-bit)</li>
+                        <li><i class="fa-solid fa-check"></i> Offline-capable installer</li>
+                        <li><i class="fa-solid fa-check"></i> Zero telemetry • bring your own keys</li>
+                        <li><i class="fa-solid fa-check"></i> Open source MIT license</li>
+                    </ul>
+                </div>
+                <div class="download-actions">
+                    <a href="https://github.com/aiexperti/atlaswebx/releases/latest/download/AtlaswebX-Setup-1.0.0.exe" class="btn btn-large btn-primary">
+                        <i class="fa-solid fa-circle-down"></i>
+                        Download Installer
+                    </a>
+                    <a href="https://github.com/aiexperti/atlaswebx/releases/latest" class="btn btn-large btn-secondary" target="_blank">
+                        <i class="fa-solid fa-bolt"></i>
+                        View All Releases
+                    </a>
+                </div>
+            </div>
+            
+            <p class="download-note">
+                <strong>Heads-up:</strong> Windows SmartScreen may appear because builds are unsigned. Click “More info” → “Run anyway” to trust the open-source binary. 
+                <a href="https://github.com/aiexperti/atlaswebx/wiki/Installation-Guide">Learn more</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="docs" class="docs">
+        <div class="container">
+            <h2 class="section-title">Documentation</h2>
+            <p class="section-subtitle">Guides engineered for builders, researchers, and privacy-first teams</p>
+            
+            <div class="docs-grid">
+                <a href="https://github.com/aiexperti/atlaswebx/wiki/Installation-Guide" class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <h3>Installation Guide</h3>
+                    <p>Step-by-step installation instructions</p>
+                </a>
+                
+                <a href="https://github.com/aiexperti/atlaswebx/wiki/Quick-Start" class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>Quick Start</h3>
+                    <p>Get up and running in 5 minutes</p>
+                </a>
+                
+                <a href="https://github.com/aiexperti/atlaswebx/wiki/AI-Assistant" class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h3>AI Assistant Guide</h3>
+                    <p>How to use the AI features</p>
+                </a>
+                
+                <a href="https://github.com/aiexperti/atlaswebx/wiki" class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-book"></i></div>
+                    <h3>Full Documentation</h3>
+                    <p>Complete wiki and guides</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Source Section -->
+    <section class="opensource">
+        <div class="container">
+            <div class="opensource-content">
+                <h2>Free & Open Source</h2>
+                <p>AtlaswebX is built in the open as a community alternative to closed AI browsers. Audit the code, fork it for your fleet, and ship features without waiting on corporate roadmaps.</p>
+                <div class="opensource-stats">
+                    <div class="stat">
+                        <div class="stat-number"><i class="fa-solid fa-certificate"></i></div>
+                        <div class="stat-label">MIT License</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number"><i class="fa-solid fa-infinity"></i></div>
+                        <div class="stat-label">100% Free</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number"><i class="fa-solid fa-code-branch"></i></div>
+                        <div class="stat-label">Open Source</div>
+                    </div>
+                </div>
+                <a href="https://github.com/aiexperti/atlaswebx" class="btn btn-large btn-primary" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="AtlaswebX Logo" class="footer-logo">
+                    <p>AI-Powered Web Browser</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#download">Download</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/releases">Releases</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/blob/v4/CHANGELOG.md">Changelog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/wiki">Documentation</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/wiki/Installation-Guide">Installation</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/wiki/Quick-Start">Quick Start</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/wiki/FAQ">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://github.com/aiexperti/atlaswebx">GitHub</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/issues">Issues</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/discussions">Discussions</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/blob/v4/CONTRIBUTING.md">Contributing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/blob/v4/LICENSE">License</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/blob/v4/SECURITY.md">Security</a></li>
+                            <li><a href="https://github.com/aiexperti/atlaswebx/blob/v4/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AtlaswebX. Released under the MIT License.</p>
+                <p>Built with ❤️ using Electron</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

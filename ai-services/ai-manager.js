@@ -2,23 +2,30 @@
 const ChatGPTService = require('./providers/chatgpt');
 const ClaudeService = require('./providers/claude');
 const GeminiService = require('./providers/gemini');
+const KimiService = require('./providers/kimi');
 const KeyManager = require('./key-manager');
 
 class AIManager {
     constructor() {
         this.keyManager = new KeyManager();
+        this.config = require('./config');
         
         this.providers = {
             chatgpt: new ChatGPTService(),
             claude: new ClaudeService(),
-            gemini: new GeminiService()
+            gemini: new GeminiService(),
+            kimi: new KimiService()
         };
         
         // Load saved API keys
         this.loadApiKeys();
         
         this.currentProvider = 'chatgpt'; // Default provider
+        this.currentModels = {}; // Store selected model for each provider
         this.conversationHistory = [];
+        
+        // Load saved model selections
+        this.loadModelSelections();
     }
 
     // Load API keys from secure storage
@@ -147,6 +154,76 @@ class AIManager {
         if (provider) {
             provider.setApiKey('');
         }
+    }
+
+    // Load saved model selections from localStorage
+    loadModelSelections() {
+        try {
+            if (typeof localStorage !== 'undefined') {
+                const saved = localStorage.getItem('ai-model-selections');
+                if (saved) {
+                    this.currentModels = JSON.parse(saved);
+                    console.log('✅ Loaded model selections:', this.currentModels);
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load model selections:', error);
+        }
+    }
+
+    // Save model selections to localStorage
+    saveModelSelections() {
+        try {
+            if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('ai-model-selections', JSON.stringify(this.currentModels));
+                console.log('💾 Saved model selections:', this.currentModels);
+            }
+        } catch (error) {
+            console.error('Failed to save model selections:', error);
+        }
+    }
+
+    // Get current model for a provider
+    getCurrentModel(providerName = null) {
+        const provider = providerName || this.currentProvider;
+        return this.currentModels[provider] || this.config.providers[provider]?.defaultModel;
+    }
+
+    // Set model for a provider
+    setModel(providerName, modelName) {
+        const providerConfig = this.config.providers[providerName];
+        if (!providerConfig) {
+            console.error(`Provider ${providerName} not found`);
+            return false;
+        }
+
+        if (!providerConfig.models.includes(modelName)) {
+            console.error(`Model ${modelName} not available for ${providerName}`);
+            return false;
+        }
+
+        this.currentModels[providerName] = modelName;
+        this.saveModelSelections();
+        
+        // Update the provider's model
+        const provider = this.providers[providerName];
+        if (provider && provider.setModel) {
+            provider.setModel(modelName);
+        }
+        
+        console.log(`✅ Set ${providerName} model to ${modelName}`);
+        return true;
+    }
+
+    // Get available models for a provider
+    getAvailableModels(providerName = null) {
+        const provider = providerName || this.currentProvider;
+        return this.config.providers[provider]?.models || [];
+    }
+
+    // Get all provider configurations
+    getProviderConfigs() {
+        return this.config.providers;
     }
 }
 

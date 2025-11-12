@@ -12,6 +12,15 @@ class ClaudeService {
         this.apiKey = apiKey;
     }
 
+    setModel(model) {
+        this.model = model;
+        console.log(`✅ Claude model set to: ${model}`);
+    }
+
+    getModel() {
+        return this.model;
+    }
+
     isConfigured() {
         return !!this.apiKey;
     }

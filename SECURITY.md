@@ -18,7 +18,7 @@ We take the security of AtlaswebX seriously. If you believe you have found a sec
 - Discuss the vulnerability in public forums, social media, or other public channels
 
 ### Please DO:
-1. **Email us directly** at security@atlaswebx.dev (or create a private security advisory on GitHub)
+1. **Email us directly** at security@atlaswebx.com (or create a private security advisory on GitHub)
 2. **Provide detailed information** including:
    - Type of vulnerability
    - Full paths of source file(s) related to the vulnerability
